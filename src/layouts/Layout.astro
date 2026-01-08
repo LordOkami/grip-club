@@ -119,8 +119,8 @@ const altPath =
                 ? "Switch to English"
                 : "Cambiar a Español"}
             >
-              <span class="flag">{altLang === "en" ? "🇬🇧" : "🇪🇸"}</span>
-              <span class="label">{altLang.toUpperCase()}</span>
+              <span class="flag">{lang === "en" ? "🇬🇧" : "🇪🇸"}</span>
+              <span class="label">{lang.toUpperCase()}</span>
             </a>
           </div>
 
@@ -190,8 +190,8 @@ const altPath =
                 ? "Switch to English"
                 : "Cambiar a Español"}
             >
-              <span class="flag">{altLang === "en" ? "🇬🇧" : "🇪🇸"}</span>
-              <span class="label">{altLang.toUpperCase()}</span>
+              <span class="flag">{lang === "en" ? "🇬🇧" : "🇪🇸"}</span>
+              <span class="label">{lang.toUpperCase()}</span>
             </a>
             <a
               id="mobile-login-btn"
@@ -254,19 +254,22 @@ const altPath =
                 <a
                   href={translatePath("/")}
                   class="text-racing-silver hover:text-vanilla transition-colors"
-                  >{t("nav.historia")}</a>
+                  >{t("nav.historia")}</a
+                >
               </li>
               <li>
                 <a
                   href={translatePath("/motos")}
                   class="text-racing-silver hover:text-vanilla transition-colors"
-                  >{t("nav.motos")}</a>
+                  >{t("nav.motos")}</a
+                >
               </li>
               <li>
                 <a
                   href={translatePath("/inscripciones")}
                   class="text-racing-silver hover:text-vanilla transition-colors"
-                  >{t("nav.inscripciones")}</a>
+                  >{t("nav.inscripciones")}</a
+                >
               </li>
             </ul>
           </div>

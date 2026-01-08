@@ -48,7 +48,7 @@ export const ui = {
     'footer.links': 'Enlaces',
     'footer.contact': 'Contacto',
     'footer.description': 'La experiencia definitiva del motorsport amateur. 8 horas de pura resistencia sobre motos 125cc de serie.',
-    'lang.switch': 'English',
+    'lang.switch': 'Español',
     // Auth
     'auth.login.title': 'Iniciar Sesión',
     'auth.login.subtitle': 'Accede a tu cuenta para gestionar tu equipo',
@@ -143,7 +143,7 @@ export const ui = {
     'footer.links': 'Links',
     'footer.contact': 'Contact',
     'footer.description': 'The ultimate amateur motorsport experience. 8 hours of pure endurance on stock 125cc motorcycles.',
-    'lang.switch': 'Español',
+    'lang.switch': 'English',
     // Auth
     'auth.login.title': 'Login',
     'auth.login.subtitle': 'Access your account to manage your team',

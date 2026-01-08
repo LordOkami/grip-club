@@ -27,8 +27,13 @@ class IdentityService {
     const netlifyIdentity = (await import('netlify-identity-widget')).default;
     this.widget = netlifyIdentity;
 
+    // When running locally, point to production Netlify site for Identity
+    const isLocalhost = typeof window !== 'undefined' && 
+      (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+    
     netlifyIdentity.init({
-      locale: locale === 'en' ? 'en' : 'es'
+      locale: locale === 'en' ? 'en' : 'es',
+      ...(isLocalhost && { APIUrl: 'https://grip-club.netlify.app/.netlify/identity' })
     });
 
     this.initialized = true;

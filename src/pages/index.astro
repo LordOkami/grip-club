@@ -1,0 +1,234 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Historia" currentPage="historia">
+  <!-- Hero Section -->
+  <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 bg-gradient-racing">
+      <div class="absolute inset-0 opacity-10" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+
+    <!-- Animated Lines -->
+    <div class="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-racing-red/30 to-transparent"></div>
+    <div class="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-racing-red/20 to-transparent"></div>
+
+    <div class="relative z-10 container mx-auto px-4 md:px-8 text-center">
+      <div class="inline-block mb-6 px-4 py-2 bg-racing-red/20 border border-racing-red/30 rounded-full">
+        <span class="text-racing-red text-sm font-semibold uppercase tracking-widest">Grip Club presenta</span>
+      </div>
+
+      <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 leading-none" style="font-family: 'Bebas Neue', sans-serif;">
+        <span class="text-white">8 HORAS</span><br>
+        <span class="text-gradient">ENDURANCE</span>
+      </h1>
+
+      <p class="text-xl md:text-2xl text-racing-silver max-w-3xl mx-auto mb-8">
+        La carrera de resistencia más emocionante de España.<br>
+        <span class="text-white font-semibold">Motos 125cc de serie. 8 horas de pura adrenalina.</span>
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <a href="/inscripciones#registro" class="btn-primary">
+          Quiero participar
+        </a>
+        <a href="#historia" class="btn-secondary">
+          Descubre más
+        </a>
+      </div>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-3 gap-4 md:gap-8 mt-16 max-w-2xl mx-auto">
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-racing-red" style="font-family: 'Bebas Neue', sans-serif;">8H</div>
+          <div class="text-racing-silver text-sm uppercase tracking-wider">Duración</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-racing-red" style="font-family: 'Bebas Neue', sans-serif;">125cc</div>
+          <div class="text-racing-silver text-sm uppercase tracking-wider">Cilindrada</div>
+        </div>
+        <div class="text-center">
+          <div class="text-4xl md:text-5xl font-bold text-racing-red" style="font-family: 'Bebas Neue', sans-serif;">100%</div>
+          <div class="text-racing-silver text-sm uppercase tracking-wider">Pasión</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <svg class="w-6 h-6 text-racing-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- Historia Section -->
+  <section id="historia" class="py-24 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <span class="text-racing-red text-sm font-semibold uppercase tracking-widest mb-4 block">Nuestra Historia</span>
+          <h2 class="section-title mb-6">El origen de la <span class="text-gradient">resistencia</span></h2>
+          <div class="space-y-4 text-racing-silver">
+            <p>
+              Inspirados por el legendario formato <strong class="text-white">FreeTech Endurance</strong> del Reino Unido,
+              traemos a España una experiencia única: <strong class="text-white">8 horas de competición pura</strong> sobre
+              motos 125cc de serie.
+            </p>
+            <p>
+              La filosofía es simple pero poderosa: <strong class="text-white">nivelar el campo de juego</strong>.
+              Con motos 125cc de serie idénticas, la victoria no depende del presupuesto más grande, sino de la
+              estrategia, la consistencia y la pasión del equipo.
+            </p>
+            <p>
+              Es el formato perfecto para equipos amateur, pilotos que dan sus primeros pasos en competición,
+              y veteranos que buscan <strong class="text-white">la esencia pura del motorsport</strong>.
+            </p>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="aspect-video bg-racing-gray rounded-2xl overflow-hidden border border-racing-silver/20">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-20 h-20 bg-racing-red/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg class="w-10 h-10 text-racing-red" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+                <p class="text-racing-silver">Próximamente: Video promocional</p>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative elements -->
+          <div class="absolute -top-4 -right-4 w-24 h-24 border-2 border-racing-red/30 rounded-2xl -z-10"></div>
+          <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-racing-red/10 rounded-2xl -z-10"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Concepto Section -->
+  <section class="py-24 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span class="text-racing-red text-sm font-semibold uppercase tracking-widest mb-4 block">El Concepto</span>
+        <h2 class="section-title">¿Por qué <span class="text-gradient">125cc de serie</span>?</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="card group">
+          <div class="w-14 h-14 bg-racing-red/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-red/30 transition-colors">
+            <svg class="w-7 h-7 text-racing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Accesible económicamente</h3>
+          <p class="text-racing-silver">
+            Sin necesidad de grandes presupuestos. Motos asequibles, costes de mantenimiento reducidos y
+            competición al alcance de todos.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card group">
+          <div class="w-14 h-14 bg-racing-red/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-red/30 transition-colors">
+            <svg class="w-7 h-7 text-racing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Competición pura</h3>
+          <p class="text-racing-silver">
+            Con máquinas igualadas, gana quien mejor estrategia tiene. La habilidad del piloto y
+            el trabajo en equipo marcan la diferencia.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card group">
+          <div class="w-14 h-14 bg-racing-red/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-red/30 transition-colors">
+            <svg class="w-7 h-7 text-racing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Espíritu de equipo</h3>
+          <p class="text-racing-silver">
+            8 horas no las corre nadie solo. La coordinación, los relevos y el trabajo conjunto
+            son la clave del éxito.
+          </p>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card group">
+          <div class="w-14 h-14 bg-racing-red/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-red/30 transition-colors">
+            <svg class="w-7 h-7 text-racing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Seguridad primero</h3>
+          <p class="text-racing-silver">
+            Velocidades controladas que permiten competir con márgenes de seguridad mayores
+            sin perder ni un gramo de emoción.
+          </p>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="card group">
+          <div class="w-14 h-14 bg-racing-red/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-red/30 transition-colors">
+            <svg class="w-7 h-7 text-racing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Escuela de pilotos</h3>
+          <p class="text-racing-silver">
+            El formato ideal para aprender las bases del pilotaje de competición y
+            dar el salto a categorías superiores.
+          </p>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="card group">
+          <div class="w-14 h-14 bg-racing-red/20 rounded-xl flex items-center justify-center mb-6 group-hover:bg-racing-red/30 transition-colors">
+            <svg class="w-7 h-7 text-racing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-white mb-3">Diversión garantizada</h3>
+          <p class="text-racing-silver">
+            Porque al final, de eso se trata: disfrutar de la competición,
+            la camaradería y la pasión por las dos ruedas.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-24 bg-racing-black relative overflow-hidden">
+    <!-- Background decoration -->
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-racing-red rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-racing-orange rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="section-title mb-6">¿Listo para el <span class="text-gradient">desafío</span>?</h2>
+        <p class="section-subtitle mx-auto mb-8">
+          Únete a la comunidad de pilotos que están escribiendo la historia del endurance 125cc en España.
+          Las inscripciones están abiertas.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/inscripciones#registro" class="btn-primary">
+            Inscríbete ahora
+          </a>
+          <a href="/motos" class="btn-secondary">
+            Ver reglamento técnico
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

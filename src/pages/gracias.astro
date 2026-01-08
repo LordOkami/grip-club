@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Gracias" currentPage="">
+  <section class="min-h-[80vh] flex items-center justify-center py-20">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-2xl mx-auto text-center">
+        <!-- Success Icon -->
+        <div class="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-8">
+          <svg class="w-12 h-12 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+
+        <h1 class="section-title mb-6">
+          <span class="text-gradient">¡Gracias!</span>
+        </h1>
+
+        <p class="text-xl text-racing-silver mb-4">
+          Tu pre-inscripción ha sido recibida correctamente.
+        </p>
+
+        <p class="text-racing-silver mb-8">
+          Hemos enviado un email de confirmación a tu dirección de correo.
+          Te contactaremos cuando las inscripciones oficiales estén abiertas.
+        </p>
+
+        <div class="card inline-block mb-8">
+          <div class="flex items-start gap-4 text-left">
+            <div class="w-10 h-10 bg-racing-red/20 rounded-lg flex items-center justify-center shrink-0">
+              <svg class="w-6 h-6 text-racing-red" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="text-white font-bold mb-2">Próximos pasos</h3>
+              <ul class="text-racing-silver text-sm space-y-2">
+                <li>1. Revisa tu email (también el spam)</li>
+                <li>2. Espera nuestras novedades sobre el circuito</li>
+                <li>3. Prepara tu equipo y tu moto</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/" class="btn-primary">
+            Volver al inicio
+          </a>
+          <a href="/motos" class="btn-secondary">
+            Ver reglamento técnico
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

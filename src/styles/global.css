@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-racing-red: #DC2626;
+  --color-racing-red-dark: #991B1B;
+  --color-racing-orange: #EA580C;
+  --color-racing-black: #0A0A0A;
+  --color-racing-gray: #1F1F1F;
+  --color-racing-silver: #A1A1AA;
+  --color-racing-gold: #F59E0B;
+
+  --font-heading: 'Bebas Neue', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-racing-black text-white antialiased;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    @apply tracking-wider;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-racing-red hover:bg-racing-red-dark text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-racing-red text-racing-red hover:bg-racing-red hover:text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 uppercase tracking-wider;
+  }
+
+  .card {
+    @apply bg-racing-gray rounded-2xl p-6 border border-racing-silver/20 hover:border-racing-red/50 transition-all duration-300;
+  }
+
+  .nav-link {
+    @apply relative text-white hover:text-racing-red transition-colors duration-300 uppercase tracking-wider font-semibold;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-racing-red transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .nav-link.active {
+    @apply text-racing-red;
+  }
+
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-6xl font-bold text-white mb-4;
+    font-family: var(--font-heading);
+  }
+
+  .section-subtitle {
+    @apply text-racing-silver text-lg md:text-xl max-w-2xl;
+  }
+
+  .input-field {
+    @apply w-full bg-racing-gray border border-racing-silver/30 rounded-lg px-4 py-3 text-white placeholder-racing-silver/50 focus:border-racing-red focus:outline-none focus:ring-2 focus:ring-racing-red/20 transition-all duration-300;
+  }
+
+  .label-field {
+    @apply block text-sm font-semibold text-racing-silver mb-2 uppercase tracking-wider;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-racing-red to-racing-orange bg-clip-text text-transparent;
+  }
+
+  .bg-gradient-racing {
+    @apply bg-gradient-to-br from-racing-black via-racing-gray to-racing-black;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9));
+  }
+}

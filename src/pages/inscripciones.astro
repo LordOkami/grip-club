@@ -13,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="container mx-auto px-4 md:px-8 relative z-10">
       <div class="max-w-3xl">
         <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Únete a nosotros</span>
-        <h1 class="section-title mb-6"><span class="text-gradient">Inscripciones</span></h1>
+        <h1 class="section-title mb-6"><span class="text-vanilla">Inscripciones</span></h1>
         <p class="section-subtitle">
           Toda la información que necesitas para formar parte de las 8 Horas Endurance.
           Inscríbete y vive la experiencia.
@@ -59,8 +59,8 @@ import Layout from '../layouts/Layout.astro';
             </svg>
           </div>
           <h3 class="text-xl font-bold text-white mb-2">Equipos</h3>
-          <p class="text-vanilla text-2xl font-bold mb-2" style="font-family: 'Bebas Neue', sans-serif;">2-4 PILOTOS</p>
-          <p class="text-racing-silver text-sm">Por equipo</p>
+          <p class="text-vanilla text-2xl font-bold mb-2" style="font-family: 'Bebas Neue', sans-serif;">4-8 PILOTOS</p>
+          <p class="text-racing-silver text-sm">+ hasta 4 staff por equipo</p>
         </div>
       </div>
     </div>
@@ -71,7 +71,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
         <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Planifica</span>
-        <h2 class="section-title">Calendario <span class="text-gradient">2025</span></h2>
+        <h2 class="section-title">Calendario <span class="text-vanilla">2025</span></h2>
       </div>
 
       <div class="max-w-3xl mx-auto">
@@ -141,7 +141,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
         <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Tarifas</span>
-        <h2 class="section-title">Precio de <span class="text-gradient">inscripción</span></h2>
+        <h2 class="section-title">Precio de <span class="text-vanilla">inscripción</span></h2>
       </div>
 
       <div class="max-w-lg mx-auto">
@@ -155,7 +155,7 @@ import Layout from '../layouts/Layout.astro';
             <h3 class="text-2xl font-bold text-white mb-4">Inscripción por equipo</h3>
             <div class="mb-6">
               <span class="text-racing-silver text-lg line-through">Precio por confirmar</span>
-              <div class="text-5xl font-bold text-gradient mt-2" style="font-family: 'Bebas Neue', sans-serif;">
+              <div class="text-5xl font-bold text-vanilla mt-2" style="font-family: 'Bebas Neue', sans-serif;">
                 PRÓXIMAMENTE
               </div>
             </div>
@@ -165,7 +165,7 @@ import Layout from '../layouts/Layout.astro';
                 <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
                 </svg>
-                Inscripción para 2-4 pilotos
+                Inscripción para 4-8 pilotos + staff
               </li>
               <li class="flex items-center gap-3 text-racing-silver">
                 <svg class="w-5 h-5 text-vanilla shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -208,18 +208,66 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Registration Form Section -->
+  <!-- Team Registration Section -->
   <section id="registro" class="py-20 bg-racing-gray scroll-mt-24">
     <div class="container mx-auto px-4 md:px-8">
-      <div class="max-w-2xl mx-auto">
+      <div class="max-w-4xl mx-auto">
         <div class="text-center mb-12">
-          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Formulario</span>
-          <h2 class="section-title">Pre-<span class="text-gradient">inscripción</span></h2>
+          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Inscripción</span>
+          <h2 class="section-title">Registra tu <span class="text-vanilla">equipo</span></h2>
           <p class="section-subtitle mx-auto mt-4">
-            Completa el formulario para registrar tu interés. Te contactaremos con toda la información
-            cuando las inscripciones oficiales estén abiertas.
+            Crea una cuenta para registrar a tu equipo completo con todos los pilotos y datos necesarios.
           </p>
         </div>
+
+        <!-- Team Registration CTA -->
+        <div class="card mb-12 border-racing-green/30 bg-racing-green/5">
+          <div class="flex flex-col md:flex-row items-center gap-6">
+            <div class="w-20 h-20 bg-racing-green/20 rounded-2xl flex items-center justify-center shrink-0">
+              <svg class="w-10 h-10 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <div class="flex-1 text-center md:text-left">
+              <h3 class="text-xl font-bold text-white mb-2">Inscripción completa del equipo</h3>
+              <p class="text-racing-silver mb-4">
+                Regístrate para inscribir a tu equipo con todos los datos: representante, pilotos (4-8), staff, y datos de la moto.
+                Podrás completar la inscripción en varias sesiones.
+              </p>
+              <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                <a href="/auth/signup" class="btn-primary inline-flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"/>
+                  </svg>
+                  Crear cuenta
+                </a>
+                <a href="/auth/login" class="px-6 py-3 border border-racing-silver/30 rounded-lg text-white hover:border-racing-silver/50 transition-colors inline-flex items-center gap-2">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                  </svg>
+                  Ya tengo cuenta
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative mb-12">
+          <div class="absolute inset-0 flex items-center">
+            <div class="w-full border-t border-racing-silver/20"></div>
+          </div>
+          <div class="relative flex justify-center text-sm">
+            <span class="px-4 bg-racing-gray text-racing-silver">o déjanos tus datos</span>
+          </div>
+        </div>
+
+        <div class="max-w-2xl mx-auto">
+          <div class="text-center mb-8">
+            <h3 class="text-lg font-bold text-white mb-2">Pre-inscripción rápida</h3>
+            <p class="text-racing-silver text-sm">
+              Si aún no estás listo para la inscripción completa, déjanos tus datos y te contactaremos.
+            </p>
+          </div>
 
         <!-- Netlify Form -->
         <form
@@ -460,6 +508,7 @@ import Layout from '../layouts/Layout.astro';
             </div>
           </div>
         </div>
+        </div>
       </div>
     </div>
   </section>
@@ -469,7 +518,7 @@ import Layout from '../layouts/Layout.astro';
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
         <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">FAQ</span>
-        <h2 class="section-title">Preguntas <span class="text-gradient">frecuentes</span></h2>
+        <h2 class="section-title">Preguntas <span class="text-vanilla">frecuentes</span></h2>
       </div>
 
       <div class="max-w-3xl mx-auto space-y-4">
@@ -481,7 +530,8 @@ import Layout from '../layouts/Layout.astro';
             </svg>
           </summary>
           <p class="mt-4 text-racing-silver">
-            Cada equipo puede estar formado por un mínimo de 2 y un máximo de 4 pilotos.
+            Cada equipo puede estar formado por un mínimo de 4 y un máximo de 8 pilotos.
+            Además, puedes registrar hasta 4 miembros de staff (mecánicos, coordinadores, apoyo).
             Todos los pilotos deben estar inscritos antes del cierre de inscripciones.
           </p>
         </details>
@@ -547,7 +597,7 @@ import Layout from '../layouts/Layout.astro';
   <section class="py-20 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
       <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title mb-6">¿Tienes más <span class="text-gradient">preguntas</span>?</h2>
+        <h2 class="section-title mb-6">¿Tienes más <span class="text-vanilla">preguntas</span>?</h2>
         <p class="section-subtitle mx-auto mb-8">
           Estamos aquí para ayudarte. Contacta con nosotros y resolveremos todas tus dudas.
         </p>

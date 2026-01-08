@@ -1,0 +1,407 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<DashboardLayout title={t('dashboard.pilots')} currentSection="pilotos">
+  <div class="max-w-4xl mx-auto">
+    <div class="flex items-center justify-between mb-8">
+      <div>
+        <h1 class="text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">
+          {t('dashboard.pilots')}
+        </h1>
+        <p class="text-racing-silver mt-1">{t('dashboard.minPilots')}</p>
+      </div>
+      <button id="add-pilot-btn" class="btn-primary flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+        </svg>
+        {t('dashboard.addPilot')}
+      </button>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="bg-racing-gray rounded-xl p-8 border border-racing-silver/10 flex items-center justify-center">
+      <svg class="animate-spin w-8 h-8 text-racing-green" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+
+    <!-- No Team Message -->
+    <div id="no-team-state" class="hidden bg-racing-gray rounded-xl p-8 border border-racing-silver/10 text-center">
+      <p class="text-racing-silver">{t('dashboard.noTeam')}</p>
+      <a href={translatePath('/dashboard/equipo')} class="btn-primary inline-block mt-4">{t('dashboard.createTeam')}</a>
+    </div>
+
+    <!-- Pilots List -->
+    <div id="pilots-list" class="hidden space-y-4">
+      <!-- Pilots will be inserted here -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="empty-state" class="hidden bg-racing-gray rounded-xl p-8 border border-racing-silver/10 text-center">
+      <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-4">
+        <svg class="w-8 h-8 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+        </svg>
+      </div>
+      <p class="text-racing-silver mb-4">No hay pilotos registrados</p>
+      <button id="add-first-pilot-btn" class="btn-primary inline-flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+        </svg>
+        {t('dashboard.addPilot')}
+      </button>
+    </div>
+
+    <!-- Pilot Modal -->
+    <div id="pilot-modal" class="hidden fixed inset-0 z-50 overflow-y-auto">
+      <div class="min-h-screen px-4 flex items-center justify-center">
+        <div class="fixed inset-0 bg-black/70" id="modal-backdrop"></div>
+
+        <div class="relative bg-racing-gray rounded-xl max-w-lg w-full p-6 border border-racing-silver/10">
+          <div class="flex items-center justify-between mb-6">
+            <h2 id="modal-title" class="text-xl font-bold text-white">{t('dashboard.addPilot')}</h2>
+            <button id="close-modal-btn" class="text-racing-silver hover:text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <form id="pilot-form" class="space-y-4">
+            <input type="hidden" id="pilot-id">
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="name" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotName')} *</label>
+                <input type="text" id="name" name="name" required
+                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              </div>
+              <div>
+                <label for="surname" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotSurname')} *</label>
+                <input type="text" id="surname" name="surname" required
+                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              </div>
+            </div>
+
+            <div>
+              <label for="dni" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotDni')} *</label>
+              <input type="text" id="dni" name="dni" required
+                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="email" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotEmail')} *</label>
+                <input type="email" id="email" name="email" required
+                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotPhone')} *</label>
+                <input type="tel" id="phone" name="phone" required
+                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+              <div>
+                <label for="emergency_contact_name" class="block text-sm font-medium text-racing-silver mb-2">{t('form.emergencyContactName')} *</label>
+                <input type="text" id="emergency_contact_name" name="emergency_contact_name" required
+                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              </div>
+              <div>
+                <label for="emergency_contact_phone" class="block text-sm font-medium text-racing-silver mb-2">{t('form.emergencyContactPhone')} *</label>
+                <input type="tel" id="emergency_contact_phone" name="emergency_contact_phone" required
+                  class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              </div>
+            </div>
+
+            <div>
+              <label for="driving_level" class="block text-sm font-medium text-racing-silver mb-2">{t('form.drivingLevel')}</label>
+              <select id="driving_level" name="driving_level"
+                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                <option value="amateur">{t('form.drivingLevel.amateur')}</option>
+                <option value="intermediate">{t('form.drivingLevel.intermediate')}</option>
+                <option value="advanced">{t('form.drivingLevel.advanced')}</option>
+                <option value="expert">{t('form.drivingLevel.expert')}</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="track_experience" class="block text-sm font-medium text-racing-silver mb-2">{t('form.trackExperience')}</label>
+              <textarea id="track_experience" name="track_experience" rows="2"
+                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors resize-none"></textarea>
+            </div>
+
+            <!-- Error message -->
+            <div id="modal-error" class="hidden p-3 bg-red-900/30 border border-red-500/50 rounded-lg text-red-300 text-sm"></div>
+
+            <div class="flex gap-4 pt-4">
+              <button type="submit" id="submit-pilot-btn"
+                class="flex-1 btn-primary py-3 flex items-center justify-center gap-2">
+                {t('dashboard.save')}
+              </button>
+              <button type="button" id="cancel-modal-btn"
+                class="px-6 py-3 border border-racing-silver/20 rounded-lg text-racing-silver hover:text-white transition-colors">
+                {t('dashboard.cancel')}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { fetchWithAuth } from '../../../lib/identity';
+
+    const lang = document.documentElement.lang || 'es';
+
+    // Elements
+    const loadingState = document.getElementById('loading-state');
+    const noTeamState = document.getElementById('no-team-state');
+    const pilotsList = document.getElementById('pilots-list');
+    const emptyState = document.getElementById('empty-state');
+    const addPilotBtn = document.getElementById('add-pilot-btn');
+    const addFirstPilotBtn = document.getElementById('add-first-pilot-btn');
+    const pilotModal = document.getElementById('pilot-modal');
+    const modalBackdrop = document.getElementById('modal-backdrop');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const cancelModalBtn = document.getElementById('cancel-modal-btn');
+    const pilotForm = document.getElementById('pilot-form') as HTMLFormElement;
+    const modalTitle = document.getElementById('modal-title');
+    const modalError = document.getElementById('modal-error');
+    const pilotIdInput = document.getElementById('pilot-id') as HTMLInputElement;
+
+    let maxPilots = 8;
+    let currentPilots: any[] = [];
+
+    const drivingLevels: Record<string, string> = {
+      amateur: lang === 'en' ? 'Amateur' : 'Amateur',
+      intermediate: lang === 'en' ? 'Intermediate' : 'Intermedio',
+      advanced: lang === 'en' ? 'Advanced' : 'Avanzado',
+      expert: lang === 'en' ? 'Expert' : 'Experto',
+    };
+
+    function openModal(pilot?: any) {
+      pilotForm?.reset();
+      modalError?.classList.add('hidden');
+
+      if (pilot) {
+        // Edit mode
+        if (modalTitle) modalTitle.textContent = lang === 'en' ? 'Edit Pilot' : 'Editar Piloto';
+        if (pilotIdInput) pilotIdInput.value = pilot.id;
+
+        // Fill form
+        const fields = ['name', 'surname', 'dni', 'email', 'phone', 'emergency_contact_name', 'emergency_contact_phone', 'driving_level', 'track_experience'];
+        fields.forEach(field => {
+          const input = document.getElementById(field) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement;
+          if (input && pilot[field]) {
+            input.value = pilot[field];
+          }
+        });
+      } else {
+        // Add mode
+        if (modalTitle) modalTitle.textContent = lang === 'en' ? 'Add Pilot' : 'Añadir Piloto';
+        if (pilotIdInput) pilotIdInput.value = '';
+      }
+
+      pilotModal?.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      pilotModal?.classList.add('hidden');
+    }
+
+    function renderPilots() {
+      if (!pilotsList) return;
+
+      if (currentPilots.length === 0) {
+        pilotsList.classList.add('hidden');
+        emptyState?.classList.remove('hidden');
+        return;
+      }
+
+      emptyState?.classList.add('hidden');
+      pilotsList.classList.remove('hidden');
+
+      pilotsList.innerHTML = currentPilots.map((pilot, index) => `
+        <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 flex items-center justify-between">
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-racing-green/20 rounded-full flex items-center justify-center text-racing-green font-bold">
+              ${pilot.pilot_number || index + 1}
+            </div>
+            <div>
+              <h3 class="text-white font-medium">${pilot.name} ${pilot.surname}</h3>
+              <p class="text-sm text-racing-silver">${pilot.email} · ${drivingLevels[pilot.driving_level] || pilot.driving_level}</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="edit-pilot-btn p-2 text-racing-silver hover:text-white transition-colors" data-id="${pilot.id}">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+              </svg>
+            </button>
+            ${!pilot.is_representative ? `
+            <button class="delete-pilot-btn p-2 text-racing-silver hover:text-red-400 transition-colors" data-id="${pilot.id}">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+              </svg>
+            </button>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+
+      // Attach event listeners
+      document.querySelectorAll('.edit-pilot-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = (btn as HTMLElement).dataset.id;
+          const pilot = currentPilots.find(p => p.id === id);
+          if (pilot) openModal(pilot);
+        });
+      });
+
+      document.querySelectorAll('.delete-pilot-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const id = (btn as HTMLElement).dataset.id;
+          const confirmMsg = lang === 'en' ? 'Are you sure you want to delete this pilot?' : '¿Estás seguro de que quieres eliminar este piloto?';
+          if (confirm(confirmMsg)) {
+            await deletePilot(id!);
+          }
+        });
+      });
+
+      // Update add button visibility
+      if (currentPilots.length >= maxPilots) {
+        addPilotBtn?.classList.add('hidden');
+      } else {
+        addPilotBtn?.classList.remove('hidden');
+      }
+    }
+
+    async function loadPilots() {
+      try {
+        // First check if team exists
+        const teamResponse = await fetchWithAuth('/api/teams');
+        const teamData = await teamResponse.json();
+
+        loadingState?.classList.add('hidden');
+
+        if (!teamData.team) {
+          noTeamState?.classList.remove('hidden');
+          return;
+        }
+
+        maxPilots = teamData.team.number_of_pilots;
+
+        const response = await fetchWithAuth('/api/pilots');
+        const data = await response.json();
+
+        currentPilots = data.pilots || [];
+        renderPilots();
+      } catch (error) {
+        console.error('Error loading pilots:', error);
+        loadingState?.classList.add('hidden');
+      }
+    }
+
+    async function savePilot(data: any) {
+      const isEdit = !!pilotIdInput?.value;
+      const method = isEdit ? 'PUT' : 'POST';
+      const url = isEdit ? `/api/pilots?id=${pilotIdInput.value}` : '/api/pilots';
+
+      const response = await fetchWithAuth(url, {
+        method,
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Error al guardar');
+      }
+
+      return result;
+    }
+
+    async function deletePilot(id: string) {
+      try {
+        const response = await fetchWithAuth(`/api/pilots?id=${id}`, {
+          method: 'DELETE'
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.error || 'Error al eliminar');
+        }
+
+        currentPilots = currentPilots.filter(p => p.id !== id);
+        renderPilots();
+      } catch (error: any) {
+        alert(error.message);
+      }
+    }
+
+    // Event listeners
+    addPilotBtn?.addEventListener('click', () => openModal());
+    addFirstPilotBtn?.addEventListener('click', () => openModal());
+    closeModalBtn?.addEventListener('click', closeModal);
+    cancelModalBtn?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', closeModal);
+
+    pilotForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      modalError?.classList.add('hidden');
+
+      const submitBtn = document.getElementById('submit-pilot-btn');
+      if (submitBtn) {
+        submitBtn.setAttribute('disabled', 'true');
+        submitBtn.textContent = lang === 'en' ? 'Saving...' : 'Guardando...';
+      }
+
+      const formData = new FormData(pilotForm);
+      const data: Record<string, any> = {};
+
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      try {
+        const result = await savePilot(data);
+
+        if (pilotIdInput?.value) {
+          // Update existing
+          const index = currentPilots.findIndex(p => p.id === pilotIdInput.value);
+          if (index !== -1) {
+            currentPilots[index] = result.pilot;
+          }
+        } else {
+          // Add new
+          currentPilots.push(result.pilot);
+        }
+
+        renderPilots();
+        closeModal();
+      } catch (error: any) {
+        if (modalError) {
+          modalError.textContent = error.message;
+          modalError.classList.remove('hidden');
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.removeAttribute('disabled');
+          submitBtn.textContent = lang === 'en' ? 'Save' : 'Guardar';
+        }
+      }
+    });
+
+    loadPilots();
+  </script>
+</DashboardLayout>

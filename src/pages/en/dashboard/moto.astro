@@ -1,0 +1,244 @@
+---
+import DashboardLayout from '../../../layouts/DashboardLayout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<DashboardLayout title={t('dashboard.motorcycle')} currentSection="moto">
+  <div class="max-w-2xl mx-auto">
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">
+        {t('dashboard.motorcycle')}
+      </h1>
+      <a href={translatePath('/dashboard')} class="text-racing-silver hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="bg-racing-gray rounded-xl p-8 border border-racing-silver/10 flex items-center justify-center">
+      <svg class="animate-spin w-8 h-8 text-racing-green" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+
+    <!-- No Team Message -->
+    <div id="no-team-state" class="hidden bg-racing-gray rounded-xl p-8 border border-racing-silver/10 text-center">
+      <p class="text-racing-silver">{t('dashboard.noTeam')}</p>
+      <a href={translatePath('/dashboard/equipo')} class="btn-primary inline-block mt-4">{t('dashboard.createTeam')}</a>
+    </div>
+
+    <!-- Motorcycle Form -->
+    <form id="moto-form" class="hidden space-y-6">
+      <!-- Motorcycle Info -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4">
+        <h2 class="text-lg font-bold text-white mb-4">Datos de la Motocicleta</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="motorcycle_brand" class="block text-sm font-medium text-racing-silver mb-2">{t('form.motorcycleBrand')}</label>
+            <input type="text" id="motorcycle_brand" name="motorcycle_brand"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              placeholder="Ej: Honda, Yamaha, KTM...">
+          </div>
+
+          <div>
+            <label for="motorcycle_model" class="block text-sm font-medium text-racing-silver mb-2">{t('form.motorcycleModel')}</label>
+            <input type="text" id="motorcycle_model" name="motorcycle_model"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              placeholder="Ej: CBR125R, YZF-R125...">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="engine_capacity" class="block text-sm font-medium text-racing-silver mb-2">{t('form.engineCapacity')}</label>
+            <select id="engine_capacity" name="engine_capacity"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+              <option value="125cc_4t">{t('form.engineCapacity.125cc')}</option>
+              <option value="50cc_2t">{t('form.engineCapacity.50cc')}</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="registration_date" class="block text-sm font-medium text-racing-silver mb-2">{t('form.registrationDate')}</label>
+            <input type="date" id="registration_date" name="registration_date"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+          </div>
+        </div>
+
+        <div>
+          <label for="modifications" class="block text-sm font-medium text-racing-silver mb-2">{t('form.modifications')}</label>
+          <textarea id="modifications" name="modifications" rows="3"
+            class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors resize-none"
+            placeholder="Describe las modificaciones de la moto (escape, suspensión, etc.)..."></textarea>
+        </div>
+      </div>
+
+      <!-- Regulations Reminder -->
+      <div class="bg-racing-green/10 rounded-xl p-6 border border-racing-green/30">
+        <div class="flex gap-4">
+          <div class="flex-shrink-0">
+            <svg class="w-6 h-6 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-white font-medium mb-2">Reglamento Técnico</h3>
+            <p class="text-racing-silver text-sm mb-3">
+              Recuerda que la moto debe cumplir con el reglamento técnico de la competición.
+            </p>
+            <a href={translatePath('/motos')} class="text-racing-green hover:text-racing-green-dark transition-colors text-sm font-medium inline-flex items-center gap-1">
+              Ver reglamento completo
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <label for="comments" class="block text-sm font-medium text-racing-silver mb-2">{t('form.comments')}</label>
+        <textarea id="comments" name="comments" rows="3"
+          class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors resize-none"
+          placeholder="Comentarios adicionales..."></textarea>
+      </div>
+
+      <!-- Messages -->
+      <div id="success-message" class="hidden p-4 bg-racing-green/20 border border-racing-green/50 rounded-lg text-racing-green text-sm">
+        Datos guardados correctamente
+      </div>
+
+      <div id="error-message" class="hidden p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-300 text-sm">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex gap-4">
+        <button type="submit" id="submit-btn"
+          class="flex-1 btn-primary py-4 flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+          {t('dashboard.save')}
+        </button>
+        <a href={translatePath('/dashboard')}
+          class="px-6 py-4 border border-racing-silver/20 rounded-lg text-racing-silver hover:text-white hover:border-racing-silver/40 transition-colors">
+          {t('dashboard.cancel')}
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    import { fetchWithAuth } from '../../../lib/identity';
+
+    const lang = document.documentElement.lang || 'es';
+    const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
+
+    // Elements
+    const loadingState = document.getElementById('loading-state');
+    const noTeamState = document.getElementById('no-team-state');
+    const motoForm = document.getElementById('moto-form') as HTMLFormElement;
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    // Form field names
+    const fields = ['motorcycle_brand', 'motorcycle_model', 'engine_capacity', 'registration_date', 'modifications', 'comments'];
+
+    async function loadTeamData() {
+      try {
+        const response = await fetchWithAuth('/api/teams');
+        const data = await response.json();
+
+        loadingState?.classList.add('hidden');
+
+        if (!data.team) {
+          noTeamState?.classList.remove('hidden');
+          return;
+        }
+
+        motoForm?.classList.remove('hidden');
+
+        // Populate form fields
+        fields.forEach(field => {
+          const input = document.getElementById(field) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+          if (input && data.team[field] !== undefined && data.team[field] !== null) {
+            input.value = data.team[field].toString();
+          }
+        });
+      } catch (error) {
+        console.error('Error loading team:', error);
+        loadingState?.classList.add('hidden');
+        noTeamState?.classList.remove('hidden');
+      }
+    }
+
+    motoForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      successMessage?.classList.add('hidden');
+      errorMessage?.classList.add('hidden');
+
+      if (submitBtn) {
+        submitBtn.setAttribute('disabled', 'true');
+        submitBtn.textContent = lang === 'en' ? 'Saving...' : 'Guardando...';
+      }
+
+      const body: Record<string, any> = {};
+
+      fields.forEach(field => {
+        const input = document.getElementById(field) as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        if (input) {
+          body[field] = input.value || null;
+        }
+      });
+
+      try {
+        const response = await fetchWithAuth('/api/teams', {
+          method: 'PUT',
+          body: JSON.stringify(body)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Error al guardar');
+        }
+
+        successMessage?.classList.remove('hidden');
+
+        // Redirect to dashboard after 1.5s
+        setTimeout(() => {
+          window.location.href = dashboardPath;
+        }, 1500);
+      } catch (error: any) {
+        console.error('Error saving motorcycle:', error);
+        if (errorMessage) {
+          errorMessage.textContent = error.message || 'Error al guardar los datos';
+          errorMessage.classList.remove('hidden');
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.removeAttribute('disabled');
+          submitBtn.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            ${lang === 'en' ? 'Save' : 'Guardar'}
+          `;
+        }
+      }
+    });
+
+    loadTeamData();
+  </script>
+</DashboardLayout>

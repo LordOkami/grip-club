@@ -1,0 +1,293 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<DashboardLayout title={t('dashboard.teamInfo')} currentSection="equipo">
+  <div class="max-w-2xl mx-auto">
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">
+        {t('dashboard.teamInfo')}
+      </h1>
+      <a href={translatePath('/dashboard')} class="text-racing-silver hover:text-white transition-colors">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="bg-racing-gray rounded-xl p-8 border border-racing-silver/10 flex items-center justify-center">
+      <svg class="animate-spin w-8 h-8 text-racing-green" fill="none" viewBox="0 0 24 24">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+      </svg>
+    </div>
+
+    <!-- Team Form -->
+    <form id="team-form" class="hidden space-y-6">
+      <!-- Team Name -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4">
+        <h2 class="text-lg font-bold text-white mb-4">Datos del Equipo</h2>
+
+        <div>
+          <label for="name" class="block text-sm font-medium text-racing-silver mb-2">{t('form.teamName')} *</label>
+          <input type="text" id="name" name="name" required
+            class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+            placeholder="Ej: Racing Team Alpha">
+        </div>
+
+        <div>
+          <label for="number_of_pilots" class="block text-sm font-medium text-racing-silver mb-2">{t('form.numberOfPilots')} *</label>
+          <select id="number_of_pilots" name="number_of_pilots" required
+            class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+            <option value="4">4 pilotos</option>
+            <option value="5">5 pilotos</option>
+            <option value="6">6 pilotos</option>
+            <option value="7">7 pilotos</option>
+            <option value="8">8 pilotos</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Representative Info -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4">
+        <h2 class="text-lg font-bold text-white mb-4">Representante del Equipo</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="representative_name" class="block text-sm font-medium text-racing-silver mb-2">{t('form.representativeName')} *</label>
+            <input type="text" id="representative_name" name="representative_name" required
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+          </div>
+
+          <div>
+            <label for="representative_surname" class="block text-sm font-medium text-racing-silver mb-2">{t('form.representativeSurname')} *</label>
+            <input type="text" id="representative_surname" name="representative_surname" required
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="representative_dni" class="block text-sm font-medium text-racing-silver mb-2">{t('form.representativeDni')} *</label>
+            <input type="text" id="representative_dni" name="representative_dni" required
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              placeholder="12345678A">
+          </div>
+
+          <div>
+            <label for="representative_phone" class="block text-sm font-medium text-racing-silver mb-2">{t('form.representativePhone')} *</label>
+            <input type="tel" id="representative_phone" name="representative_phone" required
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              placeholder="+34 600 000 000">
+          </div>
+        </div>
+
+        <div>
+          <label for="representative_email" class="block text-sm font-medium text-racing-silver mb-2">{t('form.representativeEmail')} *</label>
+          <input type="email" id="representative_email" name="representative_email" required
+            class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+            placeholder="email@ejemplo.com">
+        </div>
+      </div>
+
+      <!-- Address Info -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4">
+        <h2 class="text-lg font-bold text-white mb-4">{t('form.address')}</h2>
+
+        <div>
+          <label for="address" class="block text-sm font-medium text-racing-silver mb-2">{t('form.address')}</label>
+          <input type="text" id="address" name="address"
+            class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label for="municipality" class="block text-sm font-medium text-racing-silver mb-2">{t('form.municipality')}</label>
+            <input type="text" id="municipality" name="municipality"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+          </div>
+
+          <div>
+            <label for="postal_code" class="block text-sm font-medium text-racing-silver mb-2">{t('form.postalCode')}</label>
+            <input type="text" id="postal_code" name="postal_code"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+          </div>
+
+          <div>
+            <label for="province" class="block text-sm font-medium text-racing-silver mb-2">{t('form.province')}</label>
+            <input type="text" id="province" name="province"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+          </div>
+        </div>
+      </div>
+
+      <!-- GDPR Consent -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <label class="flex items-start gap-3 cursor-pointer">
+          <input type="checkbox" id="gdpr_consent" name="gdpr_consent" required
+            class="mt-1 w-5 h-5 rounded border-racing-silver/20 bg-racing-black text-racing-green focus:ring-racing-green focus:ring-offset-0">
+          <span class="text-sm text-racing-silver">{t('form.gdprConsent')} *</span>
+        </label>
+      </div>
+
+      <!-- Messages -->
+      <div id="success-message" class="hidden p-4 bg-racing-green/20 border border-racing-green/50 rounded-lg text-racing-green text-sm">
+        Datos guardados correctamente
+      </div>
+
+      <div id="error-message" class="hidden p-4 bg-red-900/30 border border-red-500/50 rounded-lg text-red-300 text-sm">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex gap-4">
+        <button type="submit" id="submit-btn"
+          class="flex-1 btn-primary py-4 flex items-center justify-center gap-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+          {t('dashboard.save')}
+        </button>
+        <a href={translatePath('/dashboard')}
+          class="px-6 py-4 border border-racing-silver/20 rounded-lg text-racing-silver hover:text-white hover:border-racing-silver/40 transition-colors">
+          {t('dashboard.cancel')}
+        </a>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    import { identity, fetchWithAuth } from '../../lib/identity';
+
+    const lang = document.documentElement.lang || 'es';
+    const dashboardPath = lang === 'en' ? '/en/dashboard' : '/dashboard';
+
+    // Elements
+    const loadingState = document.getElementById('loading-state');
+    const teamForm = document.getElementById('team-form') as HTMLFormElement;
+    const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
+    const submitBtn = document.getElementById('submit-btn');
+
+    let existingTeam: any = null;
+
+    // Form field names
+    const fields = [
+      'name', 'number_of_pilots',
+      'representative_name', 'representative_surname', 'representative_dni',
+      'representative_phone', 'representative_email',
+      'address', 'municipality', 'postal_code', 'province',
+      'gdpr_consent'
+    ];
+
+    async function loadTeamData() {
+      try {
+        const response = await fetchWithAuth('/api/teams');
+        const data = await response.json();
+
+        loadingState?.classList.add('hidden');
+        teamForm?.classList.remove('hidden');
+
+        if (data.team) {
+          existingTeam = data.team;
+
+          // Populate form fields
+          fields.forEach(field => {
+            const input = document.getElementById(field) as HTMLInputElement | HTMLSelectElement;
+            if (input && data.team[field] !== undefined && data.team[field] !== null) {
+              if (input.type === 'checkbox') {
+                (input as HTMLInputElement).checked = data.team[field];
+              } else {
+                input.value = data.team[field].toString();
+              }
+            }
+          });
+        } else {
+          // Pre-fill email from logged user
+          const user = identity.getUser();
+          if (user) {
+            const emailInput = document.getElementById('representative_email') as HTMLInputElement;
+            if (emailInput) emailInput.value = user.email;
+          }
+        }
+      } catch (error) {
+        console.error('Error loading team:', error);
+        loadingState?.classList.add('hidden');
+        teamForm?.classList.remove('hidden');
+      }
+    }
+
+    teamForm?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      successMessage?.classList.add('hidden');
+      errorMessage?.classList.add('hidden');
+
+      if (submitBtn) {
+        submitBtn.setAttribute('disabled', 'true');
+        submitBtn.textContent = 'Guardando...';
+      }
+
+      const formData = new FormData(teamForm);
+      const body: Record<string, any> = {};
+
+      fields.forEach(field => {
+        const input = document.getElementById(field) as HTMLInputElement | HTMLSelectElement;
+        if (input) {
+          if (input.type === 'checkbox') {
+            body[field] = (input as HTMLInputElement).checked;
+          } else if (input.type === 'number' || field === 'number_of_pilots') {
+            body[field] = parseInt(input.value, 10);
+          } else {
+            body[field] = input.value;
+          }
+        }
+      });
+
+      try {
+        const method = existingTeam ? 'PUT' : 'POST';
+        const response = await fetchWithAuth('/api/teams', {
+          method,
+          body: JSON.stringify(body)
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Error al guardar');
+        }
+
+        successMessage?.classList.remove('hidden');
+        existingTeam = data.team;
+
+        // Redirect to dashboard after 1.5s
+        setTimeout(() => {
+          window.location.href = dashboardPath;
+        }, 1500);
+      } catch (error: any) {
+        console.error('Error saving team:', error);
+        if (errorMessage) {
+          errorMessage.textContent = error.message || 'Error al guardar los datos';
+          errorMessage.classList.remove('hidden');
+        }
+      } finally {
+        if (submitBtn) {
+          submitBtn.removeAttribute('disabled');
+          submitBtn.innerHTML = `
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            ${lang === 'en' ? 'Save' : 'Guardar'}
+          `;
+        }
+      }
+    });
+
+    loadTeamData();
+  </script>
+</DashboardLayout>

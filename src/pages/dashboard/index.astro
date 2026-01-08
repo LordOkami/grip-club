@@ -1,0 +1,237 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
+<DashboardLayout title={t('dashboard.title')} currentSection="dashboard">
+  <div class="max-w-4xl mx-auto">
+    <!-- Welcome Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-white mb-2" style="font-family: 'Bebas Neue', sans-serif;">
+        {t('dashboard.welcome')}
+      </h1>
+      <p id="user-email" class="text-racing-silver"></p>
+    </div>
+
+    <!-- Loading State -->
+    <div id="loading-state" class="bg-racing-gray rounded-xl p-8 border border-racing-silver/10">
+      <div class="flex items-center justify-center">
+        <svg class="animate-spin w-8 h-8 text-racing-green" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+      </div>
+    </div>
+
+    <!-- No Team State -->
+    <div id="no-team-state" class="hidden bg-racing-gray rounded-xl p-8 border border-racing-silver/10 text-center">
+      <div class="w-20 h-20 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-10 h-10 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+        </svg>
+      </div>
+      <h2 class="text-xl font-bold text-white mb-2">{t('dashboard.noTeam')}</h2>
+      <p class="text-racing-silver mb-6">Empieza creando tu equipo para inscribirte en la carrera</p>
+      <a href={translatePath('/dashboard/equipo')} class="btn-primary inline-flex items-center gap-2">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+        </svg>
+        {t('dashboard.createTeam')}
+      </a>
+    </div>
+
+    <!-- Team Dashboard -->
+    <div id="team-dashboard" class="hidden space-y-6">
+      <!-- Progress Card -->
+      <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <h2 class="text-lg font-bold text-white mb-4">{t('dashboard.progress')}</h2>
+
+        <!-- Progress Bar -->
+        <div class="mb-4">
+          <div class="flex justify-between text-sm mb-2">
+            <span class="text-racing-silver">
+              <span id="pilots-count">0</span>/<span id="max-pilots">4</span> {t('dashboard.pilotsCount')}
+            </span>
+            <span id="progress-percent" class="text-vanilla">0%</span>
+          </div>
+          <div class="h-3 bg-racing-black rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-racing-green transition-all duration-500" style="width: 0%"></div>
+          </div>
+          <p class="text-xs text-racing-silver mt-2">{t('dashboard.minPilots')}</p>
+        </div>
+
+        <!-- Status Badge -->
+        <div class="flex items-center gap-2">
+          <span class="text-racing-silver">{t('dashboard.status')}:</span>
+          <span id="status-badge" class="px-3 py-1 rounded-full text-sm font-medium bg-yellow-500/20 text-yellow-400">
+            {t('dashboard.status.draft')}
+          </span>
+        </div>
+      </div>
+
+      <!-- Quick Actions Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Team Info Card -->
+        <a href={translatePath('/dashboard/equipo')} class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-racing-green/50 transition-colors group">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1">{t('dashboard.teamInfo')}</h3>
+              <p id="team-name" class="text-racing-silver">-</p>
+            </div>
+            <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center group-hover:bg-racing-green/30 transition-colors">
+              <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Pilots Card -->
+        <a href={translatePath('/dashboard/pilotos')} class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-racing-green/50 transition-colors group">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1">{t('dashboard.pilots')}</h3>
+              <p class="text-racing-silver"><span id="pilots-summary">0</span> pilotos</p>
+            </div>
+            <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center group-hover:bg-racing-green/30 transition-colors">
+              <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Staff Card -->
+        <a href={translatePath('/dashboard/staff')} class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-racing-green/50 transition-colors group">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1">{t('dashboard.staff')}</h3>
+              <p class="text-racing-silver"><span id="staff-summary">0</span>/4 {t('dashboard.staff').toLowerCase()}</p>
+            </div>
+            <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center group-hover:bg-racing-green/30 transition-colors">
+              <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+
+        <!-- Motorcycle Card -->
+        <a href={translatePath('/dashboard/moto')} class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-racing-green/50 transition-colors group">
+          <div class="flex items-start justify-between">
+            <div>
+              <h3 class="text-lg font-bold text-white mb-1">{t('dashboard.motorcycle')}</h3>
+              <p id="moto-summary" class="text-racing-silver">-</p>
+            </div>
+            <div class="w-10 h-10 bg-racing-green/20 rounded-lg flex items-center justify-center group-hover:bg-racing-green/30 transition-colors">
+              <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div id="error-state" class="hidden bg-red-900/20 rounded-xl p-8 border border-red-500/50 text-center">
+      <p class="text-red-300">Ha ocurrido un error al cargar los datos. Por favor, recarga la página.</p>
+    </div>
+  </div>
+
+  <script>
+    import { identity, fetchWithAuth } from '../../lib/identity';
+
+    const lang = document.documentElement.lang || 'es';
+
+    // Update user email display
+    const user = identity.getUser();
+    const userEmailEl = document.getElementById('user-email');
+    if (userEmailEl && user) {
+      userEmailEl.textContent = user.email;
+    }
+
+    // Elements
+    const loadingState = document.getElementById('loading-state');
+    const noTeamState = document.getElementById('no-team-state');
+    const teamDashboard = document.getElementById('team-dashboard');
+    const errorState = document.getElementById('error-state');
+
+    // Dashboard elements
+    const teamNameEl = document.getElementById('team-name');
+    const pilotsCountEl = document.getElementById('pilots-count');
+    const maxPilotsEl = document.getElementById('max-pilots');
+    const pilotsSummaryEl = document.getElementById('pilots-summary');
+    const staffSummaryEl = document.getElementById('staff-summary');
+    const motoSummaryEl = document.getElementById('moto-summary');
+    const progressBarEl = document.getElementById('progress-bar');
+    const progressPercentEl = document.getElementById('progress-percent');
+    const statusBadgeEl = document.getElementById('status-badge');
+
+    // Status colors and labels
+    const statusConfig: Record<string, { class: string; label: string }> = {
+      draft: { class: 'bg-yellow-500/20 text-yellow-400', label: lang === 'en' ? 'Draft' : 'Borrador' },
+      pending: { class: 'bg-blue-500/20 text-blue-400', label: lang === 'en' ? 'Pending' : 'Pendiente' },
+      confirmed: { class: 'bg-green-500/20 text-green-400', label: lang === 'en' ? 'Confirmed' : 'Confirmado' },
+    };
+
+    async function loadTeamData() {
+      try {
+        const response = await fetchWithAuth('/api/teams');
+        const data = await response.json();
+
+        loadingState?.classList.add('hidden');
+
+        if (!data.team) {
+          noTeamState?.classList.remove('hidden');
+          return;
+        }
+
+        const team = data.team;
+        const pilots = team.pilots || [];
+        const staff = team.team_staff || [];
+
+        // Update dashboard
+        if (teamNameEl) teamNameEl.textContent = team.name;
+        if (pilotsCountEl) pilotsCountEl.textContent = pilots.length.toString();
+        if (maxPilotsEl) maxPilotsEl.textContent = team.number_of_pilots.toString();
+        if (pilotsSummaryEl) pilotsSummaryEl.textContent = pilots.length.toString();
+        if (staffSummaryEl) staffSummaryEl.textContent = staff.length.toString();
+
+        // Moto summary
+        if (motoSummaryEl) {
+          if (team.motorcycle_brand && team.motorcycle_model) {
+            motoSummaryEl.textContent = `${team.motorcycle_brand} ${team.motorcycle_model}`;
+          } else {
+            motoSummaryEl.textContent = lang === 'en' ? 'Not configured' : 'Sin configurar';
+          }
+        }
+
+        // Progress bar (minimum 4 pilots required)
+        const minPilots = 4;
+        const progress = Math.min((pilots.length / minPilots) * 100, 100);
+        if (progressBarEl) progressBarEl.style.width = `${progress}%`;
+        if (progressPercentEl) progressPercentEl.textContent = `${Math.round(progress)}%`;
+
+        // Status badge
+        if (statusBadgeEl && statusConfig[team.status]) {
+          statusBadgeEl.className = `px-3 py-1 rounded-full text-sm font-medium ${statusConfig[team.status].class}`;
+          statusBadgeEl.textContent = statusConfig[team.status].label;
+        }
+
+        teamDashboard?.classList.remove('hidden');
+      } catch (error) {
+        console.error('Error loading team data:', error);
+        loadingState?.classList.add('hidden');
+        errorState?.classList.remove('hidden');
+      }
+    }
+
+    loadTeamData();
+  </script>
+</DashboardLayout>

@@ -37,36 +37,23 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-racing-green hover:bg-racing-green-dark text-vanilla font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 uppercase tracking-wider;
+    @apply bg-racing-green hover:bg-racing-green-dark text-vanilla font-bold py-3 px-8 rounded-lg transition-all duration-200 uppercase tracking-wider;
   }
 
   .btn-secondary {
-    @apply border-2 border-vanilla text-vanilla hover:bg-vanilla hover:text-racing-green font-bold py-3 px-8 rounded-lg transition-all duration-300 uppercase tracking-wider;
+    @apply border-2 border-vanilla text-vanilla hover:bg-vanilla hover:text-racing-green font-bold py-3 px-8 rounded-lg transition-all duration-200 uppercase tracking-wider;
   }
 
   .card {
-    @apply bg-racing-gray rounded-2xl p-6 border border-racing-silver/20 hover:border-racing-green/50 transition-all duration-300;
+    @apply bg-racing-gray rounded-2xl p-6 border border-racing-silver/20 hover:border-racing-green/50 transition-colors duration-200;
   }
 
   .nav-link {
-    @apply relative text-white hover:text-vanilla transition-colors duration-300 uppercase tracking-wider font-semibold;
-  }
-
-  .nav-link::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-vanilla transition-all duration-300;
-  }
-
-  .nav-link:hover::after {
-    @apply w-full;
+    @apply relative text-racing-silver hover:text-vanilla transition-colors duration-200 uppercase tracking-wider font-medium text-sm;
   }
 
   .nav-link.active {
     @apply text-vanilla;
-  }
-
-  .nav-link.active::after {
-    @apply w-full;
   }
 
   .section-title {
@@ -79,24 +66,64 @@
   }
 
   .input-field {
-    @apply w-full bg-racing-gray border border-racing-silver/30 rounded-lg px-4 py-3 text-white placeholder-racing-silver/50 focus:border-racing-green focus:outline-none focus:ring-2 focus:ring-racing-green/20 transition-all duration-300;
+    @apply w-full bg-racing-black border border-racing-silver/30 rounded-lg px-4 py-3 text-white placeholder-racing-silver/50 focus:border-racing-green focus:outline-none focus:ring-2 focus:ring-racing-green/20 transition-all duration-200;
   }
 
   .label-field {
     @apply block text-sm font-semibold text-racing-silver mb-2 uppercase tracking-wider;
   }
+
+  /* Language switcher */
+  .lang-switch {
+    @apply flex items-center gap-2 px-3 py-2 rounded-lg border border-racing-silver/20 hover:border-vanilla/50 transition-colors duration-200;
+  }
+
+  .lang-switch .flag {
+    @apply text-lg leading-none;
+  }
+
+  .lang-switch .label {
+    @apply text-xs font-medium uppercase tracking-wider text-racing-silver;
+  }
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-racing-green to-vanilla bg-clip-text text-transparent;
+  /* Replace gradient text with solid vanilla color */
+  .text-accent {
+    @apply text-vanilla;
   }
 
-  .bg-gradient-racing {
-    @apply bg-gradient-to-br from-racing-black via-racing-gray to-racing-black;
+  /* Hero section with background image */
+  .hero-bg {
+    @apply relative bg-racing-black;
   }
 
-  .hero-overlay {
-    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9));
+  .hero-bg::before {
+    content: '';
+    @apply absolute inset-0 bg-cover bg-center;
+    background-image: var(--hero-image);
+  }
+
+  .hero-bg::after {
+    content: '';
+    @apply absolute inset-0;
+    background: linear-gradient(to bottom, rgba(10, 10, 10, 0.6) 0%, rgba(10, 10, 10, 0.85) 60%, rgba(10, 10, 10, 1) 100%);
+  }
+
+  .hero-content {
+    @apply relative z-10;
+  }
+
+  /* Image gallery grid */
+  .gallery-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-3;
+  }
+
+  .gallery-item {
+    @apply aspect-video rounded-lg overflow-hidden;
+  }
+
+  .gallery-item img {
+    @apply w-full h-full object-cover transition-transform duration-300 hover:scale-105;
   }
 }

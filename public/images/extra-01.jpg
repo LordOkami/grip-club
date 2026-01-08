@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head lang="es">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta http-equiv="refresh" content="5" /> -->
+
+    <link rel="icon" href="/static/img/favicon.png" sizes="64x64" type="image/png">
+    <link rel="icon" href="/static/img/favicon.ico" sizes="48x48" type="image/vnd.microsoft.icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <title>Página no encontrada – Endurance Moto</title>
+    <meta name="description" content="Carreras de resistencia con motos de 125 cc al alcance de cualquiera">
+
+    <link href="/static/vendor/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/min/screen.5c7325456f.css" rel="stylesheet" />
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand brand-toggle" href="/">
+                <img alt="Endurance Moto" src="/static/img/logo-header.png" height="20px">
+            </a>
+        </div>
+
+        <div class="navbar-collapse collapse" id="main-menu">
+            <ul class="nav navbar-nav">
+                <li class="hidden-xs">
+                    <a href="/">
+                        <img alt="Endurance Moto logo" src="/static/img/logo-header.png" height="48px"><span style="margin-left: 8px;">Inicio<span>
+                    </a>
+                </li>
+                <li >
+                    <a href="/2024/normativa/">Normativa</a>
+                </li>
+                <li >
+                    <a href="/2024/registro/">Inscripción</a>
+                </li>
+                <li >
+                    <a href="/quienes-somos/">Quiénes somos</a>
+                </li>
+                <li >
+                    <a href="/info/">+ Info</a>
+                </li>
+                <li >
+                    <a href="/contacto/">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>    <div class="container-fluid content">
+        <h2>Página no encontrada</h2>
+        <p class="text-center">
+            <a href="/"><img src="/static/img/logo.png" class="landing-logo" /></a>
+        </p>
+        <div class="alert alert-info">
+            <h4 class="text-center">
+                Accede a la <a href="/">página principal</a> para más información.
+            </h4>
+        </div>
+    </div>
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <p class="text-center">
+                <a href="/"><img alt="Endurance Moto logo" src="/static/img/logo.png" height="96px"></a>
+            </p>
+
+            <ul class="footer-links">
+                <li >
+                    <a href="/">Inicio</a>
+                </li>
+                <li >
+                    <a href="/2024/normativa/">Normativa</a>
+                </li>
+                <li >
+                    <a href="/2024/registro/">Inscripción</a>
+                </li>
+                <li >
+                    <a href="/quienes-somos/">Quiénes somos</a>
+                </li>
+                <li >
+                    <a href="/info/">+ Info</a>
+                </li>
+                <li >
+                    <a href="/contacto/">Contacto</a>
+                </li>
+                <li >
+                    <a href="/condiciones/">Condiciones</a>
+                </li>
+            </ul>
+
+            <p>Corsedriver SLU &copy; 2026.</p>
+        </div>
+    </footer>
+
+    <script src="/static/vendor/jquery.js"></script>
+    <script src="/static/vendor/bootstrap.min.js"></script>
+    <script src="/static/min/form.afe0e64e69.js"></script>
+</body>
+</html>

@@ -1,0 +1,463 @@
+---
+import AdminLayout from '../../layouts/AdminLayout.astro';
+---
+
+<AdminLayout title="Pilotos" currentSection="pilotos">
+  <div class="max-w-7xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div>
+        <h1 class="text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">
+          Gestion de Pilotos
+        </h1>
+        <p class="text-racing-silver mt-2">Listado completo de todos los pilotos registrados</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-racing-silver text-sm" id="pilots-count">0 pilotos</span>
+      </div>
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-racing-gray rounded-xl border border-racing-silver/10 p-4 mb-6">
+      <div class="grid md:grid-cols-4 gap-4">
+        <!-- Search -->
+        <div class="md:col-span-2">
+          <label class="block text-sm text-racing-silver mb-1">Buscar</label>
+          <div class="relative">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Nombre, apellido, DNI, email..."
+              class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-2 pl-10 text-white placeholder-racing-silver/50 focus:border-red-600 focus:outline-none"
+            />
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-racing-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+          </div>
+        </div>
+
+        <!-- Level Filter -->
+        <div>
+          <label class="block text-sm text-racing-silver mb-1">Nivel</label>
+          <select
+            id="level-filter"
+            class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-2 text-white focus:border-red-600 focus:outline-none"
+          >
+            <option value="">Todos los niveles</option>
+            <option value="beginner">Principiante</option>
+            <option value="intermediate">Intermedio</option>
+            <option value="advanced">Avanzado</option>
+            <option value="expert">Experto</option>
+          </select>
+        </div>
+
+        <!-- Team Status Filter -->
+        <div>
+          <label class="block text-sm text-racing-silver mb-1">Estado Equipo</label>
+          <select
+            id="status-filter"
+            class="w-full bg-racing-black border border-racing-silver/20 rounded-lg px-4 py-2 text-white focus:border-red-600 focus:outline-none"
+          >
+            <option value="">Todos</option>
+            <option value="confirmed">Confirmados</option>
+            <option value="pending">Pendientes</option>
+            <option value="draft">Borradores</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-2xl font-bold text-blue-400" id="stat-beginner">0</div>
+        <div class="text-racing-silver text-xs">Principiantes</div>
+      </div>
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-2xl font-bold text-green-400" id="stat-intermediate">0</div>
+        <div class="text-racing-silver text-xs">Intermedios</div>
+      </div>
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-2xl font-bold text-orange-400" id="stat-advanced">0</div>
+        <div class="text-racing-silver text-xs">Avanzados</div>
+      </div>
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-2xl font-bold text-red-400" id="stat-expert">0</div>
+        <div class="text-racing-silver text-xs">Expertos</div>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="bg-racing-gray rounded-xl border border-racing-silver/10 overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-racing-black/50">
+            <tr>
+              <th class="px-4 py-3 text-left text-xs font-medium text-racing-silver uppercase tracking-wider cursor-pointer hover:text-white" data-sort="name">
+                <div class="flex items-center gap-1">
+                  Nombre
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                  </svg>
+                </div>
+              </th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-racing-silver uppercase tracking-wider">DNI</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-racing-silver uppercase tracking-wider hidden md:table-cell">Email</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-racing-silver uppercase tracking-wider hidden lg:table-cell">Telefono</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-racing-silver uppercase tracking-wider">Nivel</th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-racing-silver uppercase tracking-wider cursor-pointer hover:text-white" data-sort="team">
+                <div class="flex items-center gap-1">
+                  Equipo
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                  </svg>
+                </div>
+              </th>
+              <th class="px-4 py-3 text-left text-xs font-medium text-racing-silver uppercase tracking-wider hidden xl:table-cell">Estado</th>
+              <th class="px-4 py-3 text-right text-xs font-medium text-racing-silver uppercase tracking-wider">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="pilots-table" class="divide-y divide-racing-silver/10">
+            <tr>
+              <td colspan="8" class="px-4 py-8 text-center text-racing-silver">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2"></div>
+                Cargando pilotos...
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Pagination placeholder -->
+    <div class="mt-4 flex items-center justify-between">
+      <div class="text-sm text-racing-silver" id="pagination-info">
+        Mostrando <span id="showing-count">0</span> pilotos
+      </div>
+    </div>
+  </div>
+
+  <!-- Pilot Detail Modal -->
+  <div id="pilot-modal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
+    <div class="bg-racing-gray rounded-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+      <div class="p-6 border-b border-racing-silver/10 flex items-center justify-between">
+        <h3 class="text-xl font-semibold text-white">Detalle del Piloto</h3>
+        <button id="close-modal" class="text-racing-silver hover:text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+      <div id="pilot-detail" class="p-6">
+        <!-- Content loaded dynamically -->
+      </div>
+    </div>
+  </div>
+</AdminLayout>
+
+<script>
+  import { identity } from '../../lib/identity';
+
+  interface Pilot {
+    id: string;
+    name: string;
+    surname: string;
+    dni: string;
+    email: string;
+    phone: string;
+    driving_level: string;
+    is_representative: boolean;
+    track_experience: string;
+    team_name: string;
+    team_id: string;
+    team_status: string;
+  }
+
+  let allPilots: Pilot[] = [];
+  let filteredPilots: Pilot[] = [];
+  let sortField = 'name';
+  let sortAsc = true;
+
+  const levelLabels: Record<string, string> = {
+    beginner: 'Principiante',
+    intermediate: 'Intermedio',
+    advanced: 'Avanzado',
+    expert: 'Experto'
+  };
+
+  const levelColors: Record<string, string> = {
+    beginner: 'bg-blue-500',
+    intermediate: 'bg-green-500',
+    advanced: 'bg-orange-500',
+    expert: 'bg-red-500'
+  };
+
+  const statusLabels: Record<string, string> = {
+    draft: 'Borrador',
+    pending: 'Pendiente',
+    confirmed: 'Confirmado',
+    cancelled: 'Cancelado'
+  };
+
+  const statusColors: Record<string, string> = {
+    draft: 'bg-gray-500',
+    pending: 'bg-yellow-500',
+    confirmed: 'bg-green-500',
+    cancelled: 'bg-red-500'
+  };
+
+  async function loadPilots() {
+    try {
+      const token = identity.getToken();
+      const response = await fetch('/api/admin-teams', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      if (!response.ok) throw new Error('Error loading data');
+
+      const { teams } = await response.json();
+
+      // Flatten pilots from all teams
+      allPilots = teams.flatMap((team: any) =>
+        (team.pilots || []).map((pilot: any) => ({
+          ...pilot,
+          team_name: team.name || 'Sin nombre',
+          team_id: team.id,
+          team_status: team.status
+        }))
+      );
+
+      updateStats();
+      applyFilters();
+
+    } catch (error) {
+      console.error('Error loading pilots:', error);
+      document.getElementById('pilots-table')!.innerHTML = `
+        <tr>
+          <td colspan="8" class="px-4 py-8 text-center text-red-500">
+            Error al cargar los pilotos
+          </td>
+        </tr>
+      `;
+    }
+  }
+
+  function updateStats() {
+    const stats = {
+      beginner: allPilots.filter(p => p.driving_level === 'beginner').length,
+      intermediate: allPilots.filter(p => p.driving_level === 'intermediate').length,
+      advanced: allPilots.filter(p => p.driving_level === 'advanced').length,
+      expert: allPilots.filter(p => p.driving_level === 'expert').length
+    };
+
+    document.getElementById('stat-beginner')!.textContent = stats.beginner.toString();
+    document.getElementById('stat-intermediate')!.textContent = stats.intermediate.toString();
+    document.getElementById('stat-advanced')!.textContent = stats.advanced.toString();
+    document.getElementById('stat-expert')!.textContent = stats.expert.toString();
+    document.getElementById('pilots-count')!.textContent = `${allPilots.length} pilotos`;
+  }
+
+  function applyFilters() {
+    const search = (document.getElementById('search-input') as HTMLInputElement).value.toLowerCase();
+    const level = (document.getElementById('level-filter') as HTMLSelectElement).value;
+    const status = (document.getElementById('status-filter') as HTMLSelectElement).value;
+
+    filteredPilots = allPilots.filter(pilot => {
+      // Search filter
+      if (search) {
+        const searchable = `${pilot.name} ${pilot.surname} ${pilot.dni} ${pilot.email} ${pilot.team_name}`.toLowerCase();
+        if (!searchable.includes(search)) return false;
+      }
+
+      // Level filter
+      if (level && pilot.driving_level !== level) return false;
+
+      // Status filter
+      if (status && pilot.team_status !== status) return false;
+
+      return true;
+    });
+
+    // Sort
+    filteredPilots.sort((a, b) => {
+      let valA: string, valB: string;
+
+      if (sortField === 'team') {
+        valA = a.team_name || '';
+        valB = b.team_name || '';
+      } else {
+        valA = `${a.name} ${a.surname}`;
+        valB = `${b.name} ${b.surname}`;
+      }
+
+      return sortAsc ? valA.localeCompare(valB) : valB.localeCompare(valA);
+    });
+
+    renderTable();
+  }
+
+  function renderTable() {
+    const tbody = document.getElementById('pilots-table')!;
+
+    if (filteredPilots.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="8" class="px-4 py-8 text-center text-racing-silver">
+            No se encontraron pilotos con los filtros aplicados
+          </td>
+        </tr>
+      `;
+      document.getElementById('showing-count')!.textContent = '0';
+      return;
+    }
+
+    tbody.innerHTML = filteredPilots.map(pilot => `
+      <tr class="hover:bg-racing-silver/5 transition-colors">
+        <td class="px-4 py-3">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 ${levelColors[pilot.driving_level] || 'bg-gray-500'} rounded-full flex items-center justify-center text-white text-xs font-bold">
+              ${(pilot.name?.charAt(0) || '?').toUpperCase()}
+            </div>
+            <div>
+              <div class="text-white font-medium">
+                ${pilot.name || ''} ${pilot.surname || ''}
+                ${pilot.is_representative ? '<span class="ml-1 text-xs text-yellow-500">(Rep)</span>' : ''}
+              </div>
+            </div>
+          </div>
+        </td>
+        <td class="px-4 py-3 text-racing-silver text-sm">${pilot.dni || '-'}</td>
+        <td class="px-4 py-3 text-racing-silver text-sm hidden md:table-cell">${pilot.email || '-'}</td>
+        <td class="px-4 py-3 text-racing-silver text-sm hidden lg:table-cell">${pilot.phone || '-'}</td>
+        <td class="px-4 py-3">
+          <span class="px-2 py-1 rounded text-xs text-white ${levelColors[pilot.driving_level] || 'bg-gray-500'}">
+            ${levelLabels[pilot.driving_level] || pilot.driving_level}
+          </span>
+        </td>
+        <td class="px-4 py-3">
+          <a href="/admin/equipos/${pilot.team_id}" class="text-red-500 hover:text-red-400 text-sm">
+            ${pilot.team_name}
+          </a>
+        </td>
+        <td class="px-4 py-3 hidden xl:table-cell">
+          <span class="px-2 py-1 rounded text-xs text-white ${statusColors[pilot.team_status] || 'bg-gray-500'}">
+            ${statusLabels[pilot.team_status] || pilot.team_status}
+          </span>
+        </td>
+        <td class="px-4 py-3 text-right">
+          <button
+            class="text-racing-silver hover:text-white p-1"
+            onclick="showPilotDetail('${pilot.id}')"
+            title="Ver detalle"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+            </svg>
+          </button>
+        </td>
+      </tr>
+    `).join('');
+
+    document.getElementById('showing-count')!.textContent = filteredPilots.length.toString();
+  }
+
+  // Make showPilotDetail available globally
+  (window as any).showPilotDetail = function(pilotId: string) {
+    const pilot = allPilots.find(p => p.id === pilotId);
+    if (!pilot) return;
+
+    const modal = document.getElementById('pilot-modal')!;
+    const detail = document.getElementById('pilot-detail')!;
+
+    detail.innerHTML = `
+      <div class="space-y-4">
+        <div class="flex items-center gap-4 pb-4 border-b border-racing-silver/10">
+          <div class="w-16 h-16 ${levelColors[pilot.driving_level] || 'bg-gray-500'} rounded-full flex items-center justify-center text-white text-xl font-bold">
+            ${(pilot.name?.charAt(0) || '?').toUpperCase()}${(pilot.surname?.charAt(0) || '').toUpperCase()}
+          </div>
+          <div>
+            <h4 class="text-xl font-semibold text-white">${pilot.name || ''} ${pilot.surname || ''}</h4>
+            <div class="flex items-center gap-2 mt-1">
+              <span class="px-2 py-0.5 rounded text-xs text-white ${levelColors[pilot.driving_level] || 'bg-gray-500'}">
+                ${levelLabels[pilot.driving_level] || pilot.driving_level}
+              </span>
+              ${pilot.is_representative ? '<span class="px-2 py-0.5 rounded text-xs bg-yellow-500 text-white">Representante</span>' : ''}
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <div class="text-racing-silver text-xs uppercase mb-1">DNI</div>
+            <div class="text-white">${pilot.dni || '-'}</div>
+          </div>
+          <div>
+            <div class="text-racing-silver text-xs uppercase mb-1">Telefono</div>
+            <div class="text-white">${pilot.phone || '-'}</div>
+          </div>
+          <div class="col-span-2">
+            <div class="text-racing-silver text-xs uppercase mb-1">Email</div>
+            <div class="text-white">${pilot.email || '-'}</div>
+          </div>
+          <div class="col-span-2">
+            <div class="text-racing-silver text-xs uppercase mb-1">Experiencia en pista</div>
+            <div class="text-white">${pilot.track_experience || 'No especificada'}</div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-racing-silver/10">
+          <div class="text-racing-silver text-xs uppercase mb-2">Equipo</div>
+          <a href="/admin/equipos/${pilot.team_id}" class="flex items-center justify-between p-3 bg-racing-black/50 rounded-lg hover:bg-racing-black transition-colors">
+            <span class="text-white font-medium">${pilot.team_name}</span>
+            <span class="px-2 py-0.5 rounded text-xs text-white ${statusColors[pilot.team_status] || 'bg-gray-500'}">
+              ${statusLabels[pilot.team_status] || pilot.team_status}
+            </span>
+          </a>
+        </div>
+      </div>
+    `;
+
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+  };
+
+  // Close modal
+  document.getElementById('close-modal')?.addEventListener('click', () => {
+    const modal = document.getElementById('pilot-modal')!;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+  });
+
+  document.getElementById('pilot-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      const modal = document.getElementById('pilot-modal')!;
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  });
+
+  // Filter listeners
+  document.getElementById('search-input')?.addEventListener('input', applyFilters);
+  document.getElementById('level-filter')?.addEventListener('change', applyFilters);
+  document.getElementById('status-filter')?.addEventListener('change', applyFilters);
+
+  // Sort listeners
+  document.querySelectorAll('[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      const field = (th as HTMLElement).dataset.sort!;
+      if (sortField === field) {
+        sortAsc = !sortAsc;
+      } else {
+        sortField = field;
+        sortAsc = true;
+      }
+      applyFilters();
+    });
+  });
+
+  // Load on ready
+  loadPilots();
+</script>

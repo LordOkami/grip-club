@@ -12,29 +12,168 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
       <p class="text-racing-silver mt-2">Gestion de inscripciones Grip Club</p>
     </div>
 
-    <!-- Stats Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <!-- Alerts Section -->
+    <div id="alerts-container" class="mb-6 space-y-3 hidden">
+      <!-- Alerts will be inserted here -->
+    </div>
+
+    <!-- Main Stats Cards -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
       <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="flex items-center justify-between mb-2">
+          <div class="w-10 h-10 bg-blue-600/20 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+            </svg>
+          </div>
+        </div>
         <div class="text-3xl font-bold text-white" id="stat-total">-</div>
         <div class="text-racing-silver text-sm">Total Equipos</div>
       </div>
+
       <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="flex items-center justify-between mb-2">
+          <div class="w-10 h-10 bg-yellow-600/20 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+        </div>
         <div class="text-3xl font-bold text-yellow-500" id="stat-pending">-</div>
         <div class="text-racing-silver text-sm">Pendientes</div>
       </div>
+
       <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <div class="flex items-center justify-between mb-2">
+          <div class="w-10 h-10 bg-green-600/20 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+        </div>
         <div class="text-3xl font-bold text-green-500" id="stat-confirmed">-</div>
         <div class="text-racing-silver text-sm">Confirmados</div>
       </div>
+
       <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
-        <div class="text-3xl font-bold text-blue-500" id="stat-pilots">-</div>
+        <div class="flex items-center justify-between mb-2">
+          <div class="w-10 h-10 bg-purple-600/20 rounded-lg flex items-center justify-center">
+            <svg class="w-5 h-5 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+        </div>
+        <div class="text-3xl font-bold text-purple-500" id="stat-pilots">-</div>
         <div class="text-racing-silver text-sm">Total Pilotos</div>
       </div>
     </div>
 
+    <!-- Secondary Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-xl font-bold text-white" id="stat-staff">-</div>
+        <div class="text-racing-silver text-xs">Total Staff</div>
+      </div>
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-xl font-bold text-cyan-400" id="stat-conversion">-</div>
+        <div class="text-racing-silver text-xs">Tasa Confirmacion</div>
+      </div>
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-xl font-bold text-orange-400" id="stat-avg-pilots">-</div>
+        <div class="text-racing-silver text-xs">Pilotos/Equipo</div>
+      </div>
+      <div class="bg-racing-gray/50 rounded-xl p-4 border border-racing-silver/10">
+        <div class="text-xl font-bold text-gray-400" id="stat-draft">-</div>
+        <div class="text-racing-silver text-xs">Borradores</div>
+      </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="grid md:grid-cols-2 gap-6 mb-8">
+      <!-- Status Distribution Chart -->
+      <div class="bg-racing-gray rounded-xl border border-racing-silver/10 p-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Distribucion por Estado</h3>
+        <div class="h-64">
+          <canvas id="statusChart"></canvas>
+        </div>
+      </div>
+
+      <!-- Driving Level Chart -->
+      <div class="bg-racing-gray rounded-xl border border-racing-silver/10 p-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Nivel de Conduccion</h3>
+        <div class="h-64">
+          <canvas id="levelChart"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- More Stats Row -->
+    <div class="grid md:grid-cols-3 gap-6 mb-8">
+      <!-- Engine Type Distribution -->
+      <div class="bg-racing-gray rounded-xl border border-racing-silver/10 p-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Tipo de Motor</h3>
+        <div class="space-y-4">
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-racing-silver">125cc 4T</span>
+              <span class="text-white font-medium" id="engine-125">0</span>
+            </div>
+            <div class="h-2 bg-racing-silver/20 rounded-full overflow-hidden">
+              <div id="engine-125-bar" class="h-full bg-red-600 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span class="text-racing-silver">50cc 2T</span>
+              <span class="text-white font-medium" id="engine-50">0</span>
+            </div>
+            <div class="h-2 bg-racing-silver/20 rounded-full overflow-hidden">
+              <div id="engine-50-bar" class="h-full bg-orange-500 rounded-full transition-all duration-500" style="width: 0%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staff Roles -->
+      <div class="bg-racing-gray rounded-xl border border-racing-silver/10 p-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Roles de Staff</h3>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+              <span class="text-racing-silver text-sm">Mecanicos</span>
+            </div>
+            <span class="text-white font-medium" id="staff-mechanic">0</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+              <span class="text-racing-silver text-sm">Coordinadores</span>
+            </div>
+            <span class="text-white font-medium" id="staff-coordinator">0</span>
+          </div>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <div class="w-3 h-3 bg-purple-500 rounded-full"></div>
+              <span class="text-racing-silver text-sm">Apoyo</span>
+            </div>
+            <span class="text-white font-medium" id="staff-support">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Registration Timeline Mini -->
+      <div class="bg-racing-gray rounded-xl border border-racing-silver/10 p-6">
+        <h3 class="text-lg font-semibold text-white mb-4">Registros Recientes</h3>
+        <div class="h-32">
+          <canvas id="timelineChart"></canvas>
+        </div>
+      </div>
+    </div>
+
     <!-- Quick Actions -->
-    <div class="grid md:grid-cols-3 gap-4 mb-8">
-      <a href="/panel/equipos" class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+    <div class="grid md:grid-cols-4 gap-4 mb-8">
+      <a href="/admin/equipos" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center group-hover:bg-red-600/30 transition-colors">
             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -42,37 +181,51 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
             </svg>
           </div>
           <div>
-            <div class="text-white font-semibold">Ver Equipos</div>
-            <div class="text-racing-silver text-sm">Gestionar inscripciones</div>
+            <div class="text-white font-semibold">Equipos</div>
+            <div class="text-racing-silver text-sm">Gestionar</div>
           </div>
         </div>
       </a>
 
-      <a href="/panel/configuracion" class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+      <a href="/admin/pilotos" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center group-hover:bg-red-600/30 transition-colors">
-            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
+            <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="text-white font-semibold">Pilotos</div>
+            <div class="text-racing-silver text-sm">Ver todos</div>
+          </div>
+        </div>
+      </a>
+
+      <a href="/admin/configuracion" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-cyan-600/20 rounded-lg flex items-center justify-center group-hover:bg-cyan-600/30 transition-colors">
+            <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
           </div>
           <div>
-            <div class="text-white font-semibold">Configuracion</div>
-            <div class="text-racing-silver text-sm">Ajustes de inscripciones</div>
+            <div class="text-white font-semibold">Config</div>
+            <div class="text-racing-silver text-sm">Ajustes</div>
           </div>
         </div>
       </a>
 
-      <a href="/panel/exportar" class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+      <a href="/admin/exportar" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
         <div class="flex items-center gap-4">
-          <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center group-hover:bg-red-600/30 transition-colors">
-            <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center group-hover:bg-green-600/30 transition-colors">
+            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
             </svg>
           </div>
           <div>
-            <div class="text-white font-semibold">Exportar Datos</div>
-            <div class="text-racing-silver text-sm">Descargar CSV/Excel</div>
+            <div class="text-white font-semibold">Exportar</div>
+            <div class="text-racing-silver text-sm">Descargar</div>
           </div>
         </div>
       </a>
@@ -80,8 +233,14 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
     <!-- Recent Teams -->
     <div class="bg-racing-gray rounded-xl border border-racing-silver/10">
-      <div class="p-6 border-b border-racing-silver/10">
+      <div class="p-6 border-b border-racing-silver/10 flex items-center justify-between">
         <h2 class="text-xl font-semibold text-white">Ultimos Equipos Registrados</h2>
+        <a href="/admin/equipos" class="text-red-500 hover:text-red-400 text-sm flex items-center gap-1">
+          Ver todos
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
       </div>
       <div id="recent-teams" class="divide-y divide-racing-silver/10">
         <div class="p-6 text-center text-racing-silver">
@@ -93,8 +252,16 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
   </div>
 </AdminLayout>
 
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
   import { identity } from '../../lib/identity';
+
+  // Chart instances
+  let statusChart: any;
+  let levelChart: any;
+  let timelineChart: any;
 
   async function loadDashboard() {
     try {
@@ -111,64 +278,43 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
       const { teams, stats } = await response.json();
 
-      // Update stats
+      // Update main stats
       document.getElementById('stat-total')!.textContent = stats.total.toString();
       document.getElementById('stat-pending')!.textContent = stats.pending.toString();
       document.getElementById('stat-confirmed')!.textContent = stats.confirmed.toString();
       document.getElementById('stat-pilots')!.textContent = stats.total_pilots.toString();
 
-      // Update recent teams
-      const recentTeamsEl = document.getElementById('recent-teams')!;
-      const recentTeams = teams.slice(0, 5);
+      // Update secondary stats
+      document.getElementById('stat-staff')!.textContent = stats.total_staff.toString();
+      document.getElementById('stat-conversion')!.textContent = `${stats.conversion_rate}%`;
+      document.getElementById('stat-avg-pilots')!.textContent = stats.avg_pilots_per_team;
+      document.getElementById('stat-draft')!.textContent = stats.draft.toString();
 
-      if (recentTeams.length === 0) {
-        recentTeamsEl.innerHTML = `
-          <div class="p-6 text-center text-racing-silver">
-            No hay equipos registrados todavia
-          </div>
-        `;
-        return;
+      // Update engine stats
+      const totalEngines = stats.engine_types['125cc_4t'] + stats.engine_types['50cc_2t'];
+      document.getElementById('engine-125')!.textContent = stats.engine_types['125cc_4t'].toString();
+      document.getElementById('engine-50')!.textContent = stats.engine_types['50cc_2t'].toString();
+
+      if (totalEngines > 0) {
+        (document.getElementById('engine-125-bar') as HTMLElement).style.width = `${(stats.engine_types['125cc_4t'] / totalEngines) * 100}%`;
+        (document.getElementById('engine-50-bar') as HTMLElement).style.width = `${(stats.engine_types['50cc_2t'] / totalEngines) * 100}%`;
       }
 
-      recentTeamsEl.innerHTML = recentTeams.map((team: any) => {
-        const statusColors: Record<string, string> = {
-          draft: 'bg-gray-500',
-          pending: 'bg-yellow-500',
-          confirmed: 'bg-green-500',
-          cancelled: 'bg-red-500'
-        };
-        const statusLabels: Record<string, string> = {
-          draft: 'Borrador',
-          pending: 'Pendiente',
-          confirmed: 'Confirmado',
-          cancelled: 'Cancelado'
-        };
+      // Update staff stats
+      document.getElementById('staff-mechanic')!.textContent = stats.staff_roles.mechanic.toString();
+      document.getElementById('staff-coordinator')!.textContent = stats.staff_roles.coordinator.toString();
+      document.getElementById('staff-support')!.textContent = stats.staff_roles.support.toString();
 
-        return `
-          <a href="/panel/equipos/${team.id}" class="flex items-center justify-between p-4 hover:bg-racing-silver/5 transition-colors">
-            <div class="flex items-center gap-4">
-              <div class="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center">
-                <span class="text-red-500 font-bold">${team.name?.charAt(0) || '?'}</span>
-              </div>
-              <div>
-                <div class="text-white font-medium">${team.name || 'Sin nombre'}</div>
-                <div class="text-racing-silver text-sm">
-                  ${team.representative_name || ''} ${team.representative_surname || ''}
-                  - ${team.pilots_count} pilotos
-                </div>
-              </div>
-            </div>
-            <div class="flex items-center gap-3">
-              <span class="px-2 py-1 rounded text-xs text-white ${statusColors[team.status] || 'bg-gray-500'}">
-                ${statusLabels[team.status] || team.status}
-              </span>
-              <svg class="w-5 h-5 text-racing-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
-            </div>
-          </a>
-        `;
-      }).join('');
+      // Show alerts
+      showAlerts(stats, teams);
+
+      // Create charts
+      createStatusChart(stats);
+      createLevelChart(stats.driving_levels);
+      createTimelineChart(stats.registrations_by_date);
+
+      // Update recent teams
+      updateRecentTeams(teams);
 
     } catch (error) {
       console.error('Error loading dashboard:', error);
@@ -178,6 +324,232 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
         </div>
       `;
     }
+  }
+
+  function showAlerts(stats: any, teams: any[]) {
+    const alertsContainer = document.getElementById('alerts-container')!;
+    const alerts: string[] = [];
+
+    // Alert for pending teams
+    if (stats.pending > 0) {
+      alerts.push(`
+        <div class="bg-yellow-900/30 border border-yellow-600/50 rounded-lg p-4 flex items-center gap-3">
+          <svg class="w-5 h-5 text-yellow-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <span class="text-yellow-200"><strong>${stats.pending}</strong> equipo(s) pendiente(s) de confirmacion</span>
+          <a href="/admin/equipos?status=pending" class="ml-auto text-yellow-400 hover:text-yellow-300 text-sm">Ver &rarr;</a>
+        </div>
+      `);
+    }
+
+    // Alert for teams without GDPR
+    if (stats.teams_without_gdpr > 0) {
+      alerts.push(`
+        <div class="bg-red-900/30 border border-red-600/50 rounded-lg p-4 flex items-center gap-3">
+          <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <span class="text-red-200"><strong>${stats.teams_without_gdpr}</strong> equipo(s) sin consentimiento GDPR</span>
+        </div>
+      `);
+    }
+
+    // Alert for low conversion rate
+    if (stats.total > 5 && stats.conversion_rate < 30) {
+      alerts.push(`
+        <div class="bg-orange-900/30 border border-orange-600/50 rounded-lg p-4 flex items-center gap-3">
+          <svg class="w-5 h-5 text-orange-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+          <span class="text-orange-200">Tasa de confirmacion baja: <strong>${stats.conversion_rate}%</strong></span>
+        </div>
+      `);
+    }
+
+    if (alerts.length > 0) {
+      alertsContainer.innerHTML = alerts.join('');
+      alertsContainer.classList.remove('hidden');
+    }
+  }
+
+  function createStatusChart(stats: any) {
+    const ctx = (document.getElementById('statusChart') as HTMLCanvasElement).getContext('2d');
+
+    if (statusChart) statusChart.destroy();
+
+    statusChart = new (window as any).Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Confirmados', 'Pendientes', 'Borradores', 'Cancelados'],
+        datasets: [{
+          data: [stats.confirmed, stats.pending, stats.draft, stats.cancelled],
+          backgroundColor: ['#22c55e', '#eab308', '#6b7280', '#ef4444'],
+          borderWidth: 0
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              color: '#9ca3af',
+              padding: 20,
+              usePointStyle: true
+            }
+          }
+        },
+        cutout: '60%'
+      }
+    });
+  }
+
+  function createLevelChart(levels: any) {
+    const ctx = (document.getElementById('levelChart') as HTMLCanvasElement).getContext('2d');
+
+    if (levelChart) levelChart.destroy();
+
+    levelChart = new (window as any).Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Principiante', 'Intermedio', 'Avanzado', 'Experto'],
+        datasets: [{
+          label: 'Pilotos',
+          data: [levels.beginner, levels.intermediate, levels.advanced, levels.expert],
+          backgroundColor: ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444'],
+          borderRadius: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#9ca3af' },
+            grid: { color: '#374151' }
+          },
+          x: {
+            ticks: { color: '#9ca3af' },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  }
+
+  function createTimelineChart(registrations: Record<string, number>) {
+    const ctx = (document.getElementById('timelineChart') as HTMLCanvasElement).getContext('2d');
+
+    if (timelineChart) timelineChart.destroy();
+
+    // Get last 7 days
+    const dates: string[] = [];
+    const values: number[] = [];
+
+    for (let i = 6; i >= 0; i--) {
+      const date = new Date();
+      date.setDate(date.getDate() - i);
+      const dateStr = date.toISOString().split('T')[0];
+      dates.push(date.toLocaleDateString('es-ES', { weekday: 'short' }));
+      values.push(registrations[dateStr] || 0);
+    }
+
+    timelineChart = new (window as any).Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
+          data: values,
+          borderColor: '#ef4444',
+          backgroundColor: 'rgba(239, 68, 68, 0.1)',
+          fill: true,
+          tension: 0.4,
+          pointRadius: 3,
+          pointBackgroundColor: '#ef4444'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#9ca3af', stepSize: 1 },
+            grid: { color: '#374151' }
+          },
+          x: {
+            ticks: { color: '#9ca3af', font: { size: 10 } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  }
+
+  function updateRecentTeams(teams: any[]) {
+    const recentTeamsEl = document.getElementById('recent-teams')!;
+    const recentTeams = teams.slice(0, 5);
+
+    if (recentTeams.length === 0) {
+      recentTeamsEl.innerHTML = `
+        <div class="p-6 text-center text-racing-silver">
+          No hay equipos registrados todavia
+        </div>
+      `;
+      return;
+    }
+
+    const statusColors: Record<string, string> = {
+      draft: 'bg-gray-500',
+      pending: 'bg-yellow-500',
+      confirmed: 'bg-green-500',
+      cancelled: 'bg-red-500'
+    };
+    const statusLabels: Record<string, string> = {
+      draft: 'Borrador',
+      pending: 'Pendiente',
+      confirmed: 'Confirmado',
+      cancelled: 'Cancelado'
+    };
+
+    recentTeamsEl.innerHTML = recentTeams.map((team: any) => {
+      const date = new Date(team.created_at).toLocaleDateString('es-ES');
+      return `
+        <a href="/admin/equipos/${team.id}" class="flex items-center justify-between p-4 hover:bg-racing-silver/5 transition-colors">
+          <div class="flex items-center gap-4">
+            <div class="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center">
+              <span class="text-red-500 font-bold">${team.name?.charAt(0) || '?'}</span>
+            </div>
+            <div>
+              <div class="text-white font-medium">${team.name || 'Sin nombre'}</div>
+              <div class="text-racing-silver text-sm">
+                ${team.representative_name || ''} ${team.representative_surname || ''}
+                - ${team.pilots_count} pilotos - ${date}
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="px-2 py-1 rounded text-xs text-white ${statusColors[team.status] || 'bg-gray-500'}">
+              ${statusLabels[team.status] || team.status}
+            </span>
+            <svg class="w-5 h-5 text-racing-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </div>
+        </a>
+      `;
+    }).join('');
   }
 
   // Load on page ready

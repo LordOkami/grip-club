@@ -20,7 +20,7 @@ Web de inscripciones para el evento de resistencia de motos Grip Club.
 El panel de administracion esta disponible en:
 
 ```
-https://grip-club.netlify.app/panel
+https://your-site.netlify.app/panel
 ```
 
 ### Crear Usuarios Admin
@@ -31,7 +31,7 @@ Los administradores se definen mediante la variable de entorno `ADMIN_EMAILS`.
 
 Primero, el usuario debe tener una cuenta en el sitio:
 
-1. Ir a https://grip-club.netlify.app/auth/signup
+1. Ir a https://your-site.netlify.app/auth/signup
 2. Registrarse con el email que sera admin
 3. Confirmar el email recibido
 
@@ -57,8 +57,8 @@ ADMIN_EMAILS=luissebastianhuerta@gmail.com,g.sanjose.g@gmail.com
 
 #### 3. Acceder al panel
 
-1. Iniciar sesion en https://grip-club.netlify.app/auth/login con el email admin
-2. Ir a https://grip-club.netlify.app/panel
+1. Iniciar sesion en https://your-site.netlify.app/auth/login con el email admin
+2. Ir a https://your-site.netlify.app/panel
 3. Si el email esta en `ADMIN_EMAILS`, se mostrara el panel de administracion
 
 ### Funcionalidades del Panel
@@ -115,7 +115,7 @@ SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...
 
 # URL del sitio
-PUBLIC_SITE_URL=https://grip-club.netlify.app
+PUBLIC_SITE_URL=https://your-site.netlify.app
 
 # Emails de administradores (separados por comas, sin espacios)
 ADMIN_EMAILS=admin@ejemplo.com,otro@ejemplo.com

@@ -40,9 +40,10 @@ class IdentityService {
     const isLocalhost = typeof window !== 'undefined' &&
       (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
 
+    const siteUrl = import.meta.env.PUBLIC_SITE_URL || '';
     netlifyIdentity.init({
       locale: locale === 'en' ? 'en' : 'es',
-      ...(isLocalhost && { APIUrl: 'https://grip-club.netlify.app/.netlify/identity' })
+      ...(isLocalhost && siteUrl && { APIUrl: `${siteUrl}/.netlify/identity` })
     });
 
     this.initialized = true;

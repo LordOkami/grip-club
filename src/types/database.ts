@@ -2,7 +2,15 @@
 import type { Timestamp } from 'firebase-admin/firestore';
 
 export type EngineCapacity = '125cc_4t' | '50cc_2t';
-export type DrivingLevel = 'amateur' | 'intermediate' | 'advanced' | 'expert';
+export type MotorcycleExperience =
+  | 'principiante'
+  | 'rutero'
+  | 'tandero_iniciado'
+  | 'tandero_medio'
+  | 'tandero_rapido'
+  | 'semi_pro';
+
+export type TShirtSize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 export type RegistrationStatus = 'draft' | 'pending' | 'confirmed' | 'cancelled';
 export type StaffRole = 'mechanic' | 'coordinator' | 'support';
 
@@ -45,16 +53,26 @@ export interface Team {
 export interface Pilot {
   id: string;
   teamId: string;
+  isCaptain: boolean;
   name: string;
   surname: string;
   dni: string;
-  email: string;
   phone: string;
-  emergencyContactName: string;
-  emergencyContactPhone: string;
-  drivingLevel: DrivingLevel;
-  trackExperience?: string;
-  isRepresentative: boolean;
+  email: string;
+  birthDate: string;
+
+  // Address (for accreditation shipping)
+  address: string;
+  city: string;
+  stateProvince: string;
+  postalCode: string;
+  country: string;
+
+  // Experience & preferences
+  motorcycleExperience: MotorcycleExperience;
+  tShirtSize: TShirtSize;
+  allergies: string;
+
   createdAt: Timestamp | string;
   updatedAt: Timestamp | string;
 }
@@ -107,15 +125,21 @@ export interface TeamFormData {
 }
 
 export interface PilotFormData {
+  isCaptain: boolean;
   name: string;
   surname: string;
   dni: string;
-  email: string;
   phone: string;
-  emergencyContactName: string;
-  emergencyContactPhone: string;
-  drivingLevel: DrivingLevel;
-  trackExperience?: string;
+  email: string;
+  birthDate: string;
+  address: string;
+  city: string;
+  stateProvince: string;
+  postalCode: string;
+  country: string;
+  motorcycleExperience: MotorcycleExperience;
+  tShirtSize: TShirtSize;
+  allergies: string;
 }
 
 export interface StaffFormData {

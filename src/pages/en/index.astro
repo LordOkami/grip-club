@@ -22,16 +22,11 @@ const content = await getContent('en', 'home');
         <span class="text-vanilla text-sm font-semibold uppercase tracking-widest">{content.hero.tagline}</span>
       </div>
 
-      {content.hero.preTitle && (
-        <div class="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 text-vanilla uppercase tracking-wider" style="font-family: 'Bebas Neue', sans-serif;">
-          {content.hero.preTitle}
-        </div>
-      )}
-
-      <h1 class="text-6xl md:text-8xl lg:text-9xl font-bold mb-6 leading-none" style="font-family: 'Bebas Neue', sans-serif;">
-        <span class="text-white">{content.hero.title}</span><br>
-        {content.hero.titleSecondary && <span class="text-vanilla">{content.hero.titleSecondary}</span>}
-      </h1>
+      <img
+        src="/desafios/desafio_bronce_icon.png"
+        alt="Desafío Bronce 8 Horas 125cc 4T"
+        class="w-64 md:w-80 lg:w-96 mx-auto mb-6"
+      />
 
       <p class="text-xl md:text-2xl text-racing-silver max-w-3xl mx-auto mb-8">
         {content.hero.subtitle}<br>

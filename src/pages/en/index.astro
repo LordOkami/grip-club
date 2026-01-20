@@ -17,20 +17,33 @@ const content = await getContent('en', 'home');
     <div class="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-vanilla/30 to-transparent"></div>
     <div class="absolute top-3/4 left-0 w-full h-px bg-gradient-to-r from-transparent via-vanilla/20 to-transparent"></div>
 
-    <div class="relative z-10 container mx-auto px-4 md:px-8 text-center">
-      <img
-        src="/logo/logo_text_only.png"
-        alt="Grip Club"
-        class="h-8 md:h-10 mx-auto mt-6 mb-1"
-      />
+    <!-- Dust Particles -->
+    <div id="particles-container" class="absolute inset-0 pointer-events-none z-10"></div>
 
-      <img
-        src="/desafios/desafio_bronce_icon.png"
-        alt="Desafío Bronce 8 Horas 125cc 4T"
-        class="w-64 md:w-80 lg:w-96 mx-auto mb-2"
-      />
+    <div class="relative z-20 container mx-auto px-4 md:px-8 text-center">
+      <!-- Logo + Presents -->
+      <div class="mb-0">
+        <img
+          src="/logo/logo_text_only.png"
+          alt="Grip Club"
+          class="h-6 md:h-8 mx-auto invert brightness-200"
+        />
+        <span class="text-vanilla/80 text-xs md:text-sm uppercase tracking-[0.3em] mt-1 block">presents</span>
+      </div>
 
-      <p class="text-xl md:text-2xl text-racing-silver max-w-3xl mx-auto mb-8">
+      <!-- Desafío Bronce Icon with Effects -->
+      <div class="hero-badge-container relative mx-auto w-64 md:w-80 lg:w-96 mb-1">
+        <div class="hero-badge-glow absolute inset-0 opacity-0 transition-opacity duration-500"></div>
+        <img
+          id="hero-badge"
+          src="/desafios/desafio_bronce_icon.png"
+          alt="Desafío Bronce 8 Horas 125cc 4T"
+          class="hero-badge w-full relative z-10 drop-shadow-2xl transition-all duration-300 ease-out cursor-pointer"
+        />
+        <div class="hero-badge-shine absolute inset-0 z-20 pointer-events-none opacity-0"></div>
+      </div>
+
+      <p class="text-lg md:text-xl text-racing-silver max-w-3xl mx-auto mb-6">
         {content.hero.subtitle}<br>
         <span class="text-white font-semibold">{content.hero.subtitleBold}</span>
       </p>
@@ -45,7 +58,7 @@ const content = await getContent('en', 'home');
       </div>
 
       <!-- Stats -->
-      <div class="grid grid-cols-3 gap-4 md:gap-8 mt-16 max-w-2xl mx-auto">
+      <div class="grid grid-cols-3 gap-4 md:gap-8 mt-12 max-w-2xl mx-auto">
         {content.hero.stats.map((stat: { value: string; label: string }) => (
           <div class="text-center">
             <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">{stat.value}</div>
@@ -62,6 +75,138 @@ const content = await getContent('en', 'home');
       </svg>
     </div>
   </section>
+
+  <style>
+    .hero-badge-container:hover .hero-badge {
+      transform: scale(1.05) translateY(-5px);
+      filter: drop-shadow(0 25px 50px rgba(205, 127, 50, 0.4));
+    }
+
+    .hero-badge-container:hover .hero-badge-glow {
+      opacity: 1;
+    }
+
+    .hero-badge-glow {
+      background: radial-gradient(ellipse at center, rgba(205, 127, 50, 0.3) 0%, transparent 70%);
+      filter: blur(40px);
+      transform: scale(1.5);
+    }
+
+    .hero-badge-shine {
+      background: linear-gradient(
+        105deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.4) 45%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0.4) 55%,
+        transparent 60%
+      );
+      background-size: 200% 100%;
+      background-position: 200% 0;
+    }
+
+    .hero-badge-container:hover .hero-badge-shine {
+      opacity: 1;
+      animation: shine 0.8s ease-out forwards;
+    }
+
+    @keyframes shine {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Dust particles */
+    .dust-particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: float-dust linear infinite;
+    }
+
+    @keyframes float-dust {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+
+  <script>
+    // Create dust particles
+    function createDustParticles() {
+      const container = document.getElementById('particles-container');
+      if (!container) return;
+
+      const particleCount = 30;
+
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'dust-particle';
+
+        // Random properties
+        const size = Math.random() * 3 + 1;
+        const left = Math.random() * 100;
+        const delay = Math.random() * 20;
+        const duration = Math.random() * 15 + 20;
+        const opacity = Math.random() * 0.5 + 0.1;
+
+        particle.style.cssText = `
+          left: ${left}%;
+          width: ${size}px;
+          height: ${size}px;
+          animation-delay: -${delay}s;
+          animation-duration: ${duration}s;
+          opacity: ${opacity};
+          background: rgba(255, 255, 255, ${opacity});
+          box-shadow: 0 0 ${size * 2}px rgba(255, 255, 255, ${opacity * 0.5});
+        `;
+
+        container.appendChild(particle);
+      }
+    }
+
+    // Mouse tracking for badge
+    function initBadgeInteraction() {
+      const badge = document.getElementById('hero-badge');
+      if (!badge) return;
+
+      const container = badge.parentElement;
+
+      container?.addEventListener('mousemove', (e) => {
+        const rect = container.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+
+        badge.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05) translateY(-5px)`;
+      });
+
+      container?.addEventListener('mouseleave', () => {
+        badge.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1) translateY(0)';
+      });
+    }
+
+    // Initialize
+    createDustParticles();
+    initBadgeInteraction();
+  </script>
 
   <!-- Historia Section -->
   <section id="historia" class="py-24 bg-racing-black">

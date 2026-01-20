@@ -12,6 +12,7 @@ export type MotorcycleExperience =
 
 export type TShirtSize = 'XS' | 'S' | 'M' | 'L' | 'XL' | 'XXL' | 'XXXL';
 export type RegistrationStatus = 'draft' | 'pending' | 'confirmed' | 'cancelled';
+export type PhotoStatus = 'pending' | 'approved' | 'rejected';
 export type StaffRole = 'mechanic' | 'coordinator' | 'support';
 
 // Firestore document types (camelCase)
@@ -19,6 +20,7 @@ export interface Team {
   id: string;
   representativeUserId: string;
   name: string;
+  preferredNumber?: number;
   numberOfPilots: number;
 
   // Representative info
@@ -37,6 +39,8 @@ export interface Team {
   // Motorcycle
   motorcycleBrand?: string;
   motorcycleModel?: string;
+  motorcyclePhoto?: string;
+  motorcyclePhotoStatus?: PhotoStatus;
   engineCapacity: EngineCapacity;
   registrationDate?: string;
   modifications?: string;
@@ -105,6 +109,7 @@ export interface TeamWithRelations extends Team {
 // Form input types (for user-submitted data)
 export interface TeamFormData {
   name: string;
+  preferredNumber?: number;
   numberOfPilots: number;
   representativeName: string;
   representativeSurname: string;
@@ -117,6 +122,7 @@ export interface TeamFormData {
   province?: string;
   motorcycleBrand?: string;
   motorcycleModel?: string;
+  motorcyclePhoto?: string;
   engineCapacity: EngineCapacity;
   registrationDate?: string;
   modifications?: string;

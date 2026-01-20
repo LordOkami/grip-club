@@ -115,38 +115,43 @@ const content = await getContent('en', 'home');
 
     .hero-badge-container:hover .hero-badge-shine {
       opacity: 1;
-      animation: shine 0.8s ease-out forwards;
+      animation: shine 1.5s ease-in-out infinite;
     }
 
     @keyframes shine {
       0% { background-position: 200% 0; }
+      50% { background-position: -200% 0; }
       100% { background-position: -200% 0; }
     }
 
     /* Dust particles */
     .dust-particle {
       position: absolute;
-      width: 3px;
-      height: 3px;
-      background: rgba(255, 255, 255, 0.3);
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 215, 150, 0.6);
       border-radius: 50%;
       pointer-events: none;
       animation: float-dust linear infinite;
+      box-shadow: 0 0 6px rgba(255, 215, 150, 0.4);
     }
 
     @keyframes float-dust {
       0% {
-        transform: translateY(100vh) rotate(0deg);
+        transform: translateY(100vh) translateX(0) rotate(0deg);
         opacity: 0;
       }
       10% {
-        opacity: 1;
+        opacity: 0.8;
+      }
+      50% {
+        transform: translateY(50vh) translateX(20px) rotate(360deg);
       }
       90% {
-        opacity: 1;
+        opacity: 0.8;
       }
       100% {
-        transform: translateY(-100px) rotate(720deg);
+        transform: translateY(-100px) translateX(-10px) rotate(720deg);
         opacity: 0;
       }
     }
@@ -158,18 +163,17 @@ const content = await getContent('en', 'home');
       const container = document.getElementById('particles-container');
       if (!container) return;
 
-      const particleCount = 30;
+      const particleCount = 40;
 
       for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.className = 'dust-particle';
 
         // Random properties
-        const size = Math.random() * 3 + 1;
+        const size = Math.random() * 4 + 2;
         const left = Math.random() * 100;
-        const delay = Math.random() * 20;
-        const duration = Math.random() * 15 + 20;
-        const opacity = Math.random() * 0.5 + 0.1;
+        const delay = Math.random() * 15;
+        const duration = Math.random() * 10 + 15;
 
         particle.style.cssText = `
           left: ${left}%;
@@ -177,9 +181,6 @@ const content = await getContent('en', 'home');
           height: ${size}px;
           animation-delay: -${delay}s;
           animation-duration: ${duration}s;
-          opacity: ${opacity};
-          background: rgba(255, 255, 255, ${opacity});
-          box-shadow: 0 0 ${size * 2}px rgba(255, 255, 255, ${opacity * 0.5});
         `;
 
         container.appendChild(particle);

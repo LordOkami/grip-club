@@ -338,7 +338,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           </span>
         </td>
         <td class="px-4 py-3">
-          <a href="/panel/equipos/${pilot.team_id}" class="text-red-500 hover:text-red-400 text-sm">
+          <a href="/admin/equipos/${pilot.team_id}" class="text-red-500 hover:text-red-400 text-sm">
             ${pilot.team_name}
           </a>
         </td>
@@ -411,7 +411,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
         <div class="pt-4 border-t border-racing-silver/10">
           <div class="text-racing-silver text-xs uppercase mb-2">Equipo</div>
-          <a href="/panel/equipos/${pilot.team_id}" class="flex items-center justify-between p-3 bg-racing-black/50 rounded-lg hover:bg-racing-black transition-colors">
+          <a href="/admin/equipos/${pilot.team_id}" class="flex items-center justify-between p-3 bg-racing-black/50 rounded-lg hover:bg-racing-black transition-colors">
             <span class="text-white font-medium">${pilot.team_name}</span>
             <span class="px-2 py-0.5 rounded text-xs text-white ${statusColors[pilot.team_status] || 'bg-gray-500'}">
               ${statusLabels[pilot.team_status] || pilot.team_status}

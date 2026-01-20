@@ -173,7 +173,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
     <!-- Quick Actions -->
     <div class="grid md:grid-cols-4 gap-4 mb-8">
-      <a href="/panel/equipos" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+      <a href="/admin/equipos" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center group-hover:bg-red-600/30 transition-colors">
             <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -187,7 +187,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
         </div>
       </a>
 
-      <a href="/panel/pilotos" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+      <a href="/admin/pilotos" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center group-hover:bg-purple-600/30 transition-colors">
             <svg class="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +201,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
         </div>
       </a>
 
-      <a href="/panel/configuracion" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+      <a href="/admin/configuracion" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-cyan-600/20 rounded-lg flex items-center justify-center group-hover:bg-cyan-600/30 transition-colors">
             <svg class="w-6 h-6 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -216,7 +216,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
         </div>
       </a>
 
-      <a href="/panel/exportar" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
+      <a href="/admin/exportar" class="bg-racing-gray rounded-xl p-5 border border-racing-silver/10 hover:border-red-600/50 transition-colors group">
         <div class="flex items-center gap-4">
           <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center group-hover:bg-green-600/30 transition-colors">
             <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -235,7 +235,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     <div class="bg-racing-gray rounded-xl border border-racing-silver/10">
       <div class="p-6 border-b border-racing-silver/10 flex items-center justify-between">
         <h2 class="text-xl font-semibold text-white">Ultimos Equipos Registrados</h2>
-        <a href="/panel/equipos" class="text-red-500 hover:text-red-400 text-sm flex items-center gap-1">
+        <a href="/admin/equipos" class="text-red-500 hover:text-red-400 text-sm flex items-center gap-1">
           Ver todos
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -340,7 +340,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
           </svg>
           <span class="text-yellow-200"><strong>${stats.pending}</strong> equipo(s) pendiente(s) de confirmacion</span>
-          <a href="/panel/equipos?status=pending" class="ml-auto text-yellow-400 hover:text-yellow-300 text-sm">Ver &rarr;</a>
+          <a href="/admin/equipos?status=pending" class="ml-auto text-yellow-400 hover:text-yellow-300 text-sm">Ver &rarr;</a>
         </div>
       `);
     }
@@ -528,7 +528,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     recentTeamsEl.innerHTML = recentTeams.map((team: any) => {
       const date = new Date(team.created_at).toLocaleDateString('es-ES');
       return `
-        <a href="/panel/equipos/${team.id}" class="flex items-center justify-between p-4 hover:bg-racing-silver/5 transition-colors">
+        <a href="/admin/equipos/${team.id}" class="flex items-center justify-between p-4 hover:bg-racing-silver/5 transition-colors">
           <div class="flex items-center gap-4">
             <div class="w-10 h-10 bg-red-600/20 rounded-lg flex items-center justify-center">
               <span class="text-red-500 font-bold">${team.name?.charAt(0) || '?'}</span>

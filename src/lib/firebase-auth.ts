@@ -4,6 +4,8 @@
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
   signOut,
   onAuthStateChanged,
   type User,
@@ -113,6 +115,20 @@ class FirebaseAuthService {
     }
 
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+    return this.mapUser(userCredential.user);
+  }
+
+  async loginWithGoogle(): Promise<AuthUser> {
+    if (!this.auth) {
+      await this.init();
+    }
+
+    if (!this.auth) {
+      throw new Error('Firebase Auth not initialized');
+    }
+
+    const provider = new GoogleAuthProvider();
+    const userCredential = await signInWithPopup(this.auth, provider);
     return this.mapUser(userCredential.user);
   }
 

@@ -96,9 +96,10 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         const teamRef = db.collection('teams').doc();
         const now = FieldValue.serverTimestamp();
 
-        const teamData = {
+        const teamData: Record<string, any> = {
           representativeUserId: userId,
           name: body.name,
+          preferredNumber: body.preferredNumber || null,
           numberOfPilots: body.numberOfPilots,
           representativeName: body.representativeName || '',
           representativeSurname: body.representativeSurname || '',
@@ -111,6 +112,8 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           province: body.province || '',
           motorcycleBrand: body.motorcycleBrand || '',
           motorcycleModel: body.motorcycleModel || '',
+          motorcyclePhoto: body.motorcyclePhoto || null,
+          motorcyclePhotoStatus: body.motorcyclePhoto ? 'pending' : null,
           engineCapacity: body.engineCapacity || '125cc_4t',
           registrationDate: body.registrationDate || '',
           modifications: body.modifications || '',
@@ -142,12 +145,19 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         }
 
         const teamDoc = teamQuery.docs[0];
+        const existingData = teamDoc.data();
 
         // Remove fields that shouldn't be updated
         delete body.id;
         delete body.representativeUserId;
         delete body.createdAt;
         delete body.status; // Status changes should be separate
+        delete body.motorcyclePhotoStatus; // Only admin can change this
+
+        // If a new photo is uploaded, reset status to pending
+        if (body.motorcyclePhoto && body.motorcyclePhoto !== existingData?.motorcyclePhoto) {
+          body.motorcyclePhotoStatus = 'pending';
+        }
 
         // Add updated timestamp
         body.updatedAt = FieldValue.serverTimestamp();

@@ -64,12 +64,14 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
         const allPilots = teamsWithCounts.flatMap(t => t.pilots || []);
         const allStaff = teamsWithCounts.flatMap(t => t.staff || []);
 
-        // Calculate stats by driving level
-        const drivingLevelStats = {
-          amateur: allPilots.filter((p: any) => p.drivingLevel === 'amateur').length,
-          intermediate: allPilots.filter((p: any) => p.drivingLevel === 'intermediate').length,
-          advanced: allPilots.filter((p: any) => p.drivingLevel === 'advanced').length,
-          expert: allPilots.filter((p: any) => p.drivingLevel === 'expert').length
+        // Calculate stats by motorcycle experience
+        const experienceStats = {
+          principiante: allPilots.filter((p: any) => p.motorcycleExperience === 'principiante').length,
+          rutero: allPilots.filter((p: any) => p.motorcycleExperience === 'rutero').length,
+          tandero_iniciado: allPilots.filter((p: any) => p.motorcycleExperience === 'tandero_iniciado').length,
+          tandero_medio: allPilots.filter((p: any) => p.motorcycleExperience === 'tandero_medio').length,
+          tandero_rapido: allPilots.filter((p: any) => p.motorcycleExperience === 'tandero_rapido').length,
+          semi_pro: allPilots.filter((p: any) => p.motorcycleExperience === 'semi_pro').length
         };
 
         // Calculate stats by engine size
@@ -115,6 +117,9 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           ? (allPilots.length / teamsWithCounts.length).toFixed(1)
           : '0';
 
+        // Count teams with pending photo reviews
+        const pendingPhotoReviews = teamsWithCounts.filter((t: any) => t.motorcyclePhotoStatus === 'pending').length;
+
         // Calculate stats
         const stats = {
           total: teamsWithCounts.length,
@@ -124,20 +129,21 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
           cancelled: teamsWithCounts.filter((t: any) => t.status === 'cancelled').length,
           totalPilots: allPilots.length,
           totalStaff: allStaff.length,
-          drivingLevels: drivingLevelStats,
+          experienceLevels: experienceStats,
           engineTypes: engineStats,
           staffRoles: staffRoleStats,
           registrationsByDate: registrationsByDate,
           teamsWithoutGdpr: teamsWithoutGdpr,
           conversionRate: conversionRate,
-          avgPilotsPerTeam: avgPilotsPerTeam
+          avgPilotsPerTeam: avgPilotsPerTeam,
+          pendingPhotoReviews: pendingPhotoReviews
         };
 
         return successResponse({ teams: teamsWithCounts, stats });
       }
 
       case 'PUT': {
-        // Update team status
+        // Update team status or photo status
         const teamId = event.queryStringParameters?.id;
         if (!teamId) {
           return errorResponse('Team ID is required');
@@ -145,10 +151,15 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
 
         const body = JSON.parse(event.body || '{}');
 
-        // Only allow status updates from admin
+        // Only allow specific updates from admin
         const allowedUpdates: Record<string, any> = {};
         if (body.status && ['draft', 'pending', 'confirmed', 'cancelled'].includes(body.status)) {
           allowedUpdates.status = body.status;
+        }
+
+        // Allow photo status updates
+        if (body.motorcyclePhotoStatus && ['pending', 'approved', 'rejected'].includes(body.motorcyclePhotoStatus)) {
+          allowedUpdates.motorcyclePhotoStatus = body.motorcyclePhotoStatus;
         }
 
         if (Object.keys(allowedUpdates).length === 0) {

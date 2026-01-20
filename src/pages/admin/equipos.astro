@@ -23,8 +23,29 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           <option value="cancelled">Cancelado</option>
         </select>
 
+        <select id="filter-photo" class="bg-racing-gray border border-racing-silver/20 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:border-red-600">
+          <option value="">Todas las fotos</option>
+          <option value="pending">Fotos pendientes</option>
+          <option value="approved">Fotos aprobadas</option>
+          <option value="rejected">Fotos rechazadas</option>
+          <option value="none">Sin foto</option>
+        </select>
+
         <input type="text" id="filter-search" placeholder="Buscar equipo..."
                class="bg-racing-gray border border-racing-silver/20 rounded-lg px-4 py-2 text-white text-sm focus:outline-none focus:border-red-600 w-48">
+      </div>
+    </div>
+
+    <!-- Pending Photo Reviews Alert -->
+    <div id="photo-review-alert" class="hidden mb-6 bg-yellow-600/20 border border-yellow-500/30 rounded-xl p-4 flex items-center gap-4">
+      <div class="w-10 h-10 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+        <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+      </div>
+      <div>
+        <p class="text-yellow-400 font-medium"><span id="pending-photo-count">0</span> fotos pendientes de revision</p>
+        <p class="text-yellow-500/70 text-sm">Haz clic en un equipo para revisar y aprobar/rechazar su foto de moto</p>
       </div>
     </div>
 
@@ -37,6 +58,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
               <th class="text-left px-6 py-4 text-racing-silver text-sm font-medium">Equipo</th>
               <th class="text-left px-6 py-4 text-racing-silver text-sm font-medium">Representante</th>
               <th class="text-left px-6 py-4 text-racing-silver text-sm font-medium">Pilotos</th>
+              <th class="text-left px-6 py-4 text-racing-silver text-sm font-medium">Foto</th>
               <th class="text-left px-6 py-4 text-racing-silver text-sm font-medium">Estado</th>
               <th class="text-left px-6 py-4 text-racing-silver text-sm font-medium">Fecha</th>
               <th class="text-left px-6 py-4 text-racing-silver text-sm font-medium">Acciones</th>
@@ -44,7 +66,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           </thead>
           <tbody id="teams-table" class="divide-y divide-racing-silver/10">
             <tr>
-              <td colspan="6" class="px-6 py-8 text-center text-racing-silver">
+              <td colspan="7" class="px-6 py-8 text-center text-racing-silver">
                 <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-red-600 mx-auto mb-2"></div>
                 Cargando equipos...
               </td>
@@ -100,6 +122,18 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     cancelled: 'Cancelado'
   };
 
+  const photoStatusColors: Record<string, string> = {
+    pending: 'bg-yellow-500',
+    approved: 'bg-green-500',
+    rejected: 'bg-red-500'
+  };
+
+  const photoStatusLabels: Record<string, string> = {
+    pending: 'Pendiente',
+    approved: 'Aprobada',
+    rejected: 'Rechazada'
+  };
+
   async function loadTeams() {
     try {
       await firebaseAuth.waitForInit();
@@ -115,12 +149,18 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
       document.getElementById('teams-count')!.textContent = `${stats.total} equipos registrados`;
 
+      // Show pending photo reviews alert
+      if (stats.pendingPhotoReviews > 0) {
+        document.getElementById('photo-review-alert')!.classList.remove('hidden');
+        document.getElementById('pending-photo-count')!.textContent = stats.pendingPhotoReviews.toString();
+      }
+
       renderTeams(teams);
     } catch (error) {
       console.error('Error:', error);
       document.getElementById('teams-table')!.innerHTML = `
         <tr>
-          <td colspan="6" class="px-6 py-8 text-center text-red-500">
+          <td colspan="7" class="px-6 py-8 text-center text-red-500">
             Error al cargar los equipos
           </td>
         </tr>
@@ -134,7 +174,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
     if (teams.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="6" class="px-6 py-8 text-center text-racing-silver">
+          <td colspan="7" class="px-6 py-8 text-center text-racing-silver">
             No se encontraron equipos
           </td>
         </tr>
@@ -149,6 +189,17 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
         dateStr = dateVal.toLocaleDateString('es-ES');
       }
 
+      // Photo status indicator
+      let photoIndicator = `<span class="text-racing-silver text-xs">Sin foto</span>`;
+      if (team.motorcyclePhoto) {
+        const photoStatus = team.motorcyclePhotoStatus || 'pending';
+        photoIndicator = `
+          <span class="px-2 py-1 rounded text-xs text-white ${photoStatusColors[photoStatus] || 'bg-gray-500'}">
+            ${photoStatusLabels[photoStatus] || photoStatus}
+          </span>
+        `;
+      }
+
       return `
         <tr class="hover:bg-racing-silver/5 transition-colors">
           <td class="px-6 py-4">
@@ -157,7 +208,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
                 <span class="text-red-500 font-bold">${team.name?.charAt(0) || '?'}</span>
               </div>
               <div>
-                <div class="text-white font-medium">${team.name || 'Sin nombre'}</div>
+                <div class="text-white font-medium">${team.name || 'Sin nombre'}${team.preferredNumber ? ` <span class="text-racing-silver text-xs">#${team.preferredNumber}</span>` : ''}</div>
                 <div class="text-racing-silver text-xs">${team.representativeEmail || ''}</div>
               </div>
             </div>
@@ -168,6 +219,9 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
           <td class="px-6 py-4">
             <span class="text-white">${team.pilotsCount}</span>
             <span class="text-racing-silver">/ ${team.numberOfPilots || 4}</span>
+          </td>
+          <td class="px-6 py-4">
+            ${photoIndicator}
           </td>
           <td class="px-6 py-4">
             <span class="px-2 py-1 rounded text-xs text-white ${statusColors[team.status] || 'bg-gray-500'}">
@@ -197,12 +251,21 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   function filterTeams() {
     const status = (document.getElementById('filter-status') as HTMLSelectElement).value;
+    const photoStatus = (document.getElementById('filter-photo') as HTMLSelectElement).value;
     const search = (document.getElementById('filter-search') as HTMLInputElement).value.toLowerCase();
 
     let filtered = allTeams;
 
     if (status) {
       filtered = filtered.filter(t => t.status === status);
+    }
+
+    if (photoStatus) {
+      if (photoStatus === 'none') {
+        filtered = filtered.filter(t => !t.motorcyclePhoto);
+      } else {
+        filtered = filtered.filter(t => t.motorcyclePhoto && t.motorcyclePhotoStatus === photoStatus);
+      }
     }
 
     if (search) {
@@ -257,6 +320,7 @@ import AdminLayout from '../../layouts/AdminLayout.astro';
 
   // Event listeners
   document.getElementById('filter-status')?.addEventListener('change', filterTeams);
+  document.getElementById('filter-photo')?.addEventListener('change', filterTeams);
   document.getElementById('filter-search')?.addEventListener('input', filterTeams);
   document.getElementById('modal-cancel')?.addEventListener('click', () => {
     document.getElementById('status-modal')!.classList.add('hidden');

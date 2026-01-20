@@ -70,7 +70,7 @@ const translatePath = useTranslatedPath(lang);
       <div
         class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4"
       >
-        <h2 class="text-lg font-bold text-white mb-4">Datos del Equipo</h2>
+        <h2 class="text-lg font-bold text-white mb-4">Team Data</h2>
 
         <div>
           <label
@@ -84,28 +84,56 @@ const translatePath = useTranslatedPath(lang);
             name="name"
             required
             class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
-            placeholder="Ej: Racing Team Alpha"
+            placeholder="E.g.: Racing Team Alpha"
           />
         </div>
 
-        <div>
-          <label
-            for="number_of_pilots"
-            class="block text-sm font-medium text-racing-silver mb-2"
-            >{t("form.numberOfPilots")} *</label
-          >
-          <select
-            id="number_of_pilots"
-            name="number_of_pilots"
-            required
-            class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
-          >
-            <option value="4">4 pilotos</option>
-            <option value="5">5 pilotos</option>
-            <option value="6">6 pilotos</option>
-            <option value="7">7 pilotos</option>
-            <option value="8">8 pilotos</option>
-          </select>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              for="number_of_pilots"
+              class="block text-sm font-medium text-racing-silver mb-2"
+              >{t("form.numberOfPilots")} *</label
+            >
+            <select
+              id="number_of_pilots"
+              name="number_of_pilots"
+              required
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+            >
+              <option value="4">4 pilots</option>
+              <option value="5">5 pilots</option>
+              <option value="6">6 pilots</option>
+              <option value="7">7 pilots</option>
+              <option value="8">8 pilots</option>
+            </select>
+          </div>
+
+          <div>
+            <label
+              for="preferred_number"
+              class="block text-sm font-medium text-racing-silver mb-2 flex items-center gap-2"
+            >
+              {t("form.preferredNumber")}
+              <span class="relative group">
+                <svg class="w-4 h-4 text-racing-silver/60 cursor-help" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <span class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-2 bg-racing-black border border-racing-silver/20 rounded-lg text-xs text-racing-silver w-48 text-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-10">
+                  {t("form.preferredNumberHint")}
+                </span>
+              </span>
+            </label>
+            <input
+              type="number"
+              id="preferred_number"
+              name="preferred_number"
+              min="1"
+              max="99"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              placeholder="E.g.: 46"
+            />
+          </div>
         </div>
       </div>
 
@@ -114,7 +142,7 @@ const translatePath = useTranslatedPath(lang);
         class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4"
       >
         <h2 class="text-lg font-bold text-white mb-4">
-          Representante del Equipo
+          Team Representative
         </h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -195,7 +223,7 @@ const translatePath = useTranslatedPath(lang);
             name="representative_email"
             required
             class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
-            placeholder="email@ejemplo.com"
+            placeholder="email@example.com"
           />
         </div>
       </div>
@@ -265,6 +293,107 @@ const translatePath = useTranslatedPath(lang);
         </div>
       </div>
 
+      <!-- Motorcycle Info -->
+      <div
+        class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10 space-y-4"
+      >
+        <h2 class="text-lg font-bold text-white mb-4">{t("dashboard.motorcycle")}</h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label
+              for="motorcycle_brand"
+              class="block text-sm font-medium text-racing-silver mb-2"
+              >{t("form.motorcycleBrand")}</label
+            >
+            <input
+              type="text"
+              id="motorcycle_brand"
+              name="motorcycle_brand"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              placeholder="E.g.: Honda, Yamaha, Aprilia..."
+            />
+          </div>
+
+          <div>
+            <label
+              for="motorcycle_model"
+              class="block text-sm font-medium text-racing-silver mb-2"
+              >{t("form.motorcycleModel")}</label
+            >
+            <input
+              type="text"
+              id="motorcycle_model"
+              name="motorcycle_model"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              placeholder="E.g.: CBR125R, YZF-R125..."
+            />
+          </div>
+        </div>
+
+        <div>
+          <label
+            for="engine_capacity"
+            class="block text-sm font-medium text-racing-silver mb-2"
+            >{t("form.engineCapacity")} *</label
+          >
+          <select
+            id="engine_capacity"
+            name="engine_capacity"
+            required
+            class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+          >
+            <option value="125cc_4t">{t("form.engineCapacity.125cc")}</option>
+            <option value="50cc_2t">{t("form.engineCapacity.50cc")}</option>
+          </select>
+        </div>
+
+        <!-- Motorcycle Photo Upload -->
+        <div>
+          <label class="block text-sm font-medium text-racing-silver mb-2">
+            {t("form.motorcyclePhoto")}
+            <span class="text-racing-silver/60 font-normal ml-2">(optional)</span>
+          </label>
+          <p class="text-xs text-racing-silver/60 mb-3">{t("form.motorcyclePhotoHint")}</p>
+
+          <div id="photo-upload-container" class="relative">
+            <!-- Photo preview (hidden by default) -->
+            <div id="photo-preview" class="hidden relative rounded-lg overflow-hidden border border-racing-silver/20">
+              <img id="photo-preview-img" src="" alt="Motorcycle preview" class="w-full h-48 object-cover" />
+              <!-- Status badge -->
+              <div id="photo-status-badge" class="absolute top-2 right-2 px-2 py-1 rounded text-xs font-semibold hidden">
+              </div>
+              <!-- Change photo button -->
+              <button
+                type="button"
+                id="change-photo-btn"
+                class="absolute bottom-2 right-2 px-3 py-1.5 bg-racing-black/80 hover:bg-racing-black border border-racing-silver/20 rounded-lg text-sm text-white transition-colors"
+              >
+                {t("form.changePhoto")}
+              </button>
+            </div>
+
+            <!-- Upload button (shown when no photo) -->
+            <label
+              id="upload-photo-label"
+              class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-racing-silver/20 rounded-lg cursor-pointer hover:border-racing-green/50 transition-colors"
+            >
+              <svg class="w-8 h-8 text-racing-silver/50 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <span class="text-sm text-racing-silver">{t("form.uploadPhoto")}</span>
+              <input
+                type="file"
+                id="motorcycle_photo"
+                name="motorcycle_photo"
+                accept="image/*"
+                class="hidden"
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+
       <!-- GDPR Consent -->
       <div class="bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
         <label class="flex items-start gap-3 cursor-pointer">
@@ -286,7 +415,7 @@ const translatePath = useTranslatedPath(lang);
         id="success-message"
         class="hidden p-4 bg-racing-green/20 border border-racing-green/50 rounded-lg text-racing-green text-sm"
       >
-        Datos guardados correctamente
+        Data saved successfully
       </div>
 
       <div
@@ -344,6 +473,7 @@ const translatePath = useTranslatedPath(lang);
     // Form field names
     const fields = [
       "name",
+      "preferred_number",
       "number_of_pilots",
       "representative_name",
       "representative_surname",
@@ -354,8 +484,70 @@ const translatePath = useTranslatedPath(lang);
       "municipality",
       "postal_code",
       "province",
+      "motorcycle_brand",
+      "motorcycle_model",
+      "engine_capacity",
       "gdpr_consent",
     ];
+
+    // Photo upload elements
+    const photoInput = document.getElementById("motorcycle_photo") as HTMLInputElement;
+    const photoPreview = document.getElementById("photo-preview");
+    const photoPreviewImg = document.getElementById("photo-preview-img") as HTMLImageElement;
+    const uploadPhotoLabel = document.getElementById("upload-photo-label");
+    const changePhotoBtn = document.getElementById("change-photo-btn");
+    const photoStatusBadge = document.getElementById("photo-status-badge");
+
+    let pendingPhotoFile: File | null = null;
+
+    // Photo status colors
+    const statusColors: Record<string, { bg: string; text: string; label: string }> = {
+      pending: { bg: 'bg-yellow-500/20', text: 'text-yellow-400', label: 'Pending' },
+      approved: { bg: 'bg-green-500/20', text: 'text-green-400', label: 'Approved' },
+      rejected: { bg: 'bg-red-500/20', text: 'text-red-400', label: 'Rejected' },
+    };
+
+    function showPhotoStatus(status: string | undefined) {
+      if (!photoStatusBadge || !status) {
+        photoStatusBadge?.classList.add('hidden');
+        return;
+      }
+      const colors = statusColors[status] || statusColors.pending;
+      photoStatusBadge.className = `absolute top-2 right-2 px-2 py-1 rounded text-xs font-semibold ${colors.bg} ${colors.text}`;
+      photoStatusBadge.textContent = colors.label;
+      photoStatusBadge.classList.remove('hidden');
+    }
+
+    function showPhotoPreview(url: string, status?: string) {
+      if (photoPreviewImg) photoPreviewImg.src = url;
+      photoPreview?.classList.remove('hidden');
+      uploadPhotoLabel?.classList.add('hidden');
+      showPhotoStatus(status);
+    }
+
+    function hidePhotoPreview() {
+      photoPreview?.classList.add('hidden');
+      uploadPhotoLabel?.classList.remove('hidden');
+      photoStatusBadge?.classList.add('hidden');
+    }
+
+    // Handle photo selection
+    photoInput?.addEventListener('change', (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        pendingPhotoFile = file;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          showPhotoPreview(e.target?.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Handle change photo button
+    changePhotoBtn?.addEventListener('click', () => {
+      photoInput?.click();
+    });
 
     async function loadTeamData() {
       try {
@@ -385,6 +577,11 @@ const translatePath = useTranslatedPath(lang);
               }
             }
           });
+
+          // Show motorcycle photo if exists
+          if (data.team.motorcyclePhoto) {
+            showPhotoPreview(data.team.motorcyclePhoto, data.team.motorcyclePhotoStatus);
+          }
         } else {
           // Pre-fill email from logged user
           const user = firebaseAuth.getUser();
@@ -410,7 +607,7 @@ const translatePath = useTranslatedPath(lang);
 
       if (submitBtn) {
         submitBtn.setAttribute("disabled", "true");
-        submitBtn.textContent = "Guardando...";
+        submitBtn.textContent = "Saving...";
       }
 
       const formData = new FormData(teamForm);
@@ -423,13 +620,24 @@ const translatePath = useTranslatedPath(lang);
         if (input) {
           if (input.type === "checkbox") {
             body[field] = (input as HTMLInputElement).checked;
-          } else if (input.type === "number" || field === "number_of_pilots") {
-            body[field] = parseInt(input.value, 10);
+          } else if (input.type === "number" || field === "number_of_pilots" || field === "preferred_number") {
+            const val = input.value;
+            body[field] = val ? parseInt(val, 10) : null;
           } else {
             body[field] = input.value;
           }
         }
       });
+
+      // Handle photo upload if there's a pending file
+      if (pendingPhotoFile) {
+        const reader = new FileReader();
+        const photoData = await new Promise<string>((resolve) => {
+          reader.onload = (e) => resolve(e.target?.result as string);
+          reader.readAsDataURL(pendingPhotoFile!);
+        });
+        body.motorcycle_photo = photoData;
+      }
 
       try {
         const method = existingTeam ? "PUT" : "POST";
@@ -441,7 +649,7 @@ const translatePath = useTranslatedPath(lang);
         const data = await response.json();
 
         if (!response.ok) {
-          throw new Error(data.error || "Error al guardar");
+          throw new Error(data.error || "Error saving data");
         }
 
         successMessage?.classList.remove("hidden");
@@ -455,7 +663,7 @@ const translatePath = useTranslatedPath(lang);
         console.error("Error saving team:", error);
         if (errorMessage) {
           errorMessage.textContent =
-            error.message || "Error al guardar los datos";
+            error.message || "Error saving data";
           errorMessage.classList.remove("hidden");
         }
       } finally {
@@ -465,7 +673,7 @@ const translatePath = useTranslatedPath(lang);
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
             </svg>
-            ${lang === "en" ? "Save" : "Guardar"}
+            Save
           `;
         }
       }

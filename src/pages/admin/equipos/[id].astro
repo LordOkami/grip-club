@@ -86,6 +86,10 @@ const { id } = Astro.params;
           </h2>
           <dl class="space-y-3 text-sm">
             <div class="flex justify-between">
+              <dt class="text-racing-silver">Dorsal preferido:</dt>
+              <dd id="moto-number" class="text-white">-</dd>
+            </div>
+            <div class="flex justify-between">
               <dt class="text-racing-silver">Marca:</dt>
               <dd id="moto-brand" class="text-white">-</dd>
             </div>
@@ -106,6 +110,37 @@ const { id } = Astro.params;
               <dd id="moto-mods" class="text-white text-sm bg-racing-black/50 rounded p-2">-</dd>
             </div>
           </dl>
+        </div>
+      </div>
+
+      <!-- Motorcycle Photo Review -->
+      <div id="photo-section" class="hidden bg-racing-gray rounded-xl p-6 border border-racing-silver/10">
+        <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+          <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+          </svg>
+          Foto de la Motocicleta
+          <span id="photo-status-badge" class="px-2 py-1 rounded text-xs text-white ml-2"></span>
+        </h2>
+        <div class="flex flex-col md:flex-row gap-6">
+          <div class="flex-1">
+            <img id="moto-photo" src="" alt="Foto de la moto" class="w-full max-h-96 object-contain rounded-lg bg-racing-black cursor-pointer" onclick="openPhotoModal()"/>
+          </div>
+          <div class="flex flex-col gap-3">
+            <p class="text-racing-silver text-sm">Revisar y aprobar/rechazar la foto de la motocicleta</p>
+            <button id="approve-photo" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Aprobar
+            </button>
+            <button id="reject-photo" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors flex items-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+              Rechazar
+            </button>
+          </div>
         </div>
       </div>
 
@@ -159,6 +194,16 @@ const { id } = Astro.params;
       <p class="text-racing-silver">El equipo no existe o no tienes permisos para verlo</p>
     </div>
   </div>
+
+  <!-- Photo Modal -->
+  <div id="photo-modal" class="hidden fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
+    <button id="close-photo-modal" class="absolute top-4 right-4 text-white hover:text-red-500 transition-colors">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+    <img id="modal-photo" src="" alt="Foto de la moto" class="max-w-full max-h-full object-contain"/>
+  </div>
 </AdminLayout>
 
 <script define:vars={{ teamId: id }}>
@@ -184,11 +229,25 @@ const { id } = Astro.params;
     cancelled: 'Cancelado'
   };
 
-  const levelLabels: Record<string, string> = {
-    amateur: 'Amateur',
-    intermediate: 'Intermedio',
-    advanced: 'Avanzado',
-    expert: 'Experto'
+  const experienceLabels: Record<string, string> = {
+    principiante: 'Principiante',
+    rutero: 'Rutero',
+    tandero_iniciado: 'Tandero - Iniciado',
+    tandero_medio: 'Tandero - Medio',
+    tandero_rapido: 'Tandero - Rápido',
+    semi_pro: 'Semi-Pro'
+  };
+
+  const photoStatusLabels: Record<string, string> = {
+    pending: 'Pendiente',
+    approved: 'Aprobada',
+    rejected: 'Rechazada'
+  };
+
+  const photoStatusColors: Record<string, string> = {
+    pending: 'bg-yellow-500',
+    approved: 'bg-green-500',
+    rejected: 'bg-red-500'
   };
 
   const roleLabels: Record<string, string> = {
@@ -239,11 +298,24 @@ const { id } = Astro.params;
       ].filter(Boolean).join(', ') || '-';
 
       // Motorcycle
+      document.getElementById('moto-number')!.textContent = team.preferredNumber ? `#${team.preferredNumber}` : 'Sin preferencia';
       document.getElementById('moto-brand')!.textContent = team.motorcycleBrand || '-';
       document.getElementById('moto-model')!.textContent = team.motorcycleModel || '-';
       document.getElementById('moto-capacity')!.textContent = team.engineCapacity === '125cc_4t' ? '125cc 4T' : team.engineCapacity === '50cc_2t' ? '50cc 2T' : team.engineCapacity || '-';
       document.getElementById('moto-date')!.textContent = team.registrationDate ? new Date(team.registrationDate).toLocaleDateString('es-ES') : '-';
       document.getElementById('moto-mods')!.textContent = team.modifications || 'Ninguna';
+
+      // Motorcycle Photo
+      if (team.motorcyclePhoto) {
+        document.getElementById('photo-section')!.classList.remove('hidden');
+        (document.getElementById('moto-photo') as HTMLImageElement).src = team.motorcyclePhoto;
+        (document.getElementById('modal-photo') as HTMLImageElement).src = team.motorcyclePhoto;
+
+        const statusBadge = document.getElementById('photo-status-badge')!;
+        const photoStatus = team.motorcyclePhotoStatus || 'pending';
+        statusBadge.textContent = photoStatusLabels[photoStatus] || photoStatus;
+        statusBadge.className = `px-2 py-1 rounded text-xs text-white ml-2 ${photoStatusColors[photoStatus] || 'bg-gray-500'}`;
+      }
 
       // Pilots
       const pilots = team.pilots || [];
@@ -263,13 +335,13 @@ const { id } = Astro.params;
               <div>
                 <div class="text-white font-medium">
                   ${p.name || ''} ${p.surname || ''}
-                  ${p.isRepresentative ? '<span class="text-xs bg-red-600 px-2 py-0.5 rounded ml-2">REP</span>' : ''}
+                  ${p.isCaptain ? '<span class="text-xs bg-red-600 px-2 py-0.5 rounded ml-2">CAP</span>' : ''}
                 </div>
                 <div class="text-racing-silver text-sm">${p.email || '-'} | ${p.phone || '-'}</div>
               </div>
             </div>
             <div class="text-right">
-              <div class="text-white text-sm">${levelLabels[p.drivingLevel] || p.drivingLevel || '-'}</div>
+              <div class="text-white text-sm">${experienceLabels[p.motorcycleExperience] || p.motorcycleExperience || '-'}</div>
               <div class="text-racing-silver text-xs">DNI: ${p.dni || '-'}</div>
             </div>
           </div>
@@ -338,6 +410,50 @@ const { id } = Astro.params;
     } catch (error) {
       console.error('Error:', error);
       alert('Error al actualizar el estado');
+    }
+  });
+
+  // Photo review handlers
+  async function updatePhotoStatus(status: 'approved' | 'rejected') {
+    try {
+      await firebaseAuth.waitForInit();
+      const token = await firebaseAuth.getToken();
+      const response = await fetch(`/api/admin-teams?id=${teamId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({ motorcyclePhotoStatus: status })
+      });
+
+      if (!response.ok) throw new Error('Error updating photo status');
+
+      // Reload to show updated status
+      loadTeam();
+      alert(`Foto ${status === 'approved' ? 'aprobada' : 'rechazada'} correctamente`);
+
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al actualizar el estado de la foto');
+    }
+  }
+
+  document.getElementById('approve-photo')?.addEventListener('click', () => updatePhotoStatus('approved'));
+  document.getElementById('reject-photo')?.addEventListener('click', () => updatePhotoStatus('rejected'));
+
+  // Photo modal
+  (window as any).openPhotoModal = function() {
+    document.getElementById('photo-modal')!.classList.remove('hidden');
+  };
+
+  document.getElementById('close-photo-modal')?.addEventListener('click', () => {
+    document.getElementById('photo-modal')!.classList.add('hidden');
+  });
+
+  document.getElementById('photo-modal')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      document.getElementById('photo-modal')!.classList.add('hidden');
     }
   });
 

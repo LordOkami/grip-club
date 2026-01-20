@@ -18,25 +18,42 @@ const handler: Handler = async (event: HandlerEvent, context: HandlerContext) =>
   }
 
   // Validate authentication
+  console.log('Admin Teams: Validating authentication...');
   const userId = await getUserId(event);
   if (!userId) {
+    console.log('Admin Teams: No userId found, returning unauthorized');
     return unauthorizedResponse();
   }
+  console.log('Admin Teams: User authenticated:', userId);
 
   // Check admin permission
+  console.log('Admin Teams: Checking admin permissions...');
   if (!(await isAdmin(event))) {
+    console.log('Admin Teams: User is not admin, returning forbidden');
     return forbiddenResponse();
   }
+  console.log('Admin Teams: Admin permission verified');
 
-  const db = getFirestoreDb();
+  // Initialize Firestore
+  console.log('Admin Teams: Initializing Firestore...');
+  let db;
+  try {
+    db = getFirestoreDb();
+    console.log('Admin Teams: Firestore initialized successfully');
+  } catch (initError: any) {
+    console.error('Admin Teams: Firestore initialization error:', initError);
+    return errorResponse(`Firestore initialization error: ${initError.message}`, 500);
+  }
 
   try {
     switch (event.httpMethod) {
       case 'GET': {
         // Get all teams with pilots and staff
+        console.log('Admin Teams: Fetching teams from Firestore...');
         const teamsSnapshot = await db.collection('teams')
           .orderBy('createdAt', 'desc')
           .get();
+        console.log('Admin Teams: Found', teamsSnapshot.size, 'teams');
 
         const teamsWithCounts = await Promise.all(
           teamsSnapshot.docs.map(async (teamDoc) => {

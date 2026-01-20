@@ -212,133 +212,272 @@ const content = await getContent('en', 'home');
       });
     }
 
-    // Realistic motorcycle pass-by sound effect using Web Audio API
+    // Ultra-realistic 125cc 4T motorcycle pass-by sound
     function playMotoSound() {
       const ctx = new (window.AudioContext || (window as any).webkitAudioContext)();
       const now = ctx.currentTime;
-      const duration = 1.8;
+      const duration = 2.5;
+      const peakTime = duration * 0.42; // When bike is closest
 
-      // Master output with stereo panner
+      // Master bus with compression and EQ
       const masterGain = ctx.createGain();
-      const panner = ctx.createStereoPanner();
       const compressor = ctx.createDynamicsCompressor();
+      compressor.threshold.value = -24;
+      compressor.knee.value = 30;
+      compressor.ratio.value = 12;
+      compressor.attack.value = 0.003;
+      compressor.release.value = 0.25;
 
-      masterGain.connect(compressor);
+      const masterEQ = ctx.createBiquadFilter();
+      masterEQ.type = 'peaking';
+      masterEQ.frequency.value = 800;
+      masterEQ.Q.value = 1;
+      masterEQ.gain.value = 3;
+
+      const panner = ctx.createStereoPanner();
+
+      masterGain.connect(masterEQ);
+      masterEQ.connect(compressor);
       compressor.connect(panner);
       panner.connect(ctx.destination);
 
-      // Doppler pan from left to right
-      panner.pan.setValueAtTime(-0.9, now);
-      panner.pan.linearRampToValueAtTime(0, now + duration * 0.45);
-      panner.pan.linearRampToValueAtTime(0.9, now + duration);
+      // Realistic Doppler panning
+      panner.pan.setValueAtTime(-1, now);
+      panner.pan.setTargetAtTime(-0.3, now + duration * 0.2, 0.3);
+      panner.pan.setTargetAtTime(0, now + peakTime, 0.1);
+      panner.pan.setTargetAtTime(0.5, now + duration * 0.6, 0.2);
+      panner.pan.linearRampToValueAtTime(1, now + duration);
 
-      // Base frequencies for 125cc single cylinder engine (~8000-12000 RPM)
-      const baseFreq = 65; // Fundamental firing frequency
-      const peakFreq = 140; // Peak at closest point
-      const endFreq = 55; // Lower as it moves away
+      // === ENGINE SOUND ===
+      // 125cc 4T single at ~9000-11000 RPM = 75-92 Hz firing frequency
+      const approachRPM = 9500;
+      const peakRPM = 11500;
+      const departRPM = 8000;
 
-      // Create multiple harmonics for realistic engine sound
-      const harmonics = [1, 2, 3, 4, 6, 8];
-      const harmonicGains = [0.4, 0.3, 0.2, 0.15, 0.1, 0.05];
+      const rpmToFreq = (rpm: number) => rpm / 120; // 4-stroke single: RPM/60/2
+      const baseApproach = rpmToFreq(approachRPM);
+      const basePeak = rpmToFreq(peakRPM);
+      const baseDepart = rpmToFreq(departRPM);
 
-      harmonics.forEach((mult, i) => {
+      // Primary engine harmonics (cylinder firing)
+      const engineHarmonics = [
+        { mult: 0.5, gain: 0.15, type: 'sine' as OscillatorType },      // Sub-harmonic rumble
+        { mult: 1, gain: 0.35, type: 'sawtooth' as OscillatorType },    // Fundamental
+        { mult: 2, gain: 0.28, type: 'sawtooth' as OscillatorType },    // 2nd harmonic
+        { mult: 3, gain: 0.18, type: 'square' as OscillatorType },      // 3rd - adds bite
+        { mult: 4, gain: 0.12, type: 'sawtooth' as OscillatorType },    // 4th
+        { mult: 5, gain: 0.08, type: 'square' as OscillatorType },      // 5th
+        { mult: 6, gain: 0.05, type: 'sawtooth' as OscillatorType },    // 6th
+        { mult: 8, gain: 0.03, type: 'square' as OscillatorType },      // 8th - high end sizzle
+      ];
+
+      engineHarmonics.forEach((h) => {
         const osc = ctx.createOscillator();
-        const oscGain = ctx.createGain();
+        const gain = ctx.createGain();
         const filter = ctx.createBiquadFilter();
 
-        osc.type = i < 2 ? 'sawtooth' : 'square';
+        osc.type = h.type;
         filter.type = 'lowpass';
-        filter.frequency.value = 2000 - (i * 200);
-        filter.Q.value = 1;
+        filter.frequency.value = Math.min(3000, 400 * h.mult);
+        filter.Q.value = 0.7;
 
         osc.connect(filter);
-        filter.connect(oscGain);
-        oscGain.connect(masterGain);
+        filter.connect(gain);
+        gain.connect(masterGain);
 
         // Doppler frequency shift
-        osc.frequency.setValueAtTime(baseFreq * mult, now);
-        osc.frequency.exponentialRampToValueAtTime(peakFreq * mult, now + duration * 0.4);
-        osc.frequency.exponentialRampToValueAtTime(endFreq * mult, now + duration);
+        osc.frequency.setValueAtTime(baseApproach * h.mult, now);
+        osc.frequency.exponentialRampToValueAtTime(basePeak * h.mult * 1.15, now + peakTime);
+        osc.frequency.exponentialRampToValueAtTime(baseDepart * h.mult * 0.85, now + duration);
 
-        // Volume envelope with proximity effect
-        const gain = harmonicGains[i] * 0.12;
-        oscGain.gain.setValueAtTime(0, now);
-        oscGain.gain.linearRampToValueAtTime(gain * 0.3, now + 0.05);
-        oscGain.gain.linearRampToValueAtTime(gain * 0.6, now + duration * 0.3);
-        oscGain.gain.linearRampToValueAtTime(gain, now + duration * 0.45);
-        oscGain.gain.linearRampToValueAtTime(gain * 0.7, now + duration * 0.6);
-        oscGain.gain.linearRampToValueAtTime(0, now + duration);
+        // Volume: proximity effect (inverse square approximation)
+        const g = h.gain * 0.15;
+        gain.gain.setValueAtTime(0.001, now);
+        gain.gain.exponentialRampToValueAtTime(g * 0.2, now + 0.1);
+        gain.gain.exponentialRampToValueAtTime(g * 0.5, now + duration * 0.25);
+        gain.gain.exponentialRampToValueAtTime(g, now + peakTime);
+        gain.gain.exponentialRampToValueAtTime(g * 0.6, now + duration * 0.55);
+        gain.gain.exponentialRampToValueAtTime(g * 0.2, now + duration * 0.8);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
         osc.start(now);
-        osc.stop(now + duration);
+        osc.stop(now + duration + 0.1);
       });
 
-      // Exhaust rumble - low frequency
-      const rumbleOsc = ctx.createOscillator();
-      const rumbleGain = ctx.createGain();
-      const rumbleFilter = ctx.createBiquadFilter();
+      // === EXHAUST RESONANCE ===
+      const exhaustOsc = ctx.createOscillator();
+      const exhaustGain = ctx.createGain();
+      const exhaustFilter = ctx.createBiquadFilter();
+      const exhaustFilter2 = ctx.createBiquadFilter();
 
-      rumbleOsc.type = 'triangle';
-      rumbleFilter.type = 'lowpass';
-      rumbleFilter.frequency.value = 150;
+      exhaustOsc.type = 'sawtooth';
+      exhaustFilter.type = 'bandpass';
+      exhaustFilter.frequency.value = 180;
+      exhaustFilter.Q.value = 8;
+      exhaustFilter2.type = 'lowpass';
+      exhaustFilter2.frequency.value = 600;
 
-      rumbleOsc.connect(rumbleFilter);
-      rumbleFilter.connect(rumbleGain);
-      rumbleGain.connect(masterGain);
+      exhaustOsc.connect(exhaustFilter);
+      exhaustFilter.connect(exhaustFilter2);
+      exhaustFilter2.connect(exhaustGain);
+      exhaustGain.connect(masterGain);
 
-      rumbleOsc.frequency.setValueAtTime(30, now);
-      rumbleOsc.frequency.linearRampToValueAtTime(55, now + duration * 0.45);
-      rumbleOsc.frequency.linearRampToValueAtTime(25, now + duration);
+      exhaustOsc.frequency.setValueAtTime(baseApproach * 2, now);
+      exhaustOsc.frequency.exponentialRampToValueAtTime(basePeak * 2, now + peakTime);
+      exhaustOsc.frequency.exponentialRampToValueAtTime(baseDepart * 2, now + duration);
 
-      rumbleGain.gain.setValueAtTime(0, now);
-      rumbleGain.gain.linearRampToValueAtTime(0.15, now + duration * 0.3);
-      rumbleGain.gain.linearRampToValueAtTime(0.25, now + duration * 0.45);
-      rumbleGain.gain.linearRampToValueAtTime(0, now + duration);
+      exhaustGain.gain.setValueAtTime(0.001, now);
+      exhaustGain.gain.exponentialRampToValueAtTime(0.08, now + peakTime);
+      exhaustGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
-      rumbleOsc.start(now);
-      rumbleOsc.stop(now + duration);
+      exhaustOsc.start(now);
+      exhaustOsc.stop(now + duration + 0.1);
 
-      // Exhaust noise/crackle
-      const noiseLength = ctx.sampleRate * duration;
-      const noiseBuffer = ctx.createBuffer(1, noiseLength, ctx.sampleRate);
-      const noiseData = noiseBuffer.getChannelData(0);
+      // === INTAKE NOISE ===
+      const intakeLength = Math.floor(ctx.sampleRate * duration);
+      const intakeBuffer = ctx.createBuffer(1, intakeLength, ctx.sampleRate);
+      const intakeData = intakeBuffer.getChannelData(0);
 
-      // Create shaped noise with occasional pops
-      for (let i = 0; i < noiseLength; i++) {
+      for (let i = 0; i < intakeLength; i++) {
         const t = i / ctx.sampleRate;
-        const envelope = Math.sin(Math.PI * t / duration);
-        const pop = Math.random() > 0.997 ? (Math.random() * 2 - 1) * 3 : 0;
-        noiseData[i] = ((Math.random() * 2 - 1) * 0.3 + pop) * envelope;
+        const freq = baseApproach + (basePeak - baseApproach) * Math.min(1, t / peakTime);
+        const period = ctx.sampleRate / freq;
+        const phase = (i % period) / period;
+        // Pulsing intake whoosh
+        intakeData[i] = (Math.random() * 2 - 1) * (phase < 0.3 ? 0.8 : 0.2) * Math.sin(Math.PI * t / duration);
       }
 
-      const noiseSource = ctx.createBufferSource();
-      const noiseGain = ctx.createGain();
-      const noiseFilter = ctx.createBiquadFilter();
-      const noiseFilter2 = ctx.createBiquadFilter();
+      const intakeSource = ctx.createBufferSource();
+      const intakeGain = ctx.createGain();
+      const intakeFilter = ctx.createBiquadFilter();
 
-      noiseSource.buffer = noiseBuffer;
-      noiseFilter.type = 'bandpass';
-      noiseFilter.frequency.value = 400;
-      noiseFilter.Q.value = 0.5;
-      noiseFilter2.type = 'highpass';
-      noiseFilter2.frequency.value = 100;
+      intakeSource.buffer = intakeBuffer;
+      intakeFilter.type = 'bandpass';
+      intakeFilter.frequency.value = 350;
+      intakeFilter.Q.value = 2;
 
-      noiseSource.connect(noiseFilter);
-      noiseFilter.connect(noiseFilter2);
-      noiseFilter2.connect(noiseGain);
-      noiseGain.connect(masterGain);
+      intakeSource.connect(intakeFilter);
+      intakeFilter.connect(intakeGain);
+      intakeGain.connect(masterGain);
 
-      noiseGain.gain.setValueAtTime(0, now);
-      noiseGain.gain.linearRampToValueAtTime(0.08, now + duration * 0.3);
-      noiseGain.gain.linearRampToValueAtTime(0.15, now + duration * 0.45);
-      noiseGain.gain.linearRampToValueAtTime(0.1, now + duration * 0.7);
-      noiseGain.gain.linearRampToValueAtTime(0, now + duration);
+      intakeGain.gain.setValueAtTime(0.001, now);
+      intakeGain.gain.exponentialRampToValueAtTime(0.04, now + peakTime);
+      intakeGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
 
-      noiseSource.start(now);
-      noiseSource.stop(now + duration);
+      intakeSource.start(now);
+      intakeSource.stop(now + duration + 0.1);
 
-      // Master volume envelope
-      masterGain.gain.setValueAtTime(0.8, now);
+      // === MECHANICAL/VALVE TRAIN NOISE ===
+      const mechLength = Math.floor(ctx.sampleRate * duration);
+      const mechBuffer = ctx.createBuffer(1, mechLength, ctx.sampleRate);
+      const mechData = mechBuffer.getChannelData(0);
+
+      for (let i = 0; i < mechLength; i++) {
+        const t = i / ctx.sampleRate;
+        const freq = baseApproach * 2 + (basePeak - baseApproach) * 2 * Math.min(1, t / peakTime);
+        const period = ctx.sampleRate / freq;
+        const phase = (i % period) / period;
+        // Sharp clicks for valve train
+        mechData[i] = phase < 0.05 ? (Math.random() - 0.5) * 2 : (Math.random() - 0.5) * 0.1;
+      }
+
+      const mechSource = ctx.createBufferSource();
+      const mechGain = ctx.createGain();
+      const mechFilter = ctx.createBiquadFilter();
+
+      mechSource.buffer = mechBuffer;
+      mechFilter.type = 'highpass';
+      mechFilter.frequency.value = 2000;
+      mechFilter.Q.value = 1;
+
+      mechSource.connect(mechFilter);
+      mechFilter.connect(mechGain);
+      mechGain.connect(masterGain);
+
+      mechGain.gain.setValueAtTime(0.001, now);
+      mechGain.gain.exponentialRampToValueAtTime(0.025, now + peakTime);
+      mechGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      mechSource.start(now);
+      mechSource.stop(now + duration + 0.1);
+
+      // === EXHAUST CRACKLE/POPS ===
+      const crackleLength = Math.floor(ctx.sampleRate * duration);
+      const crackleBuffer = ctx.createBuffer(1, crackleLength, ctx.sampleRate);
+      const crackleData = crackleBuffer.getChannelData(0);
+
+      for (let i = 0; i < crackleLength; i++) {
+        const t = i / ctx.sampleRate;
+        // More pops after peak (deceleration)
+        const popChance = t > peakTime ? 0.0008 : 0.0002;
+        if (Math.random() < popChance) {
+          const popLength = Math.floor(Math.random() * 400 + 100);
+          for (let j = 0; j < popLength && i + j < crackleLength; j++) {
+            crackleData[i + j] = (Math.random() * 2 - 1) * Math.exp(-j / 80) * 1.5;
+          }
+        }
+      }
+
+      const crackleSource = ctx.createBufferSource();
+      const crackleGain = ctx.createGain();
+      const crackleFilter = ctx.createBiquadFilter();
+
+      crackleSource.buffer = crackleBuffer;
+      crackleFilter.type = 'bandpass';
+      crackleFilter.frequency.value = 1200;
+      crackleFilter.Q.value = 0.5;
+
+      crackleSource.connect(crackleFilter);
+      crackleFilter.connect(crackleGain);
+      crackleGain.connect(masterGain);
+
+      crackleGain.gain.setValueAtTime(0.08, now);
+
+      crackleSource.start(now);
+      crackleSource.stop(now + duration + 0.1);
+
+      // === WIND/AIR RUSH ===
+      const windLength = Math.floor(ctx.sampleRate * duration);
+      const windBuffer = ctx.createBuffer(1, windLength, ctx.sampleRate);
+      const windData = windBuffer.getChannelData(0);
+
+      // Pink-ish noise for wind
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (let i = 0; i < windLength; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        b3 = 0.86650 * b3 + white * 0.3104856;
+        b4 = 0.55000 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.0168980;
+        windData[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+        b6 = white * 0.115926;
+      }
+
+      const windSource = ctx.createBufferSource();
+      const windGain = ctx.createGain();
+      const windFilter = ctx.createBiquadFilter();
+
+      windSource.buffer = windBuffer;
+      windFilter.type = 'bandpass';
+      windFilter.frequency.value = 800;
+      windFilter.Q.value = 0.3;
+
+      windSource.connect(windFilter);
+      windFilter.connect(windGain);
+      windGain.connect(masterGain);
+
+      // Wind gets louder at peak
+      windGain.gain.setValueAtTime(0.001, now);
+      windGain.gain.exponentialRampToValueAtTime(0.06, now + peakTime);
+      windGain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      windSource.start(now);
+      windSource.stop(now + duration + 0.1);
+
+      // Master volume
+      masterGain.gain.setValueAtTime(1.2, now);
     }
 
     // Toggle badge icon on click

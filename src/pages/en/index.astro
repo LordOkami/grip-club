@@ -32,7 +32,7 @@ const content = await getContent('en', 'home');
       </div>
 
       <!-- Desafío Bronce Icon with Effects -->
-      <div class="hero-badge-container relative mx-auto w-64 md:w-80 lg:w-96 mb-1">
+      <div class="hero-badge-container relative mx-auto w-full max-w-md mb-1">
         <div class="hero-badge-glow absolute inset-0 opacity-0 transition-opacity duration-500"></div>
         <img
           id="hero-badge"
@@ -520,7 +520,8 @@ const content = await getContent('en', 'home');
       const icons = [
         '/desafios/desafio_bronce_icon.png',
         '/desafios/desafio_bronce_icon_2.png',
-        '/desafios/desafio_bronce_icon_3.png'
+        '/desafios/desafio_bronce_icon_3.png',
+        '/desafios/desafio_bronce_icon_4.png'
       ];
       let currentIndex = 1; // Start with icon_2
 
@@ -528,12 +529,9 @@ const content = await getContent('en', 'home');
         playMotoSound();
         currentIndex = (currentIndex + 1) % icons.length;
         badge.src = icons[currentIndex];
-        // Scale up icon 3 by 40%
-        badge.style.transform = currentIndex === 2 ? 'scale(1.4)' : 'scale(1)';
         if (shine) {
           shine.style.maskImage = `url('${icons[currentIndex]}')`;
           shine.style.webkitMaskImage = `url('${icons[currentIndex]}')`;
-          shine.style.transform = currentIndex === 2 ? 'scale(1.4)' : 'scale(1)';
         }
       });
     }

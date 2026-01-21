@@ -3,7 +3,7 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout title="Historia" currentPage="historia">
-  <!-- Hero Section -->
+  <!-- BLOQUE 1: Historia Hero Section -->
   <section class="relative py-24 md:py-32 overflow-hidden">
     <div class="absolute inset-0 bg-gradient-racing"></div>
     <div class="absolute inset-0 opacity-5">
@@ -11,57 +11,96 @@ import Layout from '../layouts/Layout.astro';
     </div>
 
     <div class="container mx-auto px-4 md:px-8 relative z-10">
-      <div class="max-w-3xl">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Grip Club</span>
-        <h1 class="section-title mb-6">
-          Nuestra <span class="text-vanilla">Historia</span>
-        </h1>
-        <p class="section-subtitle">
-          De la pasion por las dos ruedas nacio Grip Club. Conoce como empezo todo y hacia donde vamos.
-        </p>
-      </div>
-    </div>
-  </section>
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Grip Club</span>
+          <h1 class="section-title mb-8">
+            Nuestra <span class="text-vanilla">Historia</span>
+          </h1>
+        </div>
 
-  <!-- Origin Section -->
-  <section class="py-20 bg-racing-gray">
-    <div class="container mx-auto px-4 md:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Los Origenes</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6" style="font-family: 'Bebas Neue', sans-serif;">
-            Una idea entre <span class="text-vanilla">amigos</span>
-          </h2>
-          <p class="text-racing-silver mb-4">
-            Grip Club nacio de la pasion compartida por el motorsport. Un grupo de entusiastas de las motos
-            que querian crear algo diferente: una competicion accesible, emocionante y que reuniera
-            a la comunidad motera en torno a un evento unico.
+        <div class="prose prose-invert prose-lg max-w-none mb-12">
+          <p class="text-racing-silver text-lg leading-relaxed mb-6">
+            Grip Club nació de una pasión compartida por el motorsport.
+            Un grupo de amigos, entusiastas de las motos, que querían crear algo diferente: una competición accesible, emocionante y capaz de reunir a la comunidad motera en torno a un evento único.
           </p>
-          <p class="text-racing-silver mb-4">
-            Inspirados por formatos de resistencia internacionales como FreeTech Endurance UK,
-            decidimos adaptar el concepto a nuestro pais, manteniendo la esencia: motos 125cc de serie,
-            8 horas de carrera y mucho trabajo en equipo.
+          <p class="text-racing-silver text-lg leading-relaxed mb-6">
+            Inspirados por los grandes formatos internacionales de resistencia, decidimos adaptar el concepto a nuestro país manteniendo su esencia más pura: motos 125cc de serie, pilotos amateur y carreras donde importa tanto el equipo como el piloto.
           </p>
-          <p class="text-racing-silver">
-            Lo que empezo como una idea entre amigos se ha convertido en una realidad que crece
-            cada temporada, atrayendo a equipos de toda Espana.
+          <p class="text-racing-silver text-lg leading-relaxed mb-6">
+            Detrás de esta idea hay algo más que ilusión. Hay años de experiencia creando eventos en circuitos, viviendo las carreras desde dentro, organizando formatos de resistencia, trackdays y encuentros que han unido a miles de apasionados del motor. Esa trayectoria, forjada en proyectos como las 24H Experience, 8000vueltas y eventos de cultura del motor como Autopía, es la base sobre la que nace Grip Club.
+          </p>
+          <p class="text-racing-silver text-lg leading-relaxed">
+            Lo que empezó como una idea entre amigos se ha convertido hoy en una realidad pensada para equipos y pilotos de toda España, con un objetivo claro: trasladar todo ese conocimiento, exigencia y cuidado por el detalle a una competición accesible, auténtica y memorable para quienes la viven desde el box, la pista y el paddock.
           </p>
         </div>
-        <div class="relative">
-          <div class="aspect-video bg-racing-black rounded-2xl overflow-hidden border border-racing-silver/20">
-            <img
-              src="/images/teams-1.jpg"
-              alt="Origenes de Grip Club"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
+
+        <!-- Auto-rotating Image Carousel -->
+        <div class="relative max-w-4xl mx-auto">
+          <div class="historia-carousel-container relative overflow-hidden rounded-2xl">
+            <div class="historia-carousel-track">
+              <!-- Slide 1 -->
+              <div class="historia-slide">
+                <div class="aspect-video bg-racing-black overflow-hidden">
+                  <img
+                    src="https://github.com/user-attachments/assets/8f266e31-907d-46d1-9cf5-725b92309450"
+                    alt="Autopía Events"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="slide-caption">
+                  <a href="https://autopia.events/" target="_blank" rel="noopener noreferrer" class="text-vanilla hover:text-racing-green transition-colors">
+                    Autopía Events - Cultura del motor
+                  </a>
+                </div>
+              </div>
+
+              <!-- Slide 2 -->
+              <div class="historia-slide">
+                <div class="aspect-video bg-racing-black overflow-hidden">
+                  <img
+                    src="https://github.com/user-attachments/assets/5730ed2d-27af-4095-b984-9fa17471e947"
+                    alt="8000vueltas"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="slide-caption">
+                  <a href="https://8000vueltas.com/" target="_blank" rel="noopener noreferrer" class="text-vanilla hover:text-racing-green transition-colors">
+                    8000vueltas - Trackdays y eventos
+                  </a>
+                </div>
+              </div>
+
+              <!-- Slide 3 -->
+              <div class="historia-slide">
+                <div class="aspect-video bg-racing-black overflow-hidden">
+                  <img
+                    src="https://github.com/user-attachments/assets/2620ab2a-8469-45db-a648-72877bc38506"
+                    alt="Robert Borowik Media"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="slide-caption">
+                  <a href="https://robertborowikmedia.com/" target="_blank" rel="noopener noreferrer" class="text-vanilla hover:text-racing-green transition-colors">
+                    Robert Borowik Media - Fotografía de motorsport
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navigation Dots -->
+            <div class="carousel-dots">
+              <button class="dot active" data-slide="0" aria-label="Ver imagen 1"></button>
+              <button class="dot" data-slide="1" aria-label="Ver imagen 2"></button>
+              <button class="dot" data-slide="2" aria-label="Ver imagen 3"></button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Values Section -->
+  <!-- BLOQUE 2: Nuestros Valores -->
   <section class="py-20 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
@@ -69,8 +108,8 @@ import Layout from '../layouts/Layout.astro';
         <h2 class="section-title">Lo que nos <span class="text-vanilla">define</span></h2>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Value 1 -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        <!-- Value 1: Comunidad -->
         <div class="card text-center">
           <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,12 +118,11 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Comunidad</h3>
           <p class="text-racing-silver">
-            Creemos en construir una comunidad unida donde todos los apasionados de las motos
-            tengan un lugar. El paddock es una gran familia.
+            Creemos en una comunidad unida por una misma pasión: el motociclismo en su esencia, sin filtros.
           </p>
         </div>
 
-        <!-- Value 2 -->
+        <!-- Value 2: Accesibilidad -->
         <div class="card text-center">
           <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -93,12 +131,11 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Accesibilidad</h3>
           <p class="text-racing-silver">
-            El motorsport no tiene que ser exclusivo. Con motos 125cc de serie y costes controlados,
-            cualquiera puede participar y competir.
+            El motorsport no tiene que ser exclusivo de unos pocos. Con motos 125cc de serie y costes controlados, cualquiera puede participar y competir.
           </p>
         </div>
 
-        <!-- Value 3 -->
+        <!-- Value 3: Seguridad -->
         <div class="card text-center">
           <div class="w-16 h-16 bg-racing-green/20 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg class="w-8 h-8 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -107,19 +144,19 @@ import Layout from '../layouts/Layout.astro';
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Seguridad</h3>
           <p class="text-racing-silver">
-            La seguridad es nuestra maxima prioridad. Velocidades controladas, equipamiento obligatorio
-            y estrictos controles tecnicos.
+            La seguridad es nuestra máxima prioridad. Velocidades bajas, riesgos controlados, equipamiento obligatorio y estrictos controles técnicos.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Concepto Section - Moved from Home -->
+  <!-- BLOQUE 3: Nuestra Visión - ¿Por qué motos de 125cc? -->
   <section class="py-24 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
-        <h2 class="section-title">¿Por que motos de <span class="text-vanilla">125cc</span>?</h2>
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Nuestra visión</span>
+        <h2 class="section-title">¿Por qué motos de <span class="text-vanilla">125cc</span>?</h2>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -131,7 +168,7 @@ import Layout from '../layouts/Layout.astro';
             </svg>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Accesible para todos</h3>
-          <p class="text-racing-silver">Motos asequibles, fiables y baratas de mantener. Para que podais disfrutar la experiencia sin arruinaros.</p>
+          <p class="text-racing-silver">Motos asequibles, fiables y baratas de mantener. Para que podáis disfrutar la experiencia sin arruinaros.</p>
         </div>
 
         <!-- Card 2 -->
@@ -142,7 +179,7 @@ import Layout from '../layouts/Layout.astro';
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
             </svg>
           </div>
-          <h3 class="text-xl font-bold text-white mb-3">Maxima igualdad mecanica</h3>
+          <h3 class="text-xl font-bold text-white mb-3">Máxima igualdad mecánica</h3>
           <p class="text-racing-silver">Con motos igualadas, todo lo decide la estrategia, la habilidad de los pilotos y el trabajo en equipo.</p>
         </div>
 
@@ -165,7 +202,7 @@ import Layout from '../layouts/Layout.astro';
             </svg>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Escuela de pilotos</h3>
-          <p class="text-racing-silver">Motos divertidas, ligeras y faciles de pilotar. Ideales para aprender y mejorar la tecnica de pilotaje en circuito.</p>
+          <p class="text-racing-silver">Motos divertidas, ligeras y fáciles de pilotar. Ideales para aprender y mejorar la técnica de pilotaje en circuito.</p>
         </div>
 
         <!-- Card 5 -->
@@ -176,7 +213,7 @@ import Layout from '../layouts/Layout.astro';
             </svg>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">Seguridad primero</h3>
-          <p class="text-racing-silver">Velocidades controladas que permiten pilotar con margenes de seguridad mayores sin perder ni un gramo de emocion.</p>
+          <p class="text-racing-silver">Velocidades controladas que permiten pilotar con márgenes de seguridad mayores sin perder ni un gramo de emoción.</p>
         </div>
 
         <!-- Card 6 -->
@@ -187,144 +224,221 @@ import Layout from '../layouts/Layout.astro';
             </svg>
           </div>
           <h3 class="text-xl font-bold text-white mb-3">LA VELOCIDAD NO SALE EN LA FOTO</h3>
-          <p class="text-racing-silver">Lo que se busca es disfrutar de la resistencia con amigos y de la pasión por el motociclismo puro.</p>
+          <p class="text-racing-silver">La filosofía es disfrutar con amigos de la resistencia la pasión por el motociclismo puro.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Teams Section - Moved from Home -->
+  <!-- BLOQUE 4: Nuestra Misión - Espíritu de Equipo -->
   <section class="py-24 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-12">
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Nuestra misión</span>
         <h2 class="section-title">ESPÍRITU DE <span class="text-vanilla">EQUIPO</span></h2>
         <p class="section-subtitle mx-auto mt-4">Los equipos son la piedra angular de estos desafíos.</p>
       </div>
 
       <div class="max-w-4xl mx-auto mb-12 space-y-6">
-        <p class="text-racing-silver text-base md:text-lg leading-relaxed">Seréis de 4 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: resistir y llegar juntos hasta el final. Durante horas tendréis que gestionar mucho más que el gas: los nervios antes de salir, el tráfico en pista, los pequeños errores, los repostajes, los cambios de piloto, el cansancio y las decisiones bajo presión. Aquí cada vuelta cuenta y cada parada importa.</p>
-        <p class="text-racing-silver text-base md:text-lg leading-relaxed">Y sí, en pista habrá duelos, adelantamientos y momentos de máxima tensión… pero eso es solo una parte. Lo realmente importante es vivir la resistencia con vuestros amigos: compartir los nervios, las risas, los sustos y las remontadas hasta que cae la bandera a cuadros y os recorre la euforia de haber logrado juntos algo épico e inolvidable.</p>
+        <p class="text-racing-silver text-base md:text-lg leading-relaxed">
+          Seréis de 4 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: resistir y llegar juntos hasta el final. Durante horas tendréis que gestionar mucho más que el gas: los nervios antes de salir, el tráfico en pista, los pequeños errores, los repostajes, los cambios de piloto, el cansancio y las decisiones bajo presión. Aquí cada vuelta cuenta y cada parada importa.
+        </p>
+        <p class="text-racing-silver text-base md:text-lg leading-relaxed">
+          Y sí, en pista habrá duelos, adelantamientos y momentos de máxima tensión… pero eso es solo una parte. Lo realmente importante es vivir la resistencia con vuestros amigos: compartir los nervios, las risas, los sustos y las remontadas hasta que cae la bandera a cuadros y os recorre la euforia de haber logrado juntos algo épico e inolvidable.
+        </p>
       </div>
 
-      <div class="gallery-grid">
-        <div class="gallery-item">
-          <img src="/images/teams-1.jpg" alt="Equipo de pilotos" loading="lazy" />
+      <!-- Team Images Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="relative rounded-2xl overflow-hidden border border-racing-silver/20 group">
+          <div class="aspect-[3/2] bg-racing-gray">
+            <img
+              src="https://github.com/user-attachments/assets/810d3958-6cd9-4d7d-88b3-e1adcc34d140"
+              alt="Equipos en el paddock"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
         </div>
-        <div class="gallery-item">
-          <img src="/images/teams-2.jpg" alt="Celebracion en pista" loading="lazy" />
+        <div class="relative rounded-2xl overflow-hidden border border-racing-silver/20 group">
+          <div class="aspect-[3/2] bg-racing-gray">
+            <img
+              src="https://github.com/user-attachments/assets/64aa2b8a-5f61-4047-907d-f4917a43e8ef"
+              alt="Pilotos en acción"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
         </div>
-        <div class="gallery-item">
-          <img src="/images/teams-3.jpg" alt="Mecanicos trabajando" loading="lazy" />
-        </div>
-        <div class="gallery-item">
-          <img src="/images/teams-4.jpg" alt="Ambiente de equipo" loading="lazy" />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section - Moved from Home -->
-  <section class="py-24 bg-racing-gray relative overflow-hidden">
-    <!-- Background Image -->
-    <div class="absolute inset-0">
-      <img
-        src="/images/track-DR7-1.jpg"
-        alt="Circuito"
-        class="w-full h-full object-cover opacity-30"
-      />
-      <div class="absolute inset-0 bg-racing-gray/80"></div>
-    </div>
-
-    <div class="container mx-auto px-4 md:px-8 relative z-10">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title mb-6">¿Listo para el <span class="text-vanilla">desafio</span>?</h2>
-        <p class="section-subtitle mx-auto mb-8">Unete a la comunidad de equipos y pilotos que ya estan disfrutando de las resistencias mas epicas de la mano de GRIP Club.</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="/inscripciones" class="btn-primary">
-            Inscríbete
-          </a>
-          <a href="/eventos" class="btn-secondary">
-            Ver próximos eventos
-          </a>
+        <div class="relative rounded-2xl overflow-hidden border border-racing-silver/20 group">
+          <div class="aspect-[3/2] bg-racing-gray">
+            <img
+              src="https://github.com/user-attachments/assets/fdbb9769-24fd-4494-9ef2-b416742fe368"
+              alt="Trabajo en equipo"
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Timeline Section -->
+  <!-- BLOQUE 5: CTA - Se parte de nuestra historia -->
   <section class="py-20 bg-racing-gray">
-    <div class="container mx-auto px-4 md:px-8">
-      <div class="text-center mb-16">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Cronologia</span>
-        <h2 class="section-title">Nuestro <span class="text-vanilla">recorrido</span></h2>
-      </div>
-
-      <div class="max-w-3xl mx-auto">
-        <!-- Timeline Item 1 -->
-        <div class="flex gap-6 mb-12">
-          <div class="flex flex-col items-center">
-            <div class="w-12 h-12 bg-racing-green rounded-full flex items-center justify-center text-vanilla font-bold">
-              <span style="font-family: 'Bebas Neue', sans-serif;">2024</span>
-            </div>
-            <div class="w-0.5 h-full bg-racing-silver/20 mt-4"></div>
-          </div>
-          <div class="pb-12">
-            <h3 class="text-xl font-bold text-white mb-2">El Nacimiento</h3>
-            <p class="text-racing-silver">
-              Grip Club se funda con la mision de traer las carreras de resistencia 125cc a Espana.
-              Se establecen las bases del reglamento y se comienza a construir la comunidad.
-            </p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 2 -->
-        <div class="flex gap-6 mb-12">
-          <div class="flex flex-col items-center">
-            <div class="w-12 h-12 bg-racing-green rounded-full flex items-center justify-center text-vanilla font-bold">
-              <span style="font-family: 'Bebas Neue', sans-serif;">2025</span>
-            </div>
-            <div class="w-0.5 h-full bg-racing-silver/20 mt-4"></div>
-          </div>
-          <div class="pb-12">
-            <h3 class="text-xl font-bold text-white mb-2">Primera Edicion</h3>
-            <p class="text-racing-silver">
-              Se celebra la primera edicion oficial de las 8 Horas Grip Club. Equipos de toda Espana
-              se reunen para escribir las primeras paginas de esta nueva historia.
-            </p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 3 -->
-        <div class="flex gap-6">
-          <div class="flex flex-col items-center">
-            <div class="w-12 h-12 bg-vanilla/20 border-2 border-vanilla rounded-full flex items-center justify-center text-vanilla font-bold">
-              <span style="font-family: 'Bebas Neue', sans-serif;">...</span>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-xl font-bold text-white mb-2">El Futuro</h3>
-            <p class="text-racing-silver">
-              Y esto es solo el comienzo. Tenemos grandes planes para hacer crecer la comunidad,
-              mejorar el evento y llevar Grip Club a mas circuitos.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="py-20 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
       <div class="max-w-3xl mx-auto text-center">
         <h2 class="section-title mb-6">Se parte de la <span class="text-vanilla">historia</span></h2>
         <p class="section-subtitle mx-auto mb-8">
-          La historia de Grip Club se escribe con cada equipo que participa. Unete y forma parte de algo especial.
+          La historia de Grip Club se escribe con cada equipo que participa. Únete y forma parte de algo especial.
         </p>
         <a href="/inscripciones#registro" class="btn-primary">
-          Inscribete ahora
+          Inscríbete ahora
         </a>
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  /* Historia Carousel Styles */
+  .historia-carousel-container {
+    position: relative;
+    background: var(--racing-black);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .historia-carousel-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .historia-slide {
+    min-width: 100%;
+    flex-shrink: 0;
+  }
+
+  .slide-caption {
+    padding: 1.5rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .slide-caption a {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  /* Carousel Dots */
+  .carousel-dots {
+    position: absolute;
+    bottom: 5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.75rem;
+    z-index: 10;
+  }
+
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .dot:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+  }
+
+  .dot.active {
+    background: var(--vanilla);
+    border-color: var(--vanilla);
+    transform: scale(1.3);
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .carousel-dots {
+      bottom: 4.5rem;
+      gap: 0.5rem;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+    }
+  }
+</style>
+
+<script>
+  // Auto-rotating carousel functionality
+  function initHistoriaCarousel() {
+    const track = document.querySelector('.historia-carousel-track') as HTMLElement;
+    const slides = document.querySelectorAll('.historia-slide');
+    const dots = document.querySelectorAll('.carousel-dots .dot');
+
+    if (!track || !slides.length || !dots.length) return;
+
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+    const autoPlayInterval = 5000; // 5 seconds
+    let autoPlayTimer: number;
+
+    function goToSlide(index: number) {
+      currentSlide = index;
+      const offset = -currentSlide * 100;
+      track.style.transform = `translateX(${offset}%)`;
+
+      // Update dots
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
+    }
+
+    function nextSlide() {
+      const next = (currentSlide + 1) % totalSlides;
+      goToSlide(next);
+    }
+
+    function startAutoPlay() {
+      stopAutoPlay();
+      autoPlayTimer = window.setInterval(nextSlide, autoPlayInterval);
+    }
+
+    function stopAutoPlay() {
+      if (autoPlayTimer) {
+        clearInterval(autoPlayTimer);
+      }
+    }
+
+    // Add click handlers to dots
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => {
+        goToSlide(index);
+        stopAutoPlay();
+        startAutoPlay(); // Restart auto-play after manual interaction
+      });
+    });
+
+    // Pause auto-play on hover
+    track.addEventListener('mouseenter', stopAutoPlay);
+    track.addEventListener('mouseleave', startAutoPlay);
+
+    // Start auto-play
+    startAutoPlay();
+  }
+
+  // Initialize on page load
+  document.addEventListener('DOMContentLoaded', initHistoriaCarousel);
+
+  // Re-initialize on Astro page transitions (if using View Transitions)
+  document.addEventListener('astro:page-load', initHistoriaCarousel);
+</script>

@@ -75,6 +75,11 @@
     "title": "Trabajo en",
     "titleAccent": "equipo",
     "subtitle": "De 4 a 8 pilotos por equipo, mas hasta 4 miembros de staff. La coordinacion es clave.",
+    "content": [
+      "Los equipos son la piedra angular de estos desafíos.",
+      "Desde 04 a 8 pilotos por equipo, unidos por una misma moto y un mismo objetivo: dar el máximo durante 8 horas. Aquí habrá momentos de tensión, estrategia, cambios rápidos, desgaste de equipo, cansancio de pilotos, el cansancio y las decisiones bajo presión. Aquí gana quien mejor se adapte y trabaje unido.",
+      "Y es, sin esta hacia cuatro, aisladamente y mostremos de máxima fuerza... pero no es solo hasta 8. Un miembro importante, un conjunto de técnicos dedicados, que se entrega al equipo como uno más. La ayuda y las conexiones hacia una que cida la escucha y armonizan. Y eso es para nuestra carrera a poder pista, puede siempre hay que no está en carreras de resistencia."
+    ],
     "images": [
       { "src": "/images/teams-1.jpg", "alt": "Equipo de pilotos" },
       { "src": "/images/teams-2.jpg", "alt": "Celebracion en pista" },

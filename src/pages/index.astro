@@ -29,45 +29,62 @@ const content = await getContent('es', 'home');
         <span class="text-vanilla/80 text-xs md:text-sm uppercase tracking-[0.3em] mt-1 block">presenta</span>
       </div>
 
-      <!-- Logo Carousel -->
-      <div class="logo-carousel-container relative mx-auto w-full max-w-4xl mb-1 overflow-hidden">
-        <div class="logo-carousel-track flex gap-8 items-center justify-center py-8">
-          <div class="logo-item">
+      <!-- 3D Category Carousel -->
+      <div class="category-carousel-container relative mx-auto w-full max-w-5xl mb-8 overflow-visible" style="perspective: 2000px; height: 300px;">
+        <div class="category-carousel-track relative w-full h-full flex items-center justify-center" style="transform-style: preserve-3d;">
+          <!-- Acero (Left 2) -->
+          <div class="category-item absolute transition-all duration-700 ease-out cursor-pointer" data-position="0" data-category="acero">
             <img
-              src="/logo/logo_text_only_white.png"
-              alt="Grip Club"
-              class="h-32 md:h-40 object-contain filter drop-shadow-2xl"
+              src="https://github.com/user-attachments/assets/8702ec3e-e3a3-4fb2-b06a-fe1af3b3e449"
+              alt="Desafío Acero - 4 Horas"
+              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
             />
           </div>
-          <div class="logo-item">
+          <!-- Plata (Left 1) -->
+          <div class="category-item absolute transition-all duration-700 ease-out cursor-pointer" data-position="1" data-category="plata">
             <img
-              src="/logo/logo_text_only_white.png"
-              alt="Grip Club"
-              class="h-32 md:h-40 object-contain filter drop-shadow-2xl"
+              src="https://github.com/user-attachments/assets/9bd60513-b432-4ee9-a837-34c7eb7814c9"
+              alt="Desafío Plata - 12 Horas"
+              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
             />
           </div>
-          <div class="logo-item logo-center">
+          <!-- Oro (Center) -->
+          <div class="category-item absolute transition-all duration-700 ease-out cursor-pointer active" data-position="2" data-category="oro">
             <img
-              src="/logo/logo_text_only_white.png"
-              alt="Grip Club"
-              class="h-40 md:h-52 object-contain filter drop-shadow-2xl"
+              src="https://github.com/user-attachments/assets/6424b072-ed74-4a39-a9ea-d96d0248ce3e"
+              alt="Desafío Oro - 24 Horas"
+              class="h-52 md:h-64 object-contain filter drop-shadow-2xl"
             />
           </div>
-          <div class="logo-item">
+          <!-- Bronce (Right 1) -->
+          <div class="category-item absolute transition-all duration-700 ease-out cursor-pointer" data-position="3" data-category="bronce">
             <img
-              src="/logo/logo_text_only_white.png"
-              alt="Grip Club"
-              class="h-32 md:h-40 object-contain filter drop-shadow-2xl"
+              src="https://github.com/user-attachments/assets/1fe86808-d60d-43a2-9940-9968a150b5bb"
+              alt="Desafío Bronce - 8 Horas"
+              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
             />
           </div>
-          <div class="logo-item">
+          <!-- Platino (Right 2) -->
+          <div class="category-item absolute transition-all duration-700 ease-out cursor-pointer" data-position="4" data-category="platino">
             <img
-              src="/logo/logo_text_only_white.png"
-              alt="Grip Club"
-              class="h-32 md:h-40 object-contain filter drop-shadow-2xl"
+              src="https://github.com/user-attachments/assets/7dd519e3-69ac-4e64-af3f-c6c98299d2c4"
+              alt="Desafío Platino - 27 Horas"
+              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
             />
           </div>
         </div>
+
+        <!-- Navigation Arrows -->
+        <button id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-racing-black/50 hover:bg-racing-black/80 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-vanilla/20 hover:border-vanilla/40">
+          <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+          </svg>
+        </button>
+        <button id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-racing-black/50 hover:bg-racing-black/80 rounded-full flex items-center justify-center transition-colors backdrop-blur-sm border border-vanilla/20 hover:border-vanilla/40">
+          <svg class="w-6 h-6 text-vanilla" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
       </div>
 
       <p class="text-lg md:text-xl text-racing-silver max-w-3xl mx-auto mb-6">
@@ -98,84 +115,41 @@ const content = await getContent('es', 'home');
       </div>
 
       {content.hero.nextEvent && (
-        <div class="max-w-4xl mx-auto mt-12 mb-8">
-          <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-racing-green/20 via-racing-green/10 to-racing-green/20 border-2 border-racing-green/40 backdrop-blur-sm">
-            <!-- Animated background effect -->
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-racing-green/5 to-transparent animate-shimmer"></div>
-
-            <div class="relative p-6 md:p-8">
-              <!-- Header -->
-              <div class="flex items-center justify-center gap-3 mb-4">
-                <div class="w-10 h-10 bg-racing-green rounded-full flex items-center justify-center animate-pulse">
+        <div class="max-w-5xl mx-auto mt-8 mb-6">
+          <a href="/eventos" class="block relative overflow-hidden rounded-xl bg-gradient-to-r from-racing-black/80 to-racing-black/60 border border-vanilla/20 backdrop-blur-sm hover:border-vanilla/40 transition-all duration-300 group">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-vanilla/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
+            <div class="relative px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 bg-racing-green rounded-lg flex items-center justify-center shrink-0 animate-pulse">
                   <svg class="w-6 h-6 text-racing-black" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm9-8.586 6 6V15l.001 5H6v-9.586l6-6z"/>
                     <path d="M12 18c3.703 0 4.901-3.539 4.001-6h-1.752c-.741 2.188-1.979 4.002-2.249 4.002s-1.508-1.814-2.249-4.002H7.999c-.9 2.461.298 6 4.001 6z"/>
                   </svg>
                 </div>
-                <span class="text-racing-green uppercase tracking-[0.2em] text-xs md:text-sm font-bold">Próximo Desafío</span>
-                <div class="w-10 h-10 bg-racing-green rounded-full flex items-center justify-center animate-pulse">
-                  <svg class="w-6 h-6 text-racing-black" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm9-8.586 6 6V15l.001 5H6v-9.586l6-6z"/>
-                    <path d="M12 18c3.703 0 4.901-3.539 4.001-6h-1.752c-.741 2.188-1.979 4.002-2.249 4.002s-1.508-1.814-2.249-4.002H7.999c-.9 2.461.298 6 4.001 6z"/>
-                  </svg>
-                </div>
-              </div>
-
-              <!-- Event Name -->
-              <div class="text-center mb-6">
-                <a href="/eventos" class="group inline-block">
-                  <h3 class="text-2xl md:text-4xl font-bold text-vanilla mb-2 group-hover:text-racing-green transition-colors" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+                <div class="text-left">
+                  <p class="text-racing-green text-xs uppercase tracking-wider font-bold mb-1">Próximo Evento</p>
+                  <h3 class="text-xl md:text-2xl font-bold text-vanilla group-hover:text-racing-green transition-colors" style="font-family: 'Bebas Neue', sans-serif;">
                     Desafío Bronce 8 Horas
                   </h3>
-                  <div class="h-1 bg-racing-green w-0 group-hover:w-full transition-all duration-300 mx-auto"></div>
-                </a>
-              </div>
-
-              <!-- Event Details -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
-                <!-- Date -->
-                <div class="flex items-center justify-center gap-3 bg-racing-black/40 rounded-xl p-4 backdrop-blur-sm border border-racing-green/20">
-                  <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center shrink-0">
-                    <svg class="w-6 h-6 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                    </svg>
-                  </div>
-                  <div class="text-left">
-                    <p class="text-racing-silver text-xs uppercase tracking-wider mb-1">Cuando</p>
-                    <p class="text-white text-lg md:text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">10 Octubre 2026</p>
-                  </div>
-                </div>
-
-                <!-- Location -->
-                <div class="flex items-center justify-center gap-3 bg-racing-black/40 rounded-xl p-4 backdrop-blur-sm border border-racing-green/20">
-                  <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center shrink-0">
-                    <svg class="w-6 h-6 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                  </div>
-                  <div class="text-left">
-                    <p class="text-racing-silver text-xs uppercase tracking-wider mb-1">Donde</p>
-                    <a href="https://www.circuitodr7.es/" target="_blank" rel="noopener noreferrer" class="text-white text-lg md:text-xl font-bold hover:text-racing-green transition-colors flex items-center gap-1 group" style="font-family: 'Bebas Neue', sans-serif;">
-                      Circuito DR7
-                      <svg class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                      </svg>
-                    </a>
-                    <p class="text-racing-silver text-xs">Tarancón, Cuenca</p>
-                  </div>
                 </div>
               </div>
-
-              <!-- Call to action hint -->
-              <div class="mt-6 text-center">
-                <p class="text-racing-silver text-sm">
-                  ¿Listo para el desafío?
-                  <span class="text-racing-green">↓</span>
-                </p>
+              <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                  </svg>
+                  <span class="text-vanilla text-sm md:text-base">10 Octubre 2026</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                  <span class="text-vanilla text-sm md:text-base">Circuito DR7, Tarancón</span>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         </div>
       )}
 
@@ -189,102 +163,154 @@ const content = await getContent('es', 'home');
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-      <svg class="w-6 h-6 text-racing-silver" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
-      </svg>
-    </div>
   </section>
 
   <style>
-    .logo-carousel-container {
-      perspective: 1000px;
+    .category-carousel-container {
+      position: relative;
     }
 
-    .logo-carousel-track {
-      animation: carousel-float 3s ease-in-out infinite;
+    .category-item {
+      will-change: transform, opacity;
     }
 
-    .logo-item {
+    .category-item img {
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    }
+
+    .category-item:hover img {
+      filter: drop-shadow(0 15px 40px rgba(255, 255, 255, 0.3)) brightness(1.15);
+      transform: translateY(-5px);
+    }
+
+    .category-item.active img {
+      filter: drop-shadow(0 20px 50px rgba(255, 255, 255, 0.4)) brightness(1.2);
+    }
+
+    /* 3D Carousel Positions */
+    .category-item[data-position="0"] {
+      transform: translateX(-280px) translateZ(-200px) rotateY(30deg) scale(0.7);
+      opacity: 0.4;
+      z-index: 1;
+    }
+
+    .category-item[data-position="1"] {
+      transform: translateX(-150px) translateZ(-100px) rotateY(15deg) scale(0.85);
       opacity: 0.6;
-      transform: scale(0.9);
-      transition: all 0.5s ease;
+      z-index: 2;
     }
 
-    .logo-item.logo-center {
+    .category-item[data-position="2"] {
+      transform: translateX(0) translateZ(0) rotateY(0deg) scale(1);
       opacity: 1;
-      transform: scale(1.1);
+      z-index: 3;
     }
 
-    .logo-item:hover {
-      opacity: 1;
-      transform: scale(1.05);
+    .category-item[data-position="3"] {
+      transform: translateX(150px) translateZ(-100px) rotateY(-15deg) scale(0.85);
+      opacity: 0.6;
+      z-index: 2;
     }
 
-    @keyframes carousel-float {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
+    .category-item[data-position="4"] {
+      transform: translateX(280px) translateZ(-200px) rotateY(-30deg) scale(0.7);
+      opacity: 0.4;
+      z-index: 1;
     }
 
-    @keyframes shimmer {
-      0% {
-        transform: translateX(-100%);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
-
-    .animate-shimmer {
-      animation: shimmer 3s ease-in-out infinite;
-    }
-
+    /* Mobile responsive */
     @media (max-width: 768px) {
-      .logo-carousel-track {
-        flex-wrap: wrap;
-        gap: 1rem;
+      .category-carousel-container {
+        height: 250px !important;
       }
 
-      .logo-item.logo-center {
-        order: -1;
-        width: 100%;
-        display: flex;
-        justify-content: center;
+      .category-item[data-position="0"],
+      .category-item[data-position="4"] {
+        transform: translateX(0) translateZ(-300px) rotateY(0deg) scale(0.5);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .category-item[data-position="1"] {
+        transform: translateX(-100px) translateZ(-80px) rotateY(20deg) scale(0.75);
+        opacity: 0.5;
+      }
+
+      .category-item[data-position="2"] {
+        transform: translateX(0) translateZ(0) rotateY(0deg) scale(1);
+        opacity: 1;
+      }
+
+      .category-item[data-position="3"] {
+        transform: translateX(100px) translateZ(-80px) rotateY(-20deg) scale(0.75);
+        opacity: 0.5;
       }
     }
-
   </style>
 
   <script>
-    // Mouse tracking for logo carousel items
-    function initLogoInteraction() {
-      const logoItems = document.querySelectorAll('.logo-item');
-      if (!logoItems.length) return;
+    // 3D Category Carousel
+    function initCategoryCarousel() {
+      const items = document.querySelectorAll('.category-item');
+      const prevBtn = document.getElementById('carousel-prev');
+      const nextBtn = document.getElementById('carousel-next');
 
-      logoItems.forEach((item) => {
-        item.addEventListener('mouseenter', () => {
-          logoItems.forEach((otherItem) => {
-            if (otherItem !== item) {
-              otherItem.style.opacity = '0.3';
-            }
-          });
+      if (!items.length || !prevBtn || !nextBtn) return;
+
+      let currentIndex = 2; // Start with Oro (center)
+
+      function updatePositions() {
+        items.forEach((item, index) => {
+          // Calculate relative position from current center
+          let relativePos = index - currentIndex;
+
+          // Wrap around
+          if (relativePos < -2) relativePos += items.length;
+          if (relativePos > 2) relativePos -= items.length;
+
+          // Clamp to -2 to 2 range
+          relativePos = Math.max(-2, Math.min(2, relativePos));
+
+          // Update position
+          const position = relativePos + 2; // Convert to 0-4 range
+          item.setAttribute('data-position', position.toString());
+
+          // Update active state
+          if (relativePos === 0) {
+            item.classList.add('active');
+          } else {
+            item.classList.remove('active');
+          }
         });
+      }
 
-        item.addEventListener('mouseleave', () => {
-          logoItems.forEach((otherItem) => {
-            if (otherItem.classList.contains('logo-center')) {
-              otherItem.style.opacity = '1';
-            } else {
-              otherItem.style.opacity = '0.6';
-            }
-          });
+      function rotateCarousel(direction: number) {
+        currentIndex = (currentIndex + direction + items.length) % items.length;
+        updatePositions();
+      }
+
+      prevBtn.addEventListener('click', () => rotateCarousel(-1));
+      nextBtn.addEventListener('click', () => rotateCarousel(1));
+
+      // Click on items to center them
+      items.forEach((item, index) => {
+        item.addEventListener('click', () => {
+          if (index !== currentIndex) {
+            currentIndex = index;
+            updatePositions();
+          }
         });
       });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') rotateCarousel(-1);
+        if (e.key === 'ArrowRight') rotateCarousel(1);
+      });
+
+      // Initialize positions
+      updatePositions();
     }
 
     // Ultra-realistic 125cc 4T motorcycle pass-by sound
@@ -558,10 +584,10 @@ const content = await getContent('es', 'home');
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
-        initLogoInteraction();
+        initCategoryCarousel();
       });
     } else {
-      initLogoInteraction();
+      initCategoryCarousel();
     }
   </script>
 

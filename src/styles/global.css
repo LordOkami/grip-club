@@ -22,11 +22,22 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Prevent layout shift on zoom */
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 
   body {
     @apply bg-racing-black text-white antialiased;
     font-family: var(--font-body);
+    /* Ensure proper margins at all zoom levels */
+    overflow-x: hidden;
+    min-height: 100vh;
+  }
+
+  /* Prevent content overflow */
+  * {
+    box-sizing: border-box;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -125,5 +136,48 @@
 
   .gallery-item img {
     @apply w-full h-full object-cover transition-transform duration-300 hover:scale-105;
+  }
+
+  /* Responsive container improvements */
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .container {
+      max-width: 768px;
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+  @media (min-width: 1536px) {
+    .container {
+      max-width: 1536px;
+    }
   }
 }

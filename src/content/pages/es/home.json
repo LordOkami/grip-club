@@ -22,18 +22,28 @@
   },
   "concepto": {
     "tagline": "El Concepto",
-    "title": "Por que",
+    "title": "Por que motos de",
     "titleAccent": "125cc de serie",
     "cards": [
       {
-        "title": "Accesible economicamente",
-        "description": "Sin necesidad de grandes presupuestos. Motos asequibles, costes de mantenimiento reducidos y competicion al alcance de todos.",
+        "title": "Accesible para todos",
+        "description": "Motos asequibles, fiables y baratas de mantener. Para que podais disfrutar la experiencia sin arruinaros.",
         "icon": "money"
+      },
+      {
+        "title": "Maxima igualdad mecanica",
+        "description": "Con maquinas igualadas, todo lo decide la estrategia, la habilidad de los pilotos y el trabajo en equipo.",
+        "icon": "lightning"
+      },
+      {
+        "title": "Disponibilidad inmediata",
+        "description": "Hay una oferta enorme de 125cc 4 tiempos de serie nuevas o de segunda mano: distintos modelos, estilos y precios.",
+        "icon": "calendar"
       },
       {
         "title": "Competicion pura",
         "description": "Con maquinas igualadas, gana quien mejor estrategia tiene. La habilidad del piloto y el trabajo en equipo marcan la diferencia.",
-        "icon": "lightning"
+        "icon": "trophy"
       },
       {
         "title": "Espiritu de equipo",
@@ -41,18 +51,18 @@
         "icon": "team"
       },
       {
+        "title": "Escuela de pilotos",
+        "description": "Motos divertidas, ligeras y faciles de pilotar. Ideales para aprender y mejorar la tecnica de pilotaje en circuito.",
+        "icon": "book"
+      },
+      {
         "title": "Seguridad primero",
         "description": "Velocidades controladas que permiten competir con margenes de seguridad mayores sin perder ni un gramo de emocion.",
         "icon": "shield"
       },
       {
-        "title": "Escuela de pilotos",
-        "description": "El formato ideal para aprender las bases del pilotaje de competicion y dar el salto a categorias superiores.",
-        "icon": "book"
-      },
-      {
         "title": "Diversion garantizada",
-        "description": "Porque al final, de eso se trata: disfrutar de la competicion, la camaraderia y la pasion por las dos ruedas.",
+        "description": "Aqui se trata de disfrutar de la resistencia con amigos y de la pasion por el motociclismo puro.",
         "icon": "smile"
       }
     ]

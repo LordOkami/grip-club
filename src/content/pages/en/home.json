@@ -34,17 +34,27 @@
   "concepto": {
     "tagline": "The Concept",
     "title": "Why",
-    "titleAccent": "stock 125cc",
+    "titleAccent": "stock 125cc bikes",
     "cards": [
       {
-        "title": "Economically accessible",
-        "description": "No need for big budgets. Affordable bikes, reduced maintenance costs, and competition within everyone's reach.",
+        "title": "Accessible for everyone",
+        "description": "Affordable, reliable, and cheap to maintain bikes. So you can enjoy the experience without breaking the bank.",
         "icon": "money"
+      },
+      {
+        "title": "Maximum mechanical equality",
+        "description": "With equal machines, everything is decided by strategy, rider skill, and teamwork.",
+        "icon": "lightning"
+      },
+      {
+        "title": "Immediate availability",
+        "description": "There's a huge supply of stock 125cc 4-stroke bikes, new or used: different models, styles, and prices.",
+        "icon": "calendar"
       },
       {
         "title": "Pure competition",
         "description": "With equal machines, the one with the best strategy wins. Rider skill and teamwork make the difference.",
-        "icon": "lightning"
+        "icon": "trophy"
       },
       {
         "title": "Team spirit",
@@ -52,18 +62,18 @@
         "icon": "team"
       },
       {
+        "title": "Rider school",
+        "description": "Fun, light, and easy-to-ride bikes. Ideal for learning and improving your riding technique on track.",
+        "icon": "book"
+      },
+      {
         "title": "Safety first",
         "description": "Controlled speeds that allow competing with greater safety margins without losing any excitement.",
         "icon": "shield"
       },
       {
-        "title": "Rider school",
-        "description": "The ideal format to learn the basics of competitive riding and take the leap to higher categories.",
-        "icon": "book"
-      },
-      {
         "title": "Guaranteed fun",
-        "description": "Because in the end, that's what it's about: enjoying the competition, camaraderie, and passion for two wheels.",
+        "description": "It's all about enjoying endurance racing with friends and the passion for pure motorcycling.",
         "icon": "smile"
       }
     ]

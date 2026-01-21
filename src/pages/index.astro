@@ -88,13 +88,8 @@ const content = await getContent('es', 'home');
       </div>
 
       <p class="text-lg md:text-xl text-racing-silver max-w-3xl mx-auto mb-6">
-        {content.hero.subtitle}
-        {content.hero.subtitleBold && (
-          <>
-            <br>
-            <span class="text-white font-semibold">{content.hero.subtitleBold}</span>
-          </>
-        )}
+        <span class="text-white font-bold text-xl md:text-2xl block mb-2">La experiencia definitiva del motorsport amateur.</span>
+        <span class="text-racing-silver">Eventos de Resistencia en circuito con motos de 125cc.</span>
       </p>
 
       <!-- Stats -->
@@ -116,40 +111,60 @@ const content = await getContent('es', 'home');
 
       {content.hero.nextEvent && (
         <div class="max-w-5xl mx-auto mt-8 mb-6">
-          <a href="/eventos" class="block relative overflow-hidden rounded-xl bg-gradient-to-r from-racing-black/80 to-racing-black/60 border border-vanilla/20 backdrop-blur-sm hover:border-vanilla/40 transition-all duration-300 group">
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-vanilla/5 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-            <div class="relative px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 bg-racing-green rounded-lg flex items-center justify-center shrink-0 animate-pulse">
-                  <svg class="w-6 h-6 text-racing-black" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm9-8.586 6 6V15l.001 5H6v-9.586l6-6z"/>
-                    <path d="M12 18c3.703 0 4.901-3.539 4.001-6h-1.752c-.741 2.188-1.979 4.002-2.249 4.002s-1.508-1.814-2.249-4.002H7.999c-.9 2.461.298 6 4.001 6z"/>
-                  </svg>
+          <div class="block relative overflow-hidden rounded-xl bg-gradient-to-r from-racing-black/80 to-racing-black/60 border border-vanilla/20 backdrop-blur-sm transition-all duration-300 group">
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-vanilla/5 to-transparent"></div>
+            <div class="relative px-6 py-6 flex flex-col gap-6">
+              <!-- Top Row: Logo + Event Info + Date/Location -->
+              <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                  <div class="w-20 h-20 md:w-24 md:h-24 bg-vanilla/95 rounded-xl flex items-center justify-center shrink-0 p-2">
+                    <img
+                      src="https://github.com/user-attachments/assets/cd5bd662-47b8-45e8-aa80-f56f599d4b17"
+                      alt="Desafío Bronce Logo"
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
+                  <div class="text-left">
+                    <p class="text-racing-green text-xs uppercase tracking-wider font-bold mb-1">Próximo Evento</p>
+                    <h3 class="text-xl md:text-2xl font-bold text-vanilla transition-colors" style="font-family: 'Bebas Neue', sans-serif;">
+                      Desafío Bronce 8 Horas
+                    </h3>
+                  </div>
                 </div>
-                <div class="text-left">
-                  <p class="text-racing-green text-xs uppercase tracking-wider font-bold mb-1">Próximo Evento</p>
-                  <h3 class="text-xl md:text-2xl font-bold text-vanilla group-hover:text-racing-green transition-colors" style="font-family: 'Bebas Neue', sans-serif;">
-                    Desafío Bronce 8 Horas
-                  </h3>
+                <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    <span class="text-vanilla text-sm md:text-base">10 Octubre 2026</span>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <span class="text-vanilla text-sm md:text-base">Circuito DR7, Tarancón</span>
+                  </div>
                 </div>
               </div>
-              <div class="flex flex-col md:flex-row items-center gap-4 md:gap-6">
-                <div class="flex items-center gap-2">
-                  <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                  </svg>
-                  <span class="text-vanilla text-sm md:text-base">10 Octubre 2026</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <svg class="w-5 h-5 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  </svg>
-                  <span class="text-vanilla text-sm md:text-base">Circuito DR7, Tarancón</span>
-                </div>
+
+              <!-- Bottom Row: Action Buttons -->
+              <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <a
+                  href="https://grip-club.netlify.app/inscripciones#registro"
+                  class="inline-flex items-center justify-center px-6 py-3 bg-racing-green hover:bg-racing-green/90 text-racing-black font-bold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-racing-green/50"
+                >
+                  Quiero participar
+                </a>
+                <a
+                  href="https://grip-club.netlify.app/#concepto"
+                  class="inline-flex items-center justify-center px-6 py-3 bg-transparent hover:bg-vanilla/10 text-vanilla font-bold rounded-lg border-2 border-vanilla/30 hover:border-vanilla transition-all duration-300"
+                >
+                  Descubre mas
+                </a>
               </div>
             </div>
-          </a>
+          </div>
         </div>
       )}
 

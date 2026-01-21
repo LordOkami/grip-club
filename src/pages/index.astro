@@ -529,9 +529,12 @@ const content = await getContent('es', 'home');
         playMotoSound();
         currentIndex = (currentIndex + 1) % icons.length;
         badge.src = icons[currentIndex];
+        // Scale up icon 3 by 40%
+        badge.style.transform = currentIndex === 2 ? 'scale(1.4)' : 'scale(1)';
         if (shine) {
           shine.style.maskImage = `url('${icons[currentIndex]}')`;
           shine.style.webkitMaskImage = `url('${icons[currentIndex]}')`;
+          shine.style.transform = currentIndex === 2 ? 'scale(1.4)' : 'scale(1)';
         }
       });
     }

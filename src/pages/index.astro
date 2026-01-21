@@ -98,9 +98,85 @@ const content = await getContent('es', 'home');
       </div>
 
       {content.hero.nextEvent && (
-        <p class="text-base md:text-lg text-white font-semibold max-w-3xl mx-auto mt-10 mb-6">
-          {content.hero.nextEvent}
-        </p>
+        <div class="max-w-4xl mx-auto mt-12 mb-8">
+          <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-racing-green/20 via-racing-green/10 to-racing-green/20 border-2 border-racing-green/40 backdrop-blur-sm">
+            <!-- Animated background effect -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-racing-green/5 to-transparent animate-shimmer"></div>
+
+            <div class="relative p-6 md:p-8">
+              <!-- Header -->
+              <div class="flex items-center justify-center gap-3 mb-4">
+                <div class="w-10 h-10 bg-racing-green rounded-full flex items-center justify-center animate-pulse">
+                  <svg class="w-6 h-6 text-racing-black" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm9-8.586 6 6V15l.001 5H6v-9.586l6-6z"/>
+                    <path d="M12 18c3.703 0 4.901-3.539 4.001-6h-1.752c-.741 2.188-1.979 4.002-2.249 4.002s-1.508-1.814-2.249-4.002H7.999c-.9 2.461.298 6 4.001 6z"/>
+                  </svg>
+                </div>
+                <span class="text-racing-green uppercase tracking-[0.2em] text-xs md:text-sm font-bold">Próximo Desafío</span>
+                <div class="w-10 h-10 bg-racing-green rounded-full flex items-center justify-center animate-pulse">
+                  <svg class="w-6 h-6 text-racing-black" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M3 13h1v7c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-7h1a1 1 0 0 0 .707-1.707l-9-9a.999.999 0 0 0-1.414 0l-9 9A1 1 0 0 0 3 13zm9-8.586 6 6V15l.001 5H6v-9.586l6-6z"/>
+                    <path d="M12 18c3.703 0 4.901-3.539 4.001-6h-1.752c-.741 2.188-1.979 4.002-2.249 4.002s-1.508-1.814-2.249-4.002H7.999c-.9 2.461.298 6 4.001 6z"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Event Name -->
+              <div class="text-center mb-6">
+                <a href="/eventos" class="group inline-block">
+                  <h3 class="text-2xl md:text-4xl font-bold text-vanilla mb-2 group-hover:text-racing-green transition-colors" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+                    Desafío Bronce 8 Horas
+                  </h3>
+                  <div class="h-1 bg-racing-green w-0 group-hover:w-full transition-all duration-300 mx-auto"></div>
+                </a>
+              </div>
+
+              <!-- Event Details -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto">
+                <!-- Date -->
+                <div class="flex items-center justify-center gap-3 bg-racing-black/40 rounded-xl p-4 backdrop-blur-sm border border-racing-green/20">
+                  <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center shrink-0">
+                    <svg class="w-6 h-6 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <p class="text-racing-silver text-xs uppercase tracking-wider mb-1">Cuando</p>
+                    <p class="text-white text-lg md:text-xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">10 Octubre 2026</p>
+                  </div>
+                </div>
+
+                <!-- Location -->
+                <div class="flex items-center justify-center gap-3 bg-racing-black/40 rounded-xl p-4 backdrop-blur-sm border border-racing-green/20">
+                  <div class="w-12 h-12 bg-racing-green/20 rounded-lg flex items-center justify-center shrink-0">
+                    <svg class="w-6 h-6 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                  </div>
+                  <div class="text-left">
+                    <p class="text-racing-silver text-xs uppercase tracking-wider mb-1">Donde</p>
+                    <a href="https://www.circuitodr7.es/" target="_blank" rel="noopener noreferrer" class="text-white text-lg md:text-xl font-bold hover:text-racing-green transition-colors flex items-center gap-1 group" style="font-family: 'Bebas Neue', sans-serif;">
+                      Circuito DR7
+                      <svg class="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
+                    </a>
+                    <p class="text-racing-silver text-xs">Tarancón, Cuenca</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Call to action hint -->
+              <div class="mt-6 text-center">
+                <p class="text-racing-silver text-sm">
+                  ¿Listo para el desafío?
+                  <span class="text-racing-green">↓</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -153,6 +229,19 @@ const content = await getContent('es', 'home');
       50% {
         transform: translateY(-10px);
       }
+    }
+
+    @keyframes shimmer {
+      0% {
+        transform: translateX(-100%);
+      }
+      100% {
+        transform: translateX(100%);
+      }
+    }
+
+    .animate-shimmer {
+      animation: shimmer 3s ease-in-out infinite;
     }
 
     @media (max-width: 768px) {

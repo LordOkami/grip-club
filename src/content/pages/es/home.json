@@ -16,9 +16,9 @@
     "ctaSecondaryLink": "#concepto",
     "backgroundImage": "/images/header-2024.jpg",
     "stats": [
-      { "label": "Resistencia", "value": "Por equipos" },
-      { "label": "125cc", "value": "De serie" },
-      { "label": "Amateur", "value": "Pilotos" }
+      { "top": "Resistencia", "topSize": "large", "bottom": "Por equipos", "bottomSize": "small" },
+      { "top": "Motos", "topSize": "small", "middle": "125cc", "middleSize": "large", "bottom": "De serie", "bottomSize": "small" },
+      { "top": "Pilotos", "topSize": "small", "bottom": "Amateur", "bottomSize": "large" }
     ]
   },
   "concepto": {

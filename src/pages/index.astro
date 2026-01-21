@@ -82,10 +82,17 @@ const content = await getContent('es', 'home');
 
       <!-- Stats -->
       <div class="grid grid-cols-3 gap-4 md:gap-8 mt-8 max-w-2xl mx-auto">
-        {content.hero.stats.map((stat: { value: string; label: string }) => (
-          <div class="text-center">
-            <div class="text-racing-silver text-sm uppercase tracking-wider">{stat.label}</div>
-            <div class="text-4xl md:text-5xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">{stat.value}</div>
+        {content.hero.stats.map((stat: { top?: string; topSize?: string; middle?: string; middleSize?: string; bottom?: string; bottomSize?: string }) => (
+          <div class="text-center flex flex-col justify-center items-center gap-1">
+            {stat.top && (
+              <div class={`text-vanilla uppercase tracking-wider ${stat.topSize === 'large' ? 'text-4xl md:text-5xl font-bold' : 'text-sm text-racing-silver'}`} style={stat.topSize === 'large' ? "font-family: 'Bebas Neue', sans-serif;" : ""}>{stat.top}</div>
+            )}
+            {stat.middle && (
+              <div class={`text-vanilla uppercase tracking-wider ${stat.middleSize === 'large' ? 'text-4xl md:text-5xl font-bold' : 'text-sm text-racing-silver'}`} style={stat.middleSize === 'large' ? "font-family: 'Bebas Neue', sans-serif;" : ""}>{stat.middle}</div>
+            )}
+            {stat.bottom && (
+              <div class={`text-vanilla uppercase tracking-wider ${stat.bottomSize === 'large' ? 'text-4xl md:text-5xl font-bold' : 'text-sm text-racing-silver'}`} style={stat.bottomSize === 'large' ? "font-family: 'Bebas Neue', sans-serif;" : ""}>{stat.bottom}</div>
+            )}
           </div>
         ))}
       </div>

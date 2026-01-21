@@ -85,9 +85,9 @@
   "cta": {
     "title": "Listo para el",
     "titleAccent": "desafio",
-    "subtitle": "Unete a la comunidad de pilotos que estan escribiendo la historia del endurance 125cc en Espana. Las inscripciones estan abiertas.",
-    "button": "Inscribete ahora",
-    "buttonLink": "/inscripciones#registro",
+    "subtitle": "Unete a la comunidad de equipos y pilotos que ya estan disfrutando de las resistencias mas epicas de la mano de GRIP Club.",
+    "button": "Ver proximos eventos",
+    "buttonLink": "/eventos",
     "buttonSecondary": "Ver reglamento tecnico",
     "buttonSecondaryLink": "/motos",
     "backgroundImage": "/images/track-DR7-1.jpg"

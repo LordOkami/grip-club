@@ -30,14 +30,14 @@ const content = await getContent('es', 'home');
       </div>
 
       <!-- 3D Category Carousel -->
-      <div class="category-carousel-container relative mx-auto w-full max-w-5xl mb-8 overflow-visible" style="perspective: 2000px; height: 300px;">
+      <div class="category-carousel-container relative mx-auto w-full max-w-6xl mb-8 overflow-visible" style="perspective: 2000px; height: 350px;">
         <div class="category-carousel-track relative w-full h-full flex items-center justify-center" style="transform-style: preserve-3d;">
           <!-- Acero (Left 2) -->
           <div class="category-item absolute transition-all duration-700 ease-out cursor-pointer" data-position="0" data-category="acero">
             <img
               src="https://github.com/user-attachments/assets/8702ec3e-e3a3-4fb2-b06a-fe1af3b3e449"
               alt="Desafío Acero - 4 Horas"
-              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
+              class="category-logo object-contain filter drop-shadow-2xl"
             />
           </div>
           <!-- Plata (Left 1) -->
@@ -45,7 +45,7 @@ const content = await getContent('es', 'home');
             <img
               src="https://github.com/user-attachments/assets/9bd60513-b432-4ee9-a837-34c7eb7814c9"
               alt="Desafío Plata - 12 Horas"
-              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
+              class="category-logo object-contain filter drop-shadow-2xl"
             />
           </div>
           <!-- Oro (Center) -->
@@ -53,7 +53,7 @@ const content = await getContent('es', 'home');
             <img
               src="https://github.com/user-attachments/assets/6424b072-ed74-4a39-a9ea-d96d0248ce3e"
               alt="Desafío Oro - 24 Horas"
-              class="h-52 md:h-64 object-contain filter drop-shadow-2xl"
+              class="category-logo object-contain filter drop-shadow-2xl"
             />
           </div>
           <!-- Bronce (Right 1) -->
@@ -61,7 +61,7 @@ const content = await getContent('es', 'home');
             <img
               src="https://github.com/user-attachments/assets/1fe86808-d60d-43a2-9940-9968a150b5bb"
               alt="Desafío Bronce - 8 Horas"
-              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
+              class="category-logo object-contain filter drop-shadow-2xl"
             />
           </div>
           <!-- Platino (Right 2) -->
@@ -69,7 +69,7 @@ const content = await getContent('es', 'home');
             <img
               src="https://github.com/user-attachments/assets/7dd519e3-69ac-4e64-af3f-c6c98299d2c4"
               alt="Desafío Platino - 27 Horas"
-              class="h-40 md:h-48 object-contain filter drop-shadow-2xl"
+              class="category-logo object-contain filter drop-shadow-2xl"
             />
           </div>
         </div>
@@ -174,18 +174,25 @@ const content = await getContent('es', 'home');
       will-change: transform, opacity;
     }
 
+    .category-logo {
+      max-width: 280px;
+      width: auto;
+      height: auto;
+      max-height: 280px;
+    }
+
     .category-item img {
       transition: all 0.3s ease;
       filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
     }
 
     .category-item:hover img {
-      filter: drop-shadow(0 15px 40px rgba(255, 255, 255, 0.3)) brightness(1.15);
+      filter: drop-shadow(0 15px 40px rgba(0, 0, 0, 0.6));
       transform: translateY(-5px);
     }
 
     .category-item.active img {
-      filter: drop-shadow(0 20px 50px rgba(255, 255, 255, 0.4)) brightness(1.2);
+      filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.7));
     }
 
     /* 3D Carousel Positions */
@@ -222,7 +229,12 @@ const content = await getContent('es', 'home');
     /* Mobile responsive */
     @media (max-width: 768px) {
       .category-carousel-container {
-        height: 250px !important;
+        height: 280px !important;
+      }
+
+      .category-logo {
+        max-width: 220px;
+        max-height: 220px;
       }
 
       .category-item[data-position="0"],

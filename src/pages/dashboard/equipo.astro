@@ -189,9 +189,10 @@ const translatePath = useTranslatedPath(lang);
               id="representativeDni"
               name="representativeDni"
               required
-              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
+              class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors uppercase"
               placeholder="12345678A"
             />
+            <p id="representativeDni-error" class="hidden mt-1 text-xs text-red-400">DNI/NIE inválido. Formato: 12345678A o X1234567A</p>
           </div>
 
           <div>
@@ -208,6 +209,7 @@ const translatePath = useTranslatedPath(lang);
               class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white placeholder-racing-silver/50 focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors"
               placeholder="+34 600 000 000"
             />
+            <p id="representativePhone-error" class="hidden mt-1 text-xs text-red-400">Teléfono inválido. Introduce 9 dígitos o formato +34 XXX XXX XXX</p>
           </div>
         </div>
 
@@ -507,6 +509,101 @@ const translatePath = useTranslatedPath(lang);
       rejected: { bg: 'bg-red-500/20', text: 'text-red-400', label: 'Rechazada' },
     };
 
+    // DNI/NIE validation
+    function validateDni(dni: string): boolean {
+      if (!dni) return false;
+      dni = dni.toUpperCase().replace(/\s/g, '');
+
+      // DNI format: 8 digits + letter
+      const dniRegex = /^[0-9]{8}[A-Z]$/;
+      // NIE format: X/Y/Z + 7 digits + letter
+      const nieRegex = /^[XYZ][0-9]{7}[A-Z]$/;
+
+      if (!dniRegex.test(dni) && !nieRegex.test(dni)) return false;
+
+      // Calculate check letter
+      const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      let num: number;
+
+      if (nieRegex.test(dni)) {
+        // Convert NIE first letter to number
+        const niePrefix: Record<string, string> = { 'X': '0', 'Y': '1', 'Z': '2' };
+        num = parseInt(niePrefix[dni[0]] + dni.substring(1, 8));
+      } else {
+        num = parseInt(dni.substring(0, 8));
+      }
+
+      const expectedLetter = letters[num % 23];
+      return dni.charAt(dni.length - 1) === expectedLetter;
+    }
+
+    // Phone validation (Spanish format)
+    function validatePhone(phone: string): boolean {
+      if (!phone) return false;
+      // Remove spaces, dashes, and parentheses
+      const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+
+      // Accept: 9 digits, +34 + 9 digits, 0034 + 9 digits
+      const phoneRegex = /^(\+34|0034)?[6789][0-9]{8}$/;
+      return phoneRegex.test(cleaned);
+    }
+
+    // Show/hide field error
+    function showFieldError(fieldId: string, show: boolean) {
+      const input = document.getElementById(fieldId) as HTMLInputElement;
+      const error = document.getElementById(`${fieldId}-error`);
+
+      if (input) {
+        if (show) {
+          input.classList.add('border-red-500');
+          input.classList.remove('border-racing-silver/20');
+        } else {
+          input.classList.remove('border-red-500');
+          input.classList.add('border-racing-silver/20');
+        }
+      }
+
+      if (error) {
+        if (show) {
+          error.classList.remove('hidden');
+        } else {
+          error.classList.add('hidden');
+        }
+      }
+    }
+
+    // Setup field validation
+    const dniInput = document.getElementById('representativeDni') as HTMLInputElement;
+    const phoneInput = document.getElementById('representativePhone') as HTMLInputElement;
+
+    dniInput?.addEventListener('blur', () => {
+      if (dniInput.value) {
+        showFieldError('representativeDni', !validateDni(dniInput.value));
+      }
+    });
+
+    dniInput?.addEventListener('input', () => {
+      // Auto uppercase
+      dniInput.value = dniInput.value.toUpperCase();
+      // Clear error while typing
+      if (dniInput.value) {
+        showFieldError('representativeDni', false);
+      }
+    });
+
+    phoneInput?.addEventListener('blur', () => {
+      if (phoneInput.value) {
+        showFieldError('representativePhone', !validatePhone(phoneInput.value));
+      }
+    });
+
+    phoneInput?.addEventListener('input', () => {
+      // Clear error while typing
+      if (phoneInput.value) {
+        showFieldError('representativePhone', false);
+      }
+    });
+
     function showPhotoStatus(status: string | undefined) {
       if (!photoStatusBadge || !status) {
         photoStatusBadge?.classList.add('hidden');
@@ -602,6 +699,29 @@ const translatePath = useTranslatedPath(lang);
 
       successMessage?.classList.add("hidden");
       errorMessage?.classList.add("hidden");
+
+      // Validate DNI and phone
+      const dniValue = dniInput?.value || '';
+      const phoneValue = phoneInput?.value || '';
+      let hasErrors = false;
+
+      if (!validateDni(dniValue)) {
+        showFieldError('representativeDni', true);
+        hasErrors = true;
+      }
+
+      if (!validatePhone(phoneValue)) {
+        showFieldError('representativePhone', true);
+        hasErrors = true;
+      }
+
+      if (hasErrors) {
+        if (errorMessage) {
+          errorMessage.textContent = 'Por favor, corrige los errores en el formulario';
+          errorMessage.classList.remove('hidden');
+        }
+        return;
+      }
 
       if (submitBtn) {
         submitBtn.setAttribute("disabled", "true");

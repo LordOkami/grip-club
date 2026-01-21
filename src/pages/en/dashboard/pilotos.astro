@@ -101,7 +101,8 @@ const translatePath = useTranslatedPath(lang);
             <div>
               <label for="dni" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotDni')} *</label>
               <input type="text" id="dni" name="dni" required placeholder="12345678A"
-                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors uppercase">
+              <p id="dni-error" class="hidden mt-1 text-xs text-red-400">Invalid DNI/NIE. Format: 12345678A or X1234567A</p>
             </div>
 
             <div class="grid grid-cols-2 gap-4">
@@ -109,6 +110,7 @@ const translatePath = useTranslatedPath(lang);
                 <label for="phone" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotPhone')} *</label>
                 <input type="tel" id="phone" name="phone" required placeholder="+34 600 000 000"
                   class="w-full px-4 py-3 bg-racing-black border border-racing-silver/20 rounded-lg text-white focus:border-racing-green focus:ring-1 focus:ring-racing-green outline-none transition-colors">
+                <p id="phone-error" class="hidden mt-1 text-xs text-red-400">Invalid phone number</p>
               </div>
               <div>
                 <label for="email" class="block text-sm font-medium text-racing-silver mb-2">{t('form.pilotEmail')} *</label>
@@ -271,6 +273,51 @@ const translatePath = useTranslatedPath(lang);
 
     let maxPilots = 8;
     let currentPilots: any[] = [];
+
+    // DNI/NIE validation
+    function validateDni(dni: string): boolean {
+      if (!dni) return false;
+      dni = dni.toUpperCase().replace(/\s/g, '');
+      const dniRegex = /^[0-9]{8}[A-Z]$/;
+      const nieRegex = /^[XYZ][0-9]{7}[A-Z]$/;
+      if (!dniRegex.test(dni) && !nieRegex.test(dni)) return false;
+      const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      let num: number;
+      if (nieRegex.test(dni)) {
+        const niePrefix: Record<string, string> = { 'X': '0', 'Y': '1', 'Z': '2' };
+        num = parseInt(niePrefix[dni[0]] + dni.substring(1, 8));
+      } else {
+        num = parseInt(dni.substring(0, 8));
+      }
+      const expectedLetter = letters[num % 23];
+      return dni.charAt(dni.length - 1) === expectedLetter;
+    }
+
+    // Phone validation (Spanish format)
+    function validatePhone(phone: string): boolean {
+      if (!phone) return false;
+      const cleaned = phone.replace(/[\s\-\(\)]/g, '');
+      const phoneRegex = /^(\+34|0034)?[6789][0-9]{8}$/;
+      return phoneRegex.test(cleaned);
+    }
+
+    // Show/hide field error
+    function showFieldError(fieldId: string, show: boolean) {
+      const field = document.getElementById(fieldId) as HTMLInputElement;
+      const error = document.getElementById(`${fieldId}-error`);
+      if (field) {
+        if (show) {
+          field.classList.add('border-red-500');
+          field.classList.remove('border-racing-silver/20');
+        } else {
+          field.classList.remove('border-red-500');
+          field.classList.add('border-racing-silver/20');
+        }
+      }
+      if (error) {
+        error.classList.toggle('hidden', !show);
+      }
+    }
 
     const experienceLevels: Record<string, string> = {
       principiante: lang === 'en' ? 'Beginner (L)' : 'Principiante (L)',
@@ -461,6 +508,20 @@ const translatePath = useTranslatedPath(lang);
     cancelModalBtn?.addEventListener('click', closeModal);
     modalBackdrop?.addEventListener('click', closeModal);
 
+    // DNI and phone validation on blur
+    const dniInput = document.getElementById('dni') as HTMLInputElement;
+    const phoneInput = document.getElementById('phone') as HTMLInputElement;
+
+    dniInput?.addEventListener('blur', () => {
+      const isValid = validateDni(dniInput.value);
+      showFieldError('dni', !isValid && dniInput.value.length > 0);
+    });
+
+    phoneInput?.addEventListener('blur', () => {
+      const isValid = validatePhone(phoneInput.value);
+      showFieldError('phone', !isValid && phoneInput.value.length > 0);
+    });
+
     pilotForm?.addEventListener('submit', async (e) => {
       e.preventDefault();
       modalError?.classList.add('hidden');
@@ -481,6 +542,25 @@ const translatePath = useTranslatedPath(lang);
       // Handle checkbox separately (unchecked checkboxes don't appear in FormData)
       const captainCheckbox = document.getElementById('isCaptain') as HTMLInputElement;
       data.isCaptain = captainCheckbox?.checked || false;
+
+      // Validate DNI and phone before submitting
+      const dniValid = validateDni(data.dni || '');
+      const phoneValid = validatePhone(data.phone || '');
+
+      showFieldError('dni', !dniValid);
+      showFieldError('phone', !phoneValid);
+
+      if (!dniValid || !phoneValid) {
+        if (submitBtn) {
+          submitBtn.removeAttribute('disabled');
+          submitBtn.textContent = lang === 'en' ? 'Save' : 'Guardar';
+        }
+        if (modalError) {
+          modalError.textContent = 'Please correct the highlighted fields';
+          modalError.classList.remove('hidden');
+        }
+        return;
+      }
 
       try {
         const result = await savePilot(data);

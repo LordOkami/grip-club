@@ -1,0 +1,337 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Bikes" currentPage="motos">
+  <!-- Hero Section -->
+  <section class="relative py-24 md:py-32 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-racing"></div>
+    <div class="absolute inset-0 opacity-5">
+      <div
+        class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"
+      >
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-3xl">
+        <span
+          class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block"
+          >Categories</span
+        >
+        <h1 class="section-title mb-6">
+          The <span class="text-vanilla">bikes</span>
+        </h1>
+        <p class="section-subtitle">
+          Approved motorcycles from 115-125cc 4-stroke or maximum 50cc 2-stroke for the 8 Hours Endurance.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Motos Permitidas Section -->
+  <section class="py-20 bg-racing-black">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="text-center mb-16">
+        <span
+          class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block"
+          >Categories</span
+        >
+        <h2 class="section-title">
+          Approved <span class="text-vanilla">motorcycles</span>
+        </h2>
+        <p class="text-racing-silver max-w-2xl mx-auto mt-4">
+          We accept motorcycles from 115-125cc 4-stroke or maximum 50cc 2-stroke. Here
+          are some examples of the main category.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Is your bike not listed? Card - First option -->
+        <div
+          class="card group border-dashed border-racing-silver/30 flex flex-col items-center justify-center text-center"
+        >
+          <div
+            class="w-16 h-16 bg-racing-silver/10 rounded-full flex items-center justify-center mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-racing-silver"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">Is your bike not listed?</h3>
+          <p class="text-racing-silver text-sm">
+            Contact us to verify if your stock 125cc is approved for competition.
+          </p>
+        </div>
+
+        <!-- Yamaha YZF-R125 / MT-125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Yamaha-YZF-R125-MT-125.png" alt="Yamaha YZF-R125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Yamaha YZF-R125 / MT-125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most well-rounded and efficient, the reference for going fast with ease.</p>
+          <p class="text-vanilla text-xs font-semibold">2008–present</p>
+        </div>
+
+        <!-- KTM RC 125 / 125 Duke -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/KTM-RC-125-Duke.png" alt="KTM RC 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">KTM RC 125 / 125 Duke</h3>
+          <p class="text-racing-silver text-sm mb-4">The most composed, with excellent braking and rigidity.</p>
+          <p class="text-vanilla text-xs font-semibold">2010–present</p>
+        </div>
+
+        <!-- Kawasaki Ninja 125 / Z125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Kawasaki-Ninja-125-Z125.png" alt="Kawasaki Ninja 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Kawasaki Ninja 125 / Z125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most stable and predictable, gives confidence for consistent fast laps.</p>
+          <p class="text-vanilla text-xs font-semibold">2018–present</p>
+        </div>
+
+        <!-- Suzuki GSX-R125 / GSX-S125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Suzuki-GSX-R125-GSX-S125.png" alt="Suzuki GSX-R125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Suzuki GSX-R125 / GSX-S125</h3>
+          <p class="text-racing-silver text-sm mb-4">The lightest and most agile, unbeatable in direction changes.</p>
+          <p class="text-vanilla text-xs font-semibold">2017–present</p>
+        </div>
+
+        <!-- Honda CBR125R / CB125R -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Honda-CBR125R-CB125R.png" alt="Honda CBR125R" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Honda CBR125R / CB125R</h3>
+          <p class="text-racing-silver text-sm mb-4">The most premium and refined, with quality feel and complete chassis.</p>
+          <p class="text-vanilla text-xs font-semibold">2004–present</p>
+        </div>
+
+        <!-- Aprilia RS4 125 / Tuono 125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Aprilia-RS4-125-Tuono-125.png" alt="Aprilia RS4 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Aprilia RS4 125 / Tuono 125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most racing in feel, with a more "direct" and sporty ride than average.</p>
+          <p class="text-vanilla text-xs font-semibold">2011–present</p>
+        </div>
+
+        <!-- Derbi GPR 125 4T -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Derbi-GPR-125-4T.png" alt="Derbi GPR 125 4T" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Derbi GPR 125 4T</h3>
+          <p class="text-racing-silver text-sm mb-4">The most "R school" style, by posture and reactions.</p>
+          <p class="text-vanilla text-xs font-semibold">2009–2014</p>
+        </div>
+
+        <!-- Rieju RS3 125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Rieju-RS3-125.png" alt="Rieju RS3 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Rieju RS3 125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most simple and direct, with behavior easy to read and push to the limit.</p>
+          <p class="text-vanilla text-xs font-semibold">2012–2016</p>
+        </div>
+
+        <!-- Malaguti RST 125 / Drakon 125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Malaguti-RST-125-Drakon-125.png" alt="Malaguti RST 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Malaguti RST 125 / Drakon 125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most compact, ideal for small and tight circuits.</p>
+          <p class="text-vanilla text-xs font-semibold">2019–present</p>
+        </div>
+
+        <!-- Voge 125R -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Voge-125R.png" alt="Voge 125R" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Voge 125R</h3>
+          <p class="text-racing-silver text-sm mb-4">The most composed of the new generation, transmits security and stability on lean.</p>
+          <p class="text-vanilla text-xs font-semibold">2023–present</p>
+        </div>
+
+        <!-- QJ Motor SRK 125R -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/QJ-Motor-SRK-125R.png" alt="QJ Motor SRK 125R" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">QJ Motor SRK 125R</h3>
+          <p class="text-racing-silver text-sm mb-4">The most nervous in steering, quick to turn and reactive in direction changes.</p>
+          <p class="text-vanilla text-xs font-semibold">2024–present</p>
+        </div>
+
+        <!-- Zontes U125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Zontes-U125.png" alt="Zontes U125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Zontes U125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most friendly and progressive, easy to ride fast without scares.</p>
+          <p class="text-vanilla text-xs font-semibold">2021–present</p>
+        </div>
+
+        <!-- Keeway RKF 125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Keeway-RKF-125.png" alt="Keeway RKF 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Keeway RKF 125</h3>
+          <p class="text-racing-silver text-sm mb-4">The easiest and most docile, great for building rhythm and technique.</p>
+          <p class="text-vanilla text-xs font-semibold">2018–present</p>
+        </div>
+
+        <!-- MITT GP2 125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/MITT-GP2-125.png" alt="MITT GP2 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">MITT GP2 125</h3>
+          <p class="text-racing-silver text-sm mb-4">The only one with dual front disc. Sport feel with "R" sensations when leaning.</p>
+          <p class="text-vanilla text-xs font-semibold">2023–present</p>
+        </div>
+
+        <!-- MBP / Morbidelli F125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/MBP-Morbidelli-F125.png" alt="MBP Morbidelli F125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">MBP / Morbidelli F125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most neutral, stable and easy to find rhythm and repeat laps.</p>
+          <p class="text-vanilla text-xs font-semibold">2025–present</p>
+        </div>
+
+        <!-- Daelim Roadwin 125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Daelim-Roadwin-125.png" alt="Daelim Roadwin 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Daelim Roadwin 125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most classic and noble, with smooth and predictable reactions.</p>
+          <p class="text-vanilla text-xs font-semibold">2004–present</p>
+        </div>
+
+        <!-- Kymco Quannon 125 / Quannon Naked -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Kymco-Quannon-125.png" alt="Kymco Quannon 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Kymco Quannon 125 / Naked</h3>
+          <p class="text-racing-silver text-sm mb-4">The most calm and stable. Soft, to go around without struggle.</p>
+          <p class="text-vanilla text-xs font-semibold">2007–2012</p>
+        </div>
+
+        <!-- CFMOTO 125NK -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/CFMOTO-125NK.png" alt="CFMOTO 125NK" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">CFMOTO 125NK</h3>
+          <p class="text-racing-silver text-sm mb-4">The firmest chassis among the new ones, with good composure feel.</p>
+          <p class="text-vanilla text-xs font-semibold">2025–present</p>
+        </div>
+
+        <!-- Bajaj Pulsar NS125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Bajaj-Pulsar-NS125.png" alt="Bajaj Pulsar NS125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Bajaj Pulsar NS125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most robust and consistent, handles use well and maintains pace without complications.</p>
+          <p class="text-vanilla text-xs font-semibold">2021–present</p>
+        </div>
+
+        <!-- SYM Wolf 125i -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/SYM-Wolf-125i.png" alt="SYM Wolf 125i" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">SYM Wolf 125i</h3>
+          <p class="text-racing-silver text-sm mb-4">The lightest and simplest, perfect for tracing lines and finding corner speed.</p>
+          <p class="text-vanilla text-xs font-semibold">2019–present</p>
+        </div>
+
+        <!-- FB Mondial Piega 125 -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/FB-Mondial-Piega-125.png" alt="FB Mondial Piega 125" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">FB Mondial Piega 125</h3>
+          <p class="text-racing-silver text-sm mb-4">The most sporty in feel, with a more "tight" and precise ride than many alternatives.</p>
+          <p class="text-vanilla text-xs font-semibold">2022–present</p>
+        </div>
+
+        <!-- Hyosung GT125R / GT125 Comet -->
+        <div class="card group relative overflow-hidden">
+          <div class="absolute top-4 right-4 bg-racing-green text-white text-xs font-bold px-3 py-1 rounded-full">125cc</div>
+          <div class="aspect-video bg-racing-black rounded-xl mb-6 flex items-center justify-center border border-racing-silver/10 overflow-hidden">
+            <img src="/motos/Hyosung-GT125R-Comet.png" alt="Hyosung GT125R" class="w-full h-full object-contain" />
+          </div>
+          <h3 class="text-xl font-bold text-white mb-2">Hyosung GT125R / Comet</h3>
+          <p class="text-racing-silver text-sm mb-4">The most different, being twin-cylinder with big bike presence.</p>
+          <p class="text-vanilla text-xs font-semibold">2001–2016</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-20 bg-racing-gray">
+    <div class="container mx-auto px-4 md:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="section-title mb-6">
+          Got your <span class="text-vanilla">125cc</span> ready?
+        </h2>
+        <p class="section-subtitle mx-auto mb-8">
+          If your bike meets the specifications, check the complete technical regulations to know the allowed modifications.
+        </p>
+        <a href="/en/reglamento" class="btn-primary">
+          View Technical Regulations
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

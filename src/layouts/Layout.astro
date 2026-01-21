@@ -94,6 +94,11 @@ const altPath =
               >{t("nav.eventos")}</a
             >
             <a
+              href={translatePath("/motos")}
+              class={`nav-link ${currentPage === "motos" ? "active" : ""}`}
+              >{t("nav.motos")}</a
+            >
+            <a
               href={translatePath("/inscripciones")}
               class={`nav-link ${currentPage === "inscripciones" ? "active" : ""}`}
               >{t("nav.inscripciones")}</a
@@ -182,6 +187,11 @@ const altPath =
               >{t("nav.eventos")}</a
             >
             <a
+              href={translatePath("/motos")}
+              class={`nav-link ${currentPage === "motos" ? "active" : ""}`}
+              >{t("nav.motos")}</a
+            >
+            <a
               href={translatePath("/inscripciones")}
               class={`nav-link ${currentPage === "inscripciones" ? "active" : ""}`}
               >{t("nav.inscripciones")}</a
@@ -263,6 +273,13 @@ const altPath =
                   href={translatePath("/eventos")}
                   class="text-racing-silver hover:text-vanilla transition-colors"
                   >{t("nav.eventos")}</a
+                >
+              </li>
+              <li>
+                <a
+                  href={translatePath("/motos")}
+                  class="text-racing-silver hover:text-vanilla transition-colors"
+                  >{t("nav.motos")}</a
                 >
               </li>
               <li>

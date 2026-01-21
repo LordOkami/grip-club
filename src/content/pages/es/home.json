@@ -16,9 +16,9 @@
     "ctaSecondaryLink": "#concepto",
     "backgroundImage": "/images/header-2024.jpg",
     "stats": [
-      { "label": "Por equipos", "value": "Resistencia" },
-      { "label": "Motos de serie", "value": "125cc" },
-      { "label": "Pilotos", "value": "Amateur" }
+      { "label": "Resistencia", "value": "Por equipos" },
+      { "label": "125cc", "value": "De serie" },
+      { "label": "Amateur", "value": "Pilotos" }
     ]
   },
   "concepto": {

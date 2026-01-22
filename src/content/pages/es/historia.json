@@ -19,9 +19,50 @@
     "La filosofía es simple pero poderosa: <strong>nivelar el campo de juego</strong>. Con motos 125cc de serie idénticas, la victoria no depende del presupuesto más grande, sino de la estrategia, la consistencia y la pasión del equipo.",
     "Es el formato perfecto para equipos amateur, pilotos que dan sus primeros pasos en competición, y veteranos que buscan <strong>la esencia pura del motorsport</strong>."
   ],
-  "conceptoTagline": "El Concepto",
-  "conceptoTitle": "¿Por qué",
-  "conceptoTitleAccent": "125cc de serie",
+  "conceptoTagline": "Los tres pilares",
+  "conceptoTitle": "Qué hace único a",
+  "conceptoTitleAccent": "GRIP Club",
+  "threePillars": [
+    {
+      "id": "motos",
+      "icon": "motorcycle",
+      "headline": "MOTOS 125cc DE SERIE",
+      "subheadline": "Igualdad mecánica. Bajo coste. Accesibilidad.",
+      "description": "Competir con el mismo motor significa que gana quien mejor pilota, gestiona y trabaja en equipo. Sin presupuestos infinitos, sin ventajas injustas. El piloto importa más que la moto.",
+      "bullets": [
+        "Igualdad mecánica absoluta: todas las motos compiten en las mismas condiciones",
+        "Bajo coste: motos asequibles de €2,000-€4,000, mantenimiento €50-100 por evento",
+        "Accesibilidad: 18+ modelos homologados disponibles, nuevos o de segunda mano",
+        "Motor sellado: sin modificaciones internas, gana la habilidad no el presupuesto"
+      ]
+    },
+    {
+      "id": "resistencia",
+      "icon": "stopwatch",
+      "headline": "RESISTENCIA",
+      "subheadline": "Equipos. Estrategia. Relevos. Boxes. Repostajes.",
+      "description": "No es una sprint. Es gestionar neumáticos, combustible, pilotos, nervios y decisiones bajo presión durante horas. Aguantar. Vivir la carrera. Aquí gana el mejor equipo, no el piloto más rápido.",
+      "bullets": [
+        "4-8 pilotos por equipo trabajando como uno solo",
+        "Paradas estratégicas en boxes: repostaje, cambios de piloto, ajustes",
+        "Gestión de neumáticos, consumibles y tiempos de stint",
+        "Coordinación, relevos y trabajo en equipo: la clave del éxito"
+      ]
+    },
+    {
+      "id": "amateur",
+      "icon": "users",
+      "headline": "AMATEUR",
+      "subheadline": "Cultura de paddock. Club. Comunidad. Pilotos reales.",
+      "description": "Motociclismo en su estado puro. Sin egos, sin presión profesional, con la camaradería del paddock y la emoción de competir en circuitos reales. Seguridad. Compañerismo. Accesible para todos.",
+      "bullets": [
+        "Sin licencia federativa requerida: solo pasión y ganas",
+        "Cultura de paddock: competición sana + camaradería entre equipos",
+        "Seguridad primero: equipamiento obligatorio CE, velocidades controladas",
+        "Acceso a circuitos profesionales: vive la experiencia como un pro"
+      ]
+    }
+  ],
   "conceptCards": [
     { "title": "Accesible económicamente", "description": "Sin necesidad de grandes presupuestos. Motos asequibles, costes de mantenimiento reducidos y competición al alcance de todos.", "icon": "money" },
     { "title": "Competición pura", "description": "Con máquinas igualadas, gana quien mejor estrategia tiene. La habilidad del piloto y el trabajo en equipo marcan la diferencia.", "icon": "lightning" },

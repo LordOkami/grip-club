@@ -1,19 +1,22 @@
 {
   "meta": {
-    "title": "8 Horas Endurance",
-    "description": "La prueba de resistencia mas emocionante de Espana. Motos 125cc de serie. 8 horas de pura adrenalina."
+    "title": "Desafío Bronce 8 Horas - GRIP Club",
+    "description": "La experiencia definitiva del motociclismo amateur. Eventos de resistencia en circuito por equipos con motos de 125cc de serie."
   },
   "hero": {
     "tagline": "Grip Club presenta",
     "preTitle": "DESAFIO BRONCE",
     "title": "8 HORAS",
-    "subtitle": "La experiencia definitiva del motorsport amateur. Eventos de Resistencia en circuito con motos de 125cc.",
-    "subtitleBold": "",
+    "subtitle": "La experiencia definitiva del motociclismo amateur.",
+    "subtitleBold": "Eventos de resistencia en circuito por equipos con motos de 125cc de serie.",
+    "highlightText": "Donde el equipo importa más que la moto",
     "nextEvent": "🏁 PRÓXIMO DESAFÍO: Desafío Bronce 8 Horas • 10 de Octubre 2026 • Circuito DR7, Tarancón",
-    "cta": "Quiero participar",
-    "ctaSecondary": "Descubre mas",
+    "cta": "Quiero correr",
+    "ctaSecondary": "Acceso a mi equipo",
+    "ctaTertiary": "Descubre el concepto",
     "ctaLink": "/inscripciones#registro",
-    "ctaSecondaryLink": "#concepto",
+    "ctaSecondaryLink": "/auth/login",
+    "ctaTertiaryLink": "#concepto",
     "backgroundImage": "/images/header-2024.jpg",
     "stats": [
       { "top": "Resistencia", "topSize": "large", "bottom": "Por equipos", "bottomSize": "small" },

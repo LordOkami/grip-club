@@ -73,7 +73,93 @@ import historiaData from '../content/pages/es/historia.json';
     </div>
   </section>
 
-  <!-- BLOQUE 2: Vision, Mision, Valores - Compact Design -->
+  <!-- BLOQUE 2: Los Tres Pilares - Core Concepts -->
+  {historiaData.threePillars && (
+    <section class="py-20 md:py-28 bg-racing-black relative overflow-hidden">
+      <div class="absolute inset-0 opacity-5">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+      </div>
+
+      <div class="container mx-auto px-4 md:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto">
+          <div class="text-center mb-16">
+            <span class="text-racing-green text-sm font-semibold uppercase tracking-widest mb-4 block">{historiaData.conceptoTagline}</span>
+            <h2 class="text-4xl md:text-5xl font-bold text-white mb-4">
+              {historiaData.conceptoTitle} <span class="text-vanilla">{historiaData.conceptoTitleAccent}</span>
+            </h2>
+            <p class="text-racing-silver text-lg max-w-3xl mx-auto">
+              Tres conceptos fundamentales que definen nuestra filosofía y hacen que GRIP Club sea diferente.
+            </p>
+          </div>
+
+          <div class="space-y-16 md:space-y-24">
+            {historiaData.threePillars.map((pillar, index) => (
+              <div class={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''}`}>
+                <div class={`${index % 2 === 1 ? 'lg:order-2' : ''}`}>
+                  <div class="inline-flex items-center gap-3 mb-6">
+                    <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center">
+                      {pillar.icon === 'motorcycle' && (
+                        <svg class="w-8 h-8 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                      )}
+                      {pillar.icon === 'stopwatch' && (
+                        <svg class="w-8 h-8 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                      )}
+                      {pillar.icon === 'users' && (
+                        <svg class="w-8 h-8 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                      )}
+                    </div>
+                    <div>
+                      <h3 class="text-2xl md:text-3xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+                        {pillar.headline}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <p class="text-racing-green font-semibold text-lg mb-4">{pillar.subheadline}</p>
+
+                  <p class="text-racing-silver text-lg leading-relaxed mb-6">
+                    {pillar.description}
+                  </p>
+
+                  <ul class="space-y-3 mb-8">
+                    {pillar.bullets.map((bullet) => (
+                      <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-racing-green flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                        </svg>
+                        <span class="text-white text-base">{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class={`${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                  <div class="relative rounded-2xl overflow-hidden border border-racing-silver/20 group">
+                    <img
+                      src={`https://placehold.co/800x600/1a1a1a/00ff88?text=${pillar.id}`}
+                      alt={pillar.headline}
+                      class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-racing-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- BLOQUE 3: Vision, Mision, Valores - Compact Design -->
   <section class="py-12 md:py-16 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
       <div class="max-w-7xl mx-auto">
@@ -81,8 +167,8 @@ import historiaData from '../content/pages/es/historia.json';
         <!-- Vision -->
         <div class="mb-10">
           <div class="text-center mb-6">
-            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">{historiaData.conceptoTagline}</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-white">{historiaData.conceptoTitle} <span class="text-vanilla">{historiaData.conceptoTitleAccent}</span></h2>
+            <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-2 block">Por qué 125cc</span>
+            <h2 class="text-3xl md:text-4xl font-bold text-white">Las ventajas del <span class="text-vanilla">formato</span></h2>
           </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {historiaData.conceptCards.map((card) => (
@@ -204,7 +290,7 @@ import historiaData from '../content/pages/es/historia.json';
     </div>
   </section>
 
-  <!-- BLOQUE 3: CTA - Se parte de nuestra historia -->
+  <!-- BLOQUE 4: CTA - Se parte de nuestra historia -->
   <section class="py-20 bg-racing-gray">
     <div class="container mx-auto px-4 md:px-8">
       <div class="max-w-3xl mx-auto text-center">

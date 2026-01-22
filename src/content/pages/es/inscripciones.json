@@ -59,6 +59,44 @@
       }
     ]
   },
+  "whatsIncluded": {
+    "tagline": "Todo incluido",
+    "title": "Qué incluye tu",
+    "titleAccent": "inscripción",
+    "subtitle": "Una experiencia completa por un precio justo. Sin letra pequeña. Sin sorpresas.",
+    "items": [
+      {
+        "icon": "track",
+        "title": "Acceso al circuito",
+        "description": "8 horas de circuito profesional reservado para tu equipo durante todo el evento"
+      },
+      {
+        "icon": "garage",
+        "title": "Box reservado",
+        "description": "Espacio privado en paddock para preparar tu moto, descansar y coordinar estrategia"
+      },
+      {
+        "icon": "stopwatch",
+        "title": "Cronometraje oficial",
+        "description": "Transponder profesional + timing en vivo + clasificación oficial al minuto"
+      },
+      {
+        "icon": "checklist",
+        "title": "Verificación técnica",
+        "description": "Inspección profesional de tu moto antes de carrera para garantizar seguridad"
+      },
+      {
+        "icon": "shield",
+        "title": "Seguro RC",
+        "description": "Cobertura de responsabilidad civil durante todo el evento para todos los pilotos"
+      },
+      {
+        "icon": "trophy",
+        "title": "Trofeos + podio",
+        "description": "Ceremonia de premiación oficial con trofeos y recuerdos del evento"
+      }
+    ]
+  },
   "pricing": {
     "tagline": "Tarifas",
     "title": "Precio de",
@@ -76,6 +114,24 @@
       "Trofeos para el podio"
     ],
     "cta": "Pre-inscribete gratis"
+  },
+  "leadMagnet": {
+    "title": "¿Aún no estás listo para inscribirte?",
+    "subtitle": "Descarga gratis nuestra Guía del Piloto Debutante",
+    "description": "PDF completo con todo lo que necesitas saber para tu primera carrera de resistencia: preparación de moto, equipamiento, qué llevar al circuito y consejos de pilotos veteranos.",
+    "cta": "Descargar guía gratuita",
+    "benefits": [
+      "Checklist completo de equipamiento obligatorio",
+      "Cómo preparar tu moto paso a paso",
+      "Qué llevar al circuito (y qué olvidar en casa)",
+      "Consejos de pilotos veteranos para tu primer desafío"
+    ],
+    "formFields": {
+      "email": { "label": "Email", "placeholder": "tu@email.com" },
+      "nombre": { "label": "Nombre", "placeholder": "Tu nombre" }
+    },
+    "submitText": "Recibir guía gratis",
+    "privacyNote": "Te enviaremos la guía por email. Sin spam, solo información útil sobre próximos eventos."
   },
   "registration": {
     "tagline": "Inscripcion",

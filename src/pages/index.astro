@@ -88,9 +88,15 @@ const content = await getContent('es', 'home');
       </div>
 
       <p class="text-lg md:text-xl text-racing-silver max-w-3xl mx-auto mb-6">
-        <span class="text-white font-bold text-xl md:text-2xl block mb-2">La experiencia definitiva del motorsport amateur.</span>
-        <span class="text-racing-silver">Eventos de Resistencia en circuito con motos de 125cc.</span>
+        <span class="text-white font-bold text-xl md:text-2xl block mb-2">{content.hero.subtitle}</span>
+        <span class="text-racing-silver">{content.hero.subtitleBold}</span>
       </p>
+
+      {content.hero.highlightText && (
+        <p class="text-base md:text-lg text-racing-green font-semibold max-w-2xl mx-auto mb-8 italic">
+          {content.hero.highlightText}
+        </p>
+      )}
 
       <!-- Stats -->
       <div class="grid grid-cols-3 gap-4 md:gap-8 mt-8 max-w-2xl mx-auto">
@@ -169,13 +175,27 @@ const content = await getContent('es', 'home');
       )}
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href={content.hero.ctaLink} class="btn-primary">
+        <a href={content.hero.ctaLink} class="btn-primary group">
+          <svg class="w-5 h-5 mr-2 inline-block group-hover:animate-pulse" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+          </svg>
           {content.hero.cta}
         </a>
-        <a href={content.hero.ctaSecondaryLink} class="btn-secondary">
+        <a href={content.hero.ctaSecondaryLink} class="btn-secondary group">
+          <svg class="w-5 h-5 mr-2 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
           {content.hero.ctaSecondary}
         </a>
       </div>
+
+      {content.hero.ctaTertiaryLink && content.hero.ctaTertiary && (
+        <div class="mt-4">
+          <a href={content.hero.ctaTertiaryLink} class="text-racing-silver hover:text-vanilla transition-colors text-sm underline">
+            {content.hero.ctaTertiary}
+          </a>
+        </div>
+      )}
     </div>
 
   </section>

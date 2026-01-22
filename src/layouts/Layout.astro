@@ -77,35 +77,35 @@ const altPath =
           </a>
 
           <!-- Desktop Navigation -->
-          <div class="hidden md:flex items-center gap-8">
+          <div class="hidden md:flex items-center gap-6">
             <a
-              href={translatePath("/historia")}
-              class={`nav-link ${currentPage === "historia" ? "active" : ""}`}
-              >{t("nav.historia")}</a
+              href={translatePath("/")}
+              class={`nav-link nav-link-secondary ${currentPage === "home" ? "active" : ""}`}
+              >Home</a
             >
             <a
               href={translatePath("/eventos")}
-              class={`nav-link ${currentPage === "eventos" ? "active" : ""}`}
+              class={`nav-link nav-link-secondary ${currentPage === "eventos" ? "active" : ""}`}
               >{t("nav.eventos")}</a
             >
             <a
               href={translatePath("/motos")}
-              class={`nav-link ${currentPage === "motos" ? "active" : ""}`}
+              class={`nav-link nav-link-secondary ${currentPage === "motos" ? "active" : ""}`}
               >{t("nav.motos")}</a
             >
             <a
-              href={translatePath("/inscripciones")}
-              class={`nav-link ${currentPage === "inscripciones" ? "active" : ""}`}
-              >{t("nav.inscripciones")}</a
-            >
-            <a
               href={translatePath("/reglamento")}
-              class={`nav-link ${currentPage === "reglamento" ? "active" : ""}`}
+              class={`nav-link nav-link-tertiary ${currentPage === "reglamento" ? "active" : ""}`}
               >{t("nav.reglamento")}</a
             >
             <a
+              href={translatePath("/inscripciones")}
+              class={`nav-link nav-link-primary ${currentPage === "inscripciones" ? "active" : ""}`}
+              >{t("nav.inscripciones")}</a
+            >
+            <a
               href={translatePath("/tienda")}
-              class={`nav-link ${currentPage === "tienda" ? "active" : ""}`}
+              class={`nav-link nav-link-tertiary ${currentPage === "tienda" ? "active" : ""}`}
               >{t("nav.tienda")}</a
             >
 
@@ -127,14 +127,14 @@ const altPath =
             <a
               id="desktop-login-btn"
               href={translatePath("/auth/login")}
-              class="btn-primary"
+              class="btn-primary-highlight"
             >
               {t("nav.login")}
             </a>
             <a
               id="desktop-dashboard-btn"
               href={translatePath("/dashboard")}
-              class="hidden btn-primary"
+              class="hidden btn-primary-highlight"
             >
               {t("nav.dashboard")}
             </a>
@@ -167,33 +167,33 @@ const altPath =
             class="flex flex-col gap-4 pt-4 border-t border-racing-silver/10"
           >
             <a
-              href={translatePath("/historia")}
-              class={`nav-link ${currentPage === "historia" ? "active" : ""}`}
-              >{t("nav.historia")}</a
+              href={translatePath("/")}
+              class={`nav-link nav-link-secondary ${currentPage === "home" ? "active" : ""}`}
+              >Home</a
             >
             <a
               href={translatePath("/eventos")}
-              class={`nav-link ${currentPage === "eventos" ? "active" : ""}`}
+              class={`nav-link nav-link-secondary ${currentPage === "eventos" ? "active" : ""}`}
               >{t("nav.eventos")}</a
             >
             <a
               href={translatePath("/motos")}
-              class={`nav-link ${currentPage === "motos" ? "active" : ""}`}
+              class={`nav-link nav-link-secondary ${currentPage === "motos" ? "active" : ""}`}
               >{t("nav.motos")}</a
             >
             <a
-              href={translatePath("/inscripciones")}
-              class={`nav-link ${currentPage === "inscripciones" ? "active" : ""}`}
-              >{t("nav.inscripciones")}</a
-            >
-            <a
               href={translatePath("/reglamento")}
-              class={`nav-link ${currentPage === "reglamento" ? "active" : ""}`}
+              class={`nav-link nav-link-tertiary ${currentPage === "reglamento" ? "active" : ""}`}
               >{t("nav.reglamento")}</a
             >
             <a
+              href={translatePath("/inscripciones")}
+              class={`nav-link nav-link-primary ${currentPage === "inscripciones" ? "active" : ""}`}
+              >{t("nav.inscripciones")}</a
+            >
+            <a
               href={translatePath("/tienda")}
-              class={`nav-link ${currentPage === "tienda" ? "active" : ""}`}
+              class={`nav-link nav-link-tertiary ${currentPage === "tienda" ? "active" : ""}`}
               >{t("nav.tienda")}</a
             >
             <a
@@ -209,12 +209,12 @@ const altPath =
             <a
               id="mobile-login-btn"
               href={translatePath("/auth/login")}
-              class="btn-primary text-center mt-4">{t("nav.login")}</a
+              class="btn-primary-highlight text-center mt-4">{t("nav.login")}</a
             >
             <a
               id="mobile-dashboard-btn"
               href={translatePath("/dashboard")}
-              class="hidden btn-primary text-center mt-4"
+              class="hidden btn-primary-highlight text-center mt-4"
               >{t("nav.dashboard")}</a
             >
           </div>

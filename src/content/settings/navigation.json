@@ -1,20 +1,26 @@
 {
   "es": {
     "menuItems": [
-      { "label": "Historia", "url": "/" },
-      { "label": "Motos", "url": "/motos" },
-      { "label": "Inscripciones", "url": "/inscripciones" }
+      { "label": "Home", "url": "/", "priority": "secondary" },
+      { "label": "Calendario", "url": "/eventos", "priority": "secondary" },
+      { "label": "Motos", "url": "/motos", "priority": "secondary" },
+      { "label": "Reglamentos", "url": "/reglamento", "priority": "tertiary" },
+      { "label": "Inscripciones", "url": "/inscripciones", "priority": "primary" },
+      { "label": "Tienda", "url": "/tienda", "priority": "tertiary" }
     ],
-    "ctaText": "Inscríbete",
-    "ctaUrl": "/inscripciones#registro"
+    "ctaText": "Mi Equipo",
+    "ctaUrl": "/dashboard"
   },
   "en": {
     "menuItems": [
-      { "label": "Story", "url": "/en" },
-      { "label": "Bikes", "url": "/en/motos" },
-      { "label": "Registration", "url": "/en/inscripciones" }
+      { "label": "Home", "url": "/en", "priority": "secondary" },
+      { "label": "Calendar", "url": "/en/eventos", "priority": "secondary" },
+      { "label": "Bikes", "url": "/en/motos", "priority": "secondary" },
+      { "label": "Rules", "url": "/en/reglamento", "priority": "tertiary" },
+      { "label": "Registration", "url": "/en/inscripciones", "priority": "primary" },
+      { "label": "Shop", "url": "/en/tienda", "priority": "tertiary" }
     ],
-    "ctaText": "Register",
-    "ctaUrl": "/en/inscripciones#registro"
+    "ctaText": "My Team",
+    "ctaUrl": "/en/dashboard"
   }
 }

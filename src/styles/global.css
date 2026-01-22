@@ -51,6 +51,10 @@
     @apply bg-racing-green hover:bg-racing-green-dark text-vanilla font-bold py-3 px-8 rounded-lg transition-all duration-200 uppercase tracking-wider;
   }
 
+  .btn-primary-highlight {
+    @apply bg-racing-green hover:bg-racing-green-dark text-vanilla font-bold py-3 px-8 rounded-lg transition-all duration-300 uppercase tracking-wider shadow-lg shadow-racing-green/30 hover:shadow-xl hover:shadow-racing-green/50 hover:scale-105;
+  }
+
   .btn-secondary {
     @apply border-2 border-vanilla text-vanilla hover:bg-vanilla hover:text-racing-green font-bold py-3 px-8 rounded-lg transition-all duration-200 uppercase tracking-wider;
   }
@@ -65,6 +69,31 @@
 
   .nav-link.active {
     @apply text-vanilla;
+  }
+
+  /* Navigation hierarchy */
+  .nav-link-primary {
+    @apply text-racing-green font-bold hover:text-racing-green-light;
+  }
+
+  .nav-link-primary.active {
+    @apply text-racing-green-light;
+  }
+
+  .nav-link-secondary {
+    @apply text-vanilla font-semibold hover:text-vanilla;
+  }
+
+  .nav-link-secondary.active {
+    @apply text-vanilla;
+  }
+
+  .nav-link-tertiary {
+    @apply text-racing-silver/80 font-normal hover:text-racing-silver;
+  }
+
+  .nav-link-tertiary.active {
+    @apply text-racing-silver;
   }
 
   .section-title {

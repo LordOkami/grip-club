@@ -1,24 +1,8 @@
 {
-  "heroTagline": "Grip Club presenta",
-  "heroTitle": "8 HORAS",
-  "heroTitleAccent": "ENDURANCE",
-  "heroSubtitle": "La carrera de resistencia más emocionante de España.",
-  "heroSubtitleBold": "Motos 125cc de serie. 8 horas de pura adrenalina.",
-  "heroCta": "Quiero participar",
-  "heroCtaSecondary": "Descubre más",
-  "stats": [
-    { "value": "8H", "label": "Duración" },
-    { "value": "125cc", "label": "Cilindrada" },
-    { "value": "100%", "label": "Pasión" }
-  ],
-  "historiaTagline": "Nuestra Historia",
-  "historiaTitle": "El origen de la",
-  "historiaTitleAccent": "resistencia",
-  "historiaContent": [
-    "Inspirados por el legendario formato <strong>FreeTech Endurance</strong> del Reino Unido, traemos a España una experiencia única: <strong>8 horas de competición pura</strong> sobre motos 125cc de serie.",
-    "La filosofía es simple pero poderosa: <strong>nivelar el campo de juego</strong>. Con motos 125cc de serie idénticas, la victoria no depende del presupuesto más grande, sino de la estrategia, la consistencia y la pasión del equipo.",
-    "Es el formato perfecto para equipos amateur, pilotos que dan sus primeros pasos en competición, y veteranos que buscan <strong>la esencia pura del motorsport</strong>."
-  ],
+  "heroTagline": "Nuestra Filosofía",
+  "historiaTitle": "Grip Club",
+  "historiaSubtitle": "Grip Club nació de una pasión compartida por el motociclismo. Donde cada persona que entra al box, sale a pista o vive el paddock sienta que forma parte de algo especial.",
+  "historiaOrigin": "Todo ese bagaje es el que hoy se canaliza en Grip Club. Lo que empezó como una idea entre amigos se ha convertido en una realidad pensada para equipos y pilotos de toda España, con un objetivo claro: ofrecer una experiencia accesible, auténtica y cuidada al detalle.",
   "conceptoTagline": "Los tres pilares",
   "conceptoTitle": "Qué hace único a",
   "conceptoTitleAccent": "GRIP Club",

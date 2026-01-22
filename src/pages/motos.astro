@@ -2,28 +2,26 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Motos" currentPage="motos">
+<Layout title="Motos Elegibles" currentPage="motos">
   <!-- Hero Section -->
-  <section class="relative py-24 md:py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-racing"></div>
+  <section class="relative py-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-racing-black via-racing-gray to-racing-black"></div>
     <div class="absolute inset-0 opacity-5">
-      <div
-        class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"
-      >
-      </div>
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+      <div class="absolute bottom-1/4 left-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
     </div>
 
     <div class="container mx-auto px-4 md:px-8 relative z-10">
-      <div class="max-w-3xl">
-        <span
-          class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block"
-          >Categorías</span
-        >
-        <h1 class="section-title mb-6">
-          Las <span class="text-vanilla">motos</span>
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="text-racing-green text-sm font-semibold uppercase tracking-widest mb-6 block">Tu Moto Encaja</span>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-white" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+          Motos <span class="text-vanilla">Elegibles</span>
         </h1>
-        <p class="section-subtitle">
-          Motos homologadas de 115-125cc 4 tiempos o máximo 50cc 2 tiempos para las 8 Horas Endurance.
+        <p class="text-xl md:text-2xl text-racing-silver leading-relaxed max-w-3xl mx-auto mb-6">
+          Motos 125cc de serie. Sin ventajas injustas, sin presupuestos infinitos.
+        </p>
+        <p class="text-lg md:text-xl text-vanilla font-semibold">
+          El piloto importa más que la moto
         </p>
       </div>
     </div>
@@ -33,45 +31,33 @@ import Layout from "../layouts/Layout.astro";
   <section class="py-20 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
-        <span
-          class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block"
-          >Categorías</span
-        >
-        <h2 class="section-title">
-          Motos <span class="text-vanilla">homologadas</span>
-        </h2>
-        <p class="text-racing-silver max-w-2xl mx-auto mt-4">
-          Se admiten motos de 115-125cc 4 tiempos o máximo 50cc 2 tiempos. Aquí
-          tienes algunos ejemplos de la categoría principal.
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Motos Homologadas</span>
+        <h2 class="section-title">Encuentra <span class="text-vanilla">tu moto</span></h2>
+        <p class="text-racing-silver text-lg md:text-xl max-w-3xl mx-auto mt-4 leading-relaxed">
+          Todas las 125cc de 4 tiempos (115-125cc) o 2 tiempos (máx. 50cc) homologadas para circular son válidas.
+          <br/>
+          <span class="text-vanilla font-semibold">Tu moto está lista. Tú decides cuándo.</span>
         </p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        <!-- ¿Tu moto no está? Card - Primera opción -->
-        <div
-          class="card group border-dashed border-racing-silver/30 flex flex-col items-center justify-center text-center"
-        >
-          <div
-            class="w-16 h-16 bg-racing-silver/10 rounded-full flex items-center justify-center mb-4"
-          >
-            <svg
-              class="w-8 h-8 text-racing-silver"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        <!-- ¿Tu moto no está? Card - Featured -->
+        <div class="relative bg-gradient-to-br from-racing-green/10 to-racing-black/80 rounded-2xl p-8 border-2 border-dashed border-racing-green/40 flex flex-col items-center justify-center text-center group hover:border-racing-green/70 hover:bg-racing-green/15 transition-all duration-300 shadow-lg">
+          <div class="w-20 h-20 bg-racing-green/20 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-racing-green/30 group-hover:scale-110 transition-all duration-300">
+            <svg class="w-10 h-10 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </div>
-          <h3 class="text-lg font-bold text-white mb-2">¿Tu moto no está?</h3>
-          <p class="text-racing-silver text-sm">
-            Contáctanos para verificar si tu 125cc de serie está homologada para
-            competir.
+          <h3 class="text-xl md:text-2xl font-bold text-vanilla mb-3" style="font-family: 'Bebas Neue', sans-serif;">¿Tu moto encaja?</h3>
+          <p class="text-racing-silver text-base leading-relaxed mb-4">
+            Si tu 125cc de serie cumple con las especificaciones, ya estás listo para correr.
           </p>
+          <a href="/reglamento" class="inline-flex items-center gap-2 text-racing-green hover:text-racing-green-light font-semibold uppercase tracking-wider text-sm transition-colors">
+            Ver Requisitos
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
         </div>
 
         <!-- Yamaha YZF-R125 / MT-125 -->
@@ -320,18 +306,34 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 bg-racing-gray">
-    <div class="container mx-auto px-4 md:px-8">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title mb-6">
-          ¿Tienes tu <span class="text-vanilla">125cc</span> lista?
+  <section class="relative py-24 md:py-32 bg-gradient-to-b from-racing-black via-racing-gray to-racing-black overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-racing-green rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-5xl md:text-6xl font-bold mb-8 text-white" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+          ¿Tu <span class="text-vanilla">Moto</span> está lista?
         </h2>
-        <p class="section-subtitle mx-auto mb-8">
-          Si tu moto cumple con las especificaciones, consulta el reglamento técnico completo para conocer las modificaciones permitidas.
+        <p class="text-xl md:text-2xl text-racing-silver leading-relaxed max-w-3xl mx-auto mb-12">
+          Consulta el reglamento técnico para confirmar que tu moto cumple las especificaciones y conocer las modificaciones permitidas.
         </p>
-        <a href="/reglamento" class="btn-primary">
-          Ver Reglamento Técnico
-        </a>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a href="/reglamento" class="btn-secondary text-lg px-10 py-5 inline-flex items-center gap-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            Ver Reglamento Técnico
+          </a>
+          <a href="/inscripciones#registro" class="btn-primary-highlight text-lg px-10 py-5 inline-flex items-center gap-3">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            Inscríbete Ahora
+          </a>
+        </div>
       </div>
     </div>
   </section>

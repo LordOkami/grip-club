@@ -2,29 +2,23 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Reglamento" currentPage="reglamento">
+<Layout title="Reglamentos" currentPage="reglamento">
   <!-- Hero Section -->
-  <section class="relative py-24 md:py-32 overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-racing"></div>
+  <section class="relative py-20 md:py-28 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-racing-black via-racing-gray to-racing-black"></div>
     <div class="absolute inset-0 opacity-5">
-      <div
-        class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"
-      >
-      </div>
+      <div class="absolute top-1/4 right-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
+      <div class="absolute bottom-1/4 left-0 w-96 h-96 bg-racing-green rounded-full blur-3xl"></div>
     </div>
 
     <div class="container mx-auto px-4 md:px-8 relative z-10">
-      <div class="max-w-3xl">
-        <span
-          class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block"
-          >Reglamento Técnico</span
-        >
-        <h1 class="section-title mb-6">
-          Reglamento <span class="text-vanilla">técnico</span>
+      <div class="max-w-4xl mx-auto text-center">
+        <span class="text-racing-green text-sm font-semibold uppercase tracking-widest mb-6 block">Seriedad y Profesionalidad</span>
+        <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 text-white" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+          Reglamentos <span class="text-vanilla">Oficiales</span>
         </h1>
-        <p class="section-subtitle">
-          Todo lo que necesitas saber sobre las modificaciones permitidas
-          y normativa técnica para participar en las 8 Horas Endurance.
+        <p class="text-xl md:text-2xl text-racing-silver leading-relaxed max-w-3xl mx-auto">
+          Toda la información técnica, deportiva y de seguridad para competir en GRIP Club
         </p>
       </div>
     </div>
@@ -1222,19 +1216,34 @@ import Layout from "../layouts/Layout.astro";
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 bg-racing-black">
-    <div class="container mx-auto px-4 md:px-8">
-      <div class="max-w-3xl mx-auto text-center">
-        <h2 class="section-title mb-6">
-          ¿Tienes tu <span class="text-vanilla">125cc</span> lista?
+  <section class="relative py-24 md:py-32 bg-gradient-to-b from-racing-black via-racing-gray to-racing-black overflow-hidden">
+    <div class="absolute inset-0 opacity-5">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-racing-green rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="container mx-auto px-4 md:px-8 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-5xl md:text-6xl font-bold mb-8 text-white" style="font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em;">
+          ¿Todo <span class="text-vanilla">Claro?</span>
         </h2>
-        <p class="section-subtitle mx-auto mb-8">
-          Si tu moto cumple con el reglamento, estás a un paso de vivir las 8
-          horas más intensas del motorsport amateur.
+        <p class="text-xl md:text-2xl text-racing-silver leading-relaxed max-w-3xl mx-auto mb-12">
+          Si tu moto cumple con el reglamento, estás listo para vivir la experiencia definitiva del motociclismo amateur
         </p>
-        <a href="/inscripciones#registro" class="btn-primary">
-          Inscríbete ahora
-        </a>
+
+        <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+          <a href="/inscripciones#registro" class="btn-primary-highlight text-lg px-10 py-5 inline-flex items-center gap-3">
+            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/>
+            </svg>
+            Inscríbete Ahora
+          </a>
+          <a href="/motos" class="btn-secondary text-lg px-10 py-5 inline-flex items-center gap-3">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+            Ver Motos Elegibles
+          </a>
+        </div>
       </div>
     </div>
   </section>

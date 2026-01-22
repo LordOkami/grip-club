@@ -239,102 +239,106 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Schedule Overview -->
+  <!-- Event Journey / Program -->
   <section class="py-20 bg-racing-black">
     <div class="container mx-auto px-4 md:px-8">
       <div class="text-center mb-16">
-        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">Programa</span>
-        <h2 class="section-title">Programa <span class="text-vanilla">tipo</span></h2>
-        <p class="text-racing-silver max-w-2xl mx-auto mt-4">
-          Asi es un fin de semana de carrera en Grip Club.
+        <span class="text-vanilla text-sm font-semibold uppercase tracking-widest mb-4 block">El Viaje del Evento</span>
+        <h2 class="section-title">Programa del <span class="text-vanilla">Evento</span></h2>
+        <p class="text-racing-silver text-lg md:text-xl max-w-3xl mx-auto mt-4 leading-relaxed">
+          Vive la experiencia completa: desde la llegada al paddock hasta la celebración en el podio
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        <!-- Saturday -->
-        <div class="card">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 bg-racing-green rounded-lg flex items-center justify-center">
-              <span class="text-vanilla font-bold" style="font-family: 'Bebas Neue', sans-serif;">SAB</span>
+      <!-- Event Phases Timeline -->
+      <div class="max-w-6xl mx-auto mb-16">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {[
+            { name: "Acreditaciones", icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" },
+            { name: "Verificaciones", icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" },
+            { name: "Warm Up", icon: "M13 10V3L4 14h7v7l9-11h-7z" },
+            { name: "Clasificación", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+            { name: "Carrera", icon: "M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" },
+            { name: "Celebración", icon: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" }
+          ].map((phase, index) => (
+            <div class="flex flex-col items-center text-center p-4 bg-racing-gray/50 rounded-xl border border-racing-silver/10 hover:border-racing-green/40 hover:bg-racing-gray/70 transition-all duration-300 group">
+              <div class="w-14 h-14 bg-racing-green/20 rounded-xl flex items-center justify-center mb-3 group-hover:bg-racing-green/30 group-hover:scale-110 transition-all duration-300">
+                <svg class="w-7 h-7 text-racing-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={phase.icon}/>
+                </svg>
+              </div>
+              <span class="text-xs text-racing-silver uppercase tracking-wider mb-1">Fase {index + 1}</span>
+              <p class="text-white text-sm font-bold">{phase.name}</p>
             </div>
-            <div>
-              <h3 class="text-xl font-bold text-white">Sabado</h3>
-              <p class="text-racing-silver text-sm">Verificaciones y entrenamientos</p>
+          ))}
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Saturday -->
+        <div class="relative bg-gradient-to-br from-racing-gray/80 to-racing-black/80 rounded-2xl p-6 md:p-8 border-2 border-racing-silver/20 hover:border-racing-green/40 transition-all duration-300 group overflow-hidden">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-racing-green/5 rounded-bl-full -mr-8 -mt-8 group-hover:bg-racing-green/10 transition-colors duration-300"></div>
+
+          <div class="relative z-10">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-16 h-16 bg-gradient-to-br from-racing-green to-racing-green-dark rounded-2xl flex items-center justify-center shadow-lg">
+                <span class="text-vanilla text-2xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">SÁB</span>
+              </div>
+              <div>
+                <h3 class="text-2xl md:text-3xl font-bold text-white" style="font-family: 'Bebas Neue', sans-serif;">Sábado</h3>
+                <p class="text-racing-green text-sm md:text-base font-semibold uppercase tracking-wider">Preparación & Entrenamientos</p>
+              </div>
+            </div>
+            <div class="space-y-5">
+              {[
+                { time: "08:00", title: "Apertura de paddock", desc: "La aventura comienza: llegada e instalación" },
+                { time: "10:00", title: "Verificaciones técnicas", desc: "Revisión exhaustiva: moto y documentación" },
+                { time: "14:00", title: "Entrenamientos libres", desc: "Conoce cada curva del circuito" },
+                { time: "18:00", title: "Briefing oficial", desc: "Última reunión antes del gran día" }
+              ].map(item => (
+                <div class="flex items-start gap-4 p-3 bg-racing-black/40 rounded-xl hover:bg-racing-black/60 transition-colors duration-200">
+                  <span class="text-racing-green font-mono text-base font-bold w-20 shrink-0 mt-0.5">{item.time}</span>
+                  <div>
+                    <p class="text-vanilla font-semibold text-base mb-1">{item.title}</p>
+                    <p class="text-racing-silver text-sm">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">08:00</span>
-              <div>
-                <p class="text-white font-medium">Apertura de paddock</p>
-                <p class="text-racing-silver text-sm">Llegada de equipos e instalacion</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">10:00</span>
-              <div>
-                <p class="text-white font-medium">Verificaciones tecnicas</p>
-                <p class="text-racing-silver text-sm">Revision de motos y documentacion</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">14:00</span>
-              <div>
-                <p class="text-white font-medium">Entrenamientos libres</p>
-                <p class="text-racing-silver text-sm">Sesiones para conocer el circuito</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">18:00</span>
-              <div>
-                <p class="text-white font-medium">Briefing oficial</p>
-                <p class="text-racing-silver text-sm">Reunion obligatoria de equipos</p>
-              </div>
-            </li>
-          </ul>
         </div>
 
         <!-- Sunday -->
-        <div class="card">
-          <div class="flex items-center gap-3 mb-6">
-            <div class="w-12 h-12 bg-vanilla rounded-lg flex items-center justify-center">
-              <span class="text-racing-black font-bold" style="font-family: 'Bebas Neue', sans-serif;">DOM</span>
+        <div class="relative bg-gradient-to-br from-racing-black/80 to-racing-gray/80 rounded-2xl p-6 md:p-8 border-2 border-vanilla/30 hover:border-vanilla/60 transition-all duration-300 group overflow-hidden shadow-xl">
+          <div class="absolute top-0 right-0 w-32 h-32 bg-vanilla/5 rounded-bl-full -mr-8 -mt-8 group-hover:bg-vanilla/10 transition-colors duration-300"></div>
+
+          <div class="relative z-10">
+            <div class="flex items-center gap-4 mb-8">
+              <div class="w-16 h-16 bg-gradient-to-br from-vanilla to-vanilla-dark rounded-2xl flex items-center justify-center shadow-lg">
+                <span class="text-racing-black text-2xl font-bold" style="font-family: 'Bebas Neue', sans-serif;">DOM</span>
+              </div>
+              <div>
+                <h3 class="text-2xl md:text-3xl font-bold text-vanilla" style="font-family: 'Bebas Neue', sans-serif;">Domingo</h3>
+                <p class="text-vanilla text-sm md:text-base font-semibold uppercase tracking-wider">Día de Carrera</p>
+              </div>
             </div>
-            <div>
-              <h3 class="text-xl font-bold text-white">Domingo</h3>
-              <p class="text-racing-silver text-sm">Dia de carrera</p>
+            <div class="space-y-5">
+              {[
+                { time: "07:00", title: "Apertura de boxes", desc: "Preparativos finales antes de la batalla", highlight: false },
+                { time: "08:00", title: "Warm-up", desc: "Últimas vueltas de calentamiento", highlight: false },
+                { time: "10:00", title: "¡SALIDA 8 HORAS!", desc: "La resistencia comienza ahora", highlight: true },
+                { time: "18:00", title: "Llegada y Podio", desc: "Celebración y ceremonia de premiación", highlight: false }
+              ].map(item => (
+                <div class={`flex items-start gap-4 p-3 rounded-xl transition-all duration-200 ${item.highlight ? 'bg-racing-green/20 border-2 border-racing-green/40' : 'bg-racing-black/40 hover:bg-racing-black/60'}`}>
+                  <span class={`font-mono text-base font-bold w-20 shrink-0 mt-0.5 ${item.highlight ? 'text-racing-green' : 'text-vanilla'}`}>{item.time}</span>
+                  <div>
+                    <p class={`font-semibold text-base mb-1 ${item.highlight ? 'text-racing-green' : 'text-vanilla'}`}>{item.title}</p>
+                    <p class="text-racing-silver text-sm">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <ul class="space-y-4">
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">07:00</span>
-              <div>
-                <p class="text-white font-medium">Apertura de boxes</p>
-                <p class="text-racing-silver text-sm">Preparativos finales</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">08:00</span>
-              <div>
-                <p class="text-white font-medium">Warm-up</p>
-                <p class="text-racing-silver text-sm">Ultima sesion antes de carrera</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">10:00</span>
-              <div>
-                <p class="text-white font-medium">SALIDA 8 HORAS</p>
-                <p class="text-racing-silver text-sm">Inicio de la carrera</p>
-              </div>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="text-vanilla font-mono text-sm w-16 shrink-0">18:00</span>
-              <div>
-                <p class="text-white font-medium">Llegada y podio</p>
-                <p class="text-racing-silver text-sm">Final de carrera y ceremonia</p>
-              </div>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
